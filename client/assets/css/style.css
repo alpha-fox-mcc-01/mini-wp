@@ -1,0 +1,54 @@
+body {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.logo {
+  font-family: "Abril Fatface";
+}
+
+.item-border {
+  border-bottom: 1px solid white;
+}
+
+.item-border:hover {
+  border-bottom: 1px solid black;
+}
+
+.welcome-heading {
+  font-size: 4rem;
+}
+
+.landing-img {
+  max-width: 100%;
+}
+
+/* .sub-head {
+  border-bottom: 0.05rem solid black;
+} */
+
+.sub-border {
+  border: none;
+  height: 0.07rem;
+  background-color: black;
+}
+
+footer {
+  background-color: rgb(182, 255, 206);
+}
+
+#overflow {
+  overflow: scroll;
+  height: 40rem;
+}
+
+.card {
+  max-width: 100%;
+}
+
+.add-btn {
+  padding: 0.5rem 1rem;
+}
+
+.text-coffee {
+  color: rgb(105, 17, 17);
+}
