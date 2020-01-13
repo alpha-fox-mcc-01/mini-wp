@@ -81,10 +81,25 @@ header {
 
 .gallery-heading {
    font-family: 'Playfair Display SC', sans-serif;
+   color: #384147;
 }
+
 
 .blog-heading {
    font-family: 'Playfair Display SC', sans-serif;
+   color: #384147;
+}
+
+.blog-left-title {
+   font-family: 'Playfair Display SC', sans-serif;
+   color: #384147;
+   margin-bottom: 40px;
+}
+
+.article-title {
+   /* font-family: 'Playfair Display SC', sans-serif; */
+   font-family: 'Gelasio', serif;
+
 }
 
 footer {
