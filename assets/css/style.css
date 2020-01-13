@@ -1,0 +1,86 @@
+header {
+    background-image: url("../images/mountainsBG.jpg");
+    min-height: 680px;
+    height: 100%;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+}
+
+#banner h1 {
+    text-align: center;
+    font-size: 6rem;
+    margin-top: 9rem;
+}
+
+#banner p {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 1rem;
+}
+
+#btn-about {
+    /* font-family: Raleway-SemiBold; */
+    margin-top: 20px;
+    font-size: 13px;
+    /* color: rgba(108, 88, 179, 0.75); */
+    height: 50px;
+    width: 170px;
+    letter-spacing: 1px;
+    line-height: 15px;
+    /* border: 2px solid rgba(108, 89, 179, 0.75); */
+    border-radius: 40px;
+    /* background: transparent; */
+    transition: all 0.3s ease 0s;
+}
+
+#what-we-offer {
+    margin-top: 6rem;
+    width: 1500px;
+    margin-bottom: 3rem;
+}
+
+#what-we-offer #headline {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+#what-we-offer h1 {
+    font-family: 'Muli', sans-serif; 
+    font-size: 50px;
+    text-align: center;
+}
+
+.features {
+    margin-bottom: 3rem;
+}
+
+#key-features {
+    max-width: 95rem;
+    margin: 0 auto;
+}
+
+#key-features h3 {
+    color: rgb(104, 6, 173)
+}
+/* color: rgb(216, 112, 202) */
+
+#create-website {
+    margin-top: 7rem;
+    font-family: 'Ubuntu', sans-serif;  
+}
+
+#build-yourself {
+    margin-top: 2rem;
+    height: 50px;
+    width: 200px;
+    background-color: rgb(104, 6, 173);
+}
+
+footer {
+    margin-top: 10rem;
+    background-color: rgb(58, 58, 58);
+    color: white;
+}
