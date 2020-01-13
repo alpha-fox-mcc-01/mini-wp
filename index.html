@@ -287,7 +287,7 @@
         <div align='center'class="row" id='dash-1'>
             <div class="col-md-12">
                 <div class="card card-dash" style="width: 18rem; height:25rem;">
-                    <div class="card-body">
+                    <div class="card-body posts">
                       <h1 class="card-title">Whoops!</h1>
                       <h6 class="card-subtitle mb-2 text-muted">It seems that you currently have no posts to display</h6>
                       <p class="card-text"></p>
@@ -347,20 +347,26 @@
               <p class="lead">All your previous posts should appear here. It's all yours to manage and maintain.</p>
             </div>
         </div>
+        <div id='new-post'>
         <div class='container' id='new-post-container'>
-            <h1>Create new post</h1>
-            <p>Pour all your ideas out.</p>
-            <center>
-            <textarea name="editor1" id='blog-editor' cols=80 rows=10></textarea>
-            <script>
-                    CKEDITOR.replace( 'editor1', {
-                        width: 1400,
-                        height: 400
-                    });
-            </script>
-            <br>
-            <button type="button" class="btn btn-dark">Post</button>
-            </center>
+            <div class="card" id='new-post-card'>
+                <div class="card-body">
+                    <h1>Create new post</h1>
+                    <p>Pour all your ideas out.</p>
+                    <center>
+                    <textarea name="editor1" id='blog-editor' cols=80 rows=10></textarea>
+                    <script>
+                            CKEDITOR.replace( 'editor1', {
+                                width: 1400,
+                                height: 400
+                            });
+                    </script>
+                    <br>
+                    <button type="button" class="btn btn-dark">Post</button>
+                    </center>
+                </div>
+            </div>
+        </div>
         </div>
         <footer class="page-footer font-small teal pt-4">
             <div class="container-fluid text-center text-md-left">

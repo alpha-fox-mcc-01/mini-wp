@@ -135,7 +135,7 @@ footer {
 
 .jumbotron-fluid {
     color: white;
-    background-image: url("../images/indigoBG.jpg");
+    background-image: url("../images/caveBG.jpg");
     min-height: 40vh;
 
     /* background-position: center; */
@@ -160,7 +160,7 @@ footer {
     min-width: 1000px;
 } */
 
-.card-body, .card-dash {
+#posts, .card-dash {
     min-width: 160vh;
     position: absolute;
     top: 50%;
@@ -184,4 +184,22 @@ footer {
     text-align: center;
     font-family: 'Ubuntu', sans-serif;
     margin-bottom: 5rem;
+}
+
+#new-post-container {
+    margin-top: 7rem;
+}
+
+#new-post-card {
+    background-image: url("../images/blue-flowers.png");
+
+    min-width: 100rem;
+    
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#create-blog {
+    min-height: 30vh;
 }
