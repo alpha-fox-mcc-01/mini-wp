@@ -52,3 +52,18 @@ footer {
 .text-coffee {
   color: rgb(105, 17, 17);
 }
+
+.article-post {
+  padding-left: 10rem;
+  padding-right: 10rem;
+}
+@media only screen and (max-width: 992px) {
+  .article-post {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+/* .h-dashboard {
+  height: 95vh;
+} */
