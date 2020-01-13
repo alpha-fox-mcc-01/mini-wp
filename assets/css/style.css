@@ -80,7 +80,7 @@ header {
 }
 
 footer {
-    margin-top: 10rem;
+    margin-top: 17.5rem;
     background-color: rgb(58, 58, 58);
     color: white;
 }
@@ -131,4 +131,41 @@ footer {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.jumbotron-fluid {
+    color: white;
+    background-image: url("../images/indigoBG.jpg");
+    min-height: 40vh;
+
+    /* background-position: center; */
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#dashboard-nav {
+    background-color: grey !important;
+}
+
+/* #dash-1 {
+    background-image: url("../images/div1.jpg");
+    min-height: 30vh;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.card-dash {
+    min-width: 1000px;
+} */
+
+.card-body, .card-dash {
+    min-width: 160vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
 }

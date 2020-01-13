@@ -159,7 +159,7 @@
             </div>
         </div>
         <footer class="page-footer font-small teal pt-4">
-        <div class="container-fluid text-center text-md-left">
+            <div class="container-fluid text-center text-md-left">
                 <div class="row">
                     <div class="col-md-6 mt-md-0 mt-3">
                         <h5 class="text-uppercase font-weight-bold">Disclaimer</h5>
@@ -219,7 +219,7 @@
         </div>
     </section>
 
-    <section id='log-in' display='none'>
+    <section id='log-in' style="display:none">
         <div id='log-in-container'>
             <div class="card" id='log-in-card'>
                 <div class="card-body">
@@ -259,10 +259,103 @@
     </section>
 
     <section id='dashboard'>
-        <textarea name="editor1"></textarea>
+        <nav class="navbar navbar-expand-sm navbar-light bg-light" id='dashboard-nav'>
+            <a href='#' class="navbar-brand">WeBlog</a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarMenu">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-dark" style='margin-top: 0.2rem'>Write</button>
+                    </li> 
+                    <li class="nav-item">
+                        <a href="#" class="nav-link"><img src='./assets/images/blank-avatar.png' width=25 height=25></a>
+                    </li>
+                    <li class="nav-item" style='margin-top: 0.6rem'>
+                        <a href="#" onclick="signOut();">Sign out</a>
+                    </li> 
+                </ul>
+            </div>
+        </nav>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <h1 class="display-4">Welcome to Your Personal Dashboard</h1>
+              <p class="lead">All your previous posts should appear here. It's all yours to manage and maintain.</p>
+            </div>
+        </div>
+        <div align='center'class="row" id='dash-1'>
+            <div class="col-md-12">
+                <div class="card card-dash" style="width: 18rem; height:25rem;">
+                    <div class="card-body">
+                      <h1 class="card-title">Whoops!</h1>
+                      <h6 class="card-subtitle mb-2 text-muted">It seems that you currently have no posts to display</h6>
+                      <p class="card-text"></p>
+                      <a href="#" class="card-link">Create Post</a>
+                      <a href="#" class="card-link">Browse Themes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="page-footer font-small teal pt-4">
+            <div class="container-fluid text-center text-md-left">
+                    <div class="row">
+                        <div class="col-md-6 mt-md-0 mt-3">
+                            <h5 class="text-uppercase font-weight-bold">Disclaimer</h5>
+                            <p>Used for development/education only. Do NOT deploy for production use.</p>
+                        </div>
+                        <hr class="clearfix w-100 d-md-none pb-3">
+                        <div class="col-md-6 mb-md-0 mb-3">
+                            <h5 class="text-uppercase font-weight-bold">Support</h5>
+                            <ul>
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="#">User testimonials</a></li>
+                                <li><a href="#">FAQ</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            <div class="footer-copyright text-center py-3">© 2020 Copyright:
+                <a href="#">Gabriel Timothy</a>
+            </div>
+        </footer>
+        <!-- <div class="row" id='dash-2'>
+            <div class="card card-dash" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="#" class="card-link">Card link</a>
+                  <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+        </div>
+        <div class="row" id='dash-3'>
+            <div class="card card-dash" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="#" class="card-link">Card link</a>
+                  <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+        </div>
+        <div class="row" id='dash-4'>
+            <div class="card card-dash" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="#" class="card-link">Card link</a>
+                  <a href="#" class="card-link">Another link</a>
+                </div>
+            </div>
+        </div> -->
+        <!-- <textarea name="editor1"></textarea>
         <script>
                 CKEDITOR.replace( 'editor1' );
-        </script>
+        </script> -->
     </section>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
