@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="./styles/style.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Mini WP</title>
+</head>
+
+
+<body>
+  <!-- HEADER -->
+  <div class="row header">
+    <div class=" col grey" style="flex: 0 0 100px;">MINIWP</div>
+    <div class="col">
+      <div class="row">
+        <div class="col-4 col-md-1"><i class="fa fa-refresh" aria-hidden="true"></i></div>
+        <div class="col-4 col-md-1"><i class="fa fa-commenting" aria-hidden="true"></i></div>
+        <div class="col-4 col-md-1"><i class="fa fa-plus-circle" aria-hidden="true"></i></div>
+      </div>
+    </div>
+    <div class="col" style="flex: 0 0 100px;">
+      <div class="row">
+        <div class="col">Nama</div>
+      </div>
+    </div>
+    <div class="col" style="flex: 0 0 50px;">
+      <div class="row">
+        <div class="col">FOTO</div>
+      </div>
+    </div>
+  </div>
+  <!-- END OF HEADER -->
+
+
+  <!-- CONTENT CONTAINER -->
+  <div class="container">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar grey">
+      <a class="active">Home</a>
+      <a onclick="tes()">News</a>
+      <a>Contact</a>
+      <a>About</a>
+    </div>
+    <!-- END OF SIDEBAR -->
+
+    <!-- CONTENT -->
+    <div class="content">
+      <div class="row uppercard" style="background-color: white;">
+        <div class="col-lg-4">
+          <div class="cardcontainer">
+            <div class="cardtitle">Get Started</div>
+            <div class="cardcontent">
+              <button class="btn btn-success customize-button">Customize Your Site</button>
+              <p class="cardtext">or, <a href="#">change your theme completely</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="cardcontainer">
+            <div class="cardtitle">Next Steps</div>
+            <div class="cardcontent">
+              <p class="cardtext">1 <a href="#">Write your first blog post</a></p>
+              <p class="cardtext">2 <a href="#">Add an About page</a></p>
+              <p class="cardtext">3 <a href="#">View your site</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="cardcontainer">
+            <div class="cardtitle">More Actions</div>
+            <div class="cardcontent">
+              <p class="cardtext">Manage <a href="#">widgets</a> or <a href="#">menus</a></p>
+              <p class="cardtext"><a href="#">Turn comments on or off</a></p>
+              <p class="cardtext"><a href="#">Learn more about getting started</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 25px;">
+        <div class="col-12 col-md-6 ">
+          <!-- AT A GLANCE -->
+          <div class="card text-center">
+            <div class="card-header">
+              At a Glance
+            </div>
+            <div class="card-body">
+              <button class="btn btn-primary">Post</button>
+              <button class="btn btn-primary">Page</button>
+              <button class="btn btn-primary">Comment</button>
+            </div>
+            <div class="card-footer text-muted"></div>
+          </div>
+          <!-- END OF AT A GLANCE -->
+
+          <!-- ACTIVITY -->
+          <div class="card text-center">
+            <div class="card-header">
+              Activity
+            </div>
+            <div class="card-body">
+              Rencently Published
+            </div>
+            <div class="card-text recentlyPublished">
+              <!-- ISINYA DISINI -->
+            </div>
+            <div class="card-footer text-muted"></div>
+          </div>
+        </div>
+        <!-- END OF ACTIVITY -->
+
+        <!-- QUICK DRAFT -->
+        <div class="col-12 col-md-6 ">
+          <div class="card text-center">
+            <div class=" card-header">
+              Quick Draft
+            </div>
+            <div class="card-body">
+              <div class="cardcontent nopadding">
+                <div class="row">
+                  <div class="col">
+                    <label for="draftTitle">Title</label>
+                    <input type="text" name="draftTitle" id="draftTitle" style="width: 100%;" placeholder="Title">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <label for="draftContent" class="formLabel">Content</label>
+                    <textarea name="draftContent" id="draftContent" style="width: 100%; height: 30vh;"
+                      placeholder="What's on your mind?">
+                    </textarea>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <button class="btn btn-success roundedButton">Save Draft</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer text-muted"></div>
+          </div>
+        </div>
+        <!-- END OF QUICK DRAFT -->
+      </div>
+
+      <!-- ADD POST -->
+      <div class="row newpost" style="margin-top: 25px;">
+        <div class="col">
+          <h1>Add New Post</h1>
+        </div>
+        <div class="col-12">
+          <div class="card text-center">
+            <div class=" card-header">
+              Add New Post
+            </div>
+            <div class="card-body">
+              <div class="cardcontent nopadding">
+                <form action="">
+                  <div class="row">
+                    <div class="col">
+                      <input type="text" name="addTitle" id="addTitle" style="width: 100%;"
+                        placeholder="Enter the title here">
+                    </div>
+                  </div>
+                  <!-- <div class="row" style="margin: 10px 0;">
+                    <div class="col">
+                      <button>BOLD</button>
+                      <button>ITALIC</button>
+                      <button>UNDERLINE</button>
+                      <button>BTN1</button>
+                      <button>BTN2</button>
+                      <button>BTN3</button>
+                      <button>BTN4</button>
+                      <button>BTN5</button>
+                      <button>BTN6</button>
+                      <button>BTN7</button>
+                      <button>BTN8</button>
+                      <button>BTN9</button>
+                    </div>
+                  </div> -->
+                  <div class="row">
+                    <div class="col">
+                      <textarea name="draftContent" id="draftContent" style="width: 100%; height: 30vh;"
+                        placeholder="What's on your mind?">
+                    </textarea>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <button class="btn btn-success roundedButton" id="submitArticle" type="submit">Submit</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="card-footer text-muted"></div>
+          </div>
+        </div>
+      </div>
+      <!-- END OF ADD POST -->
+
+      <!-- BLOG POST -->
+      <div class="row blogpost" style="margin-top: 25px;">
+        <div class="col">
+          <h1>Blog Posts</h1>
+        </div>
+        <div class="col-12">
+          <div class="card text-center">
+            <div class=" card-header">
+              <button class="btn btn-primary">Published</button>
+              <button class="btn btn-primary">Drafts</button>
+            </div>
+            <!-- ISINYA DISINI -->
+            <div class="card-body articleList">
+
+            </div>
+            <!--  -->
+            <div class="card-footer text-muted"></div>
+          </div>
+        </div>
+      </div>
+      <!-- END OF BLOG POST -->
+    </div>
+    <!-- END OF CONTENT -->
+  </div>
+  <!-- END OF CONTENT CONTAINER -->
+
+
+
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

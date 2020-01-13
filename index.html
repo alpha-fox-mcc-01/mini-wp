@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="google-signin-client_id" content="854658090010-6opoqfhjqqj89ip6qvovt6d21sgtdn5t.apps.googleusercontent.com">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href='assets/css/style.css' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Muli|Noto+Sans|Ubuntu&display=swap" rel="stylesheet">
@@ -13,7 +14,7 @@
     <title>WeBlog</title>
 </head>
 <body>
-    <section id='landing'>
+    <section id='landing' style='display: none'>
         <header>
             <nav class="navbar navbar-expand-sm navbar-light bg-transparent">
                 <div class='container'>
@@ -36,7 +37,7 @@
                             </li> 
                             &nbsp;
                             <li class="nav-item">
-                                <button type="button" class="btn btn-dark">Create a Website</button>
+                                <button type="button" class="btn btn-dark">Create a Blog Web</button>
                             </li> 
                         </ul>
                     </div>
@@ -113,8 +114,8 @@
                             </div>
                         </div>
                         <div class='col-md-6'>
-                            <h5 class="card-title" style='margin-top: 80px; color:rgb(104, 6, 173);'>USER-FRIENDLY WEBSITE BUILDER</h5>
-                            <h1 class="card-subtitle mb-2 text-muted">The easiest way to build your own website</h1>
+                            <h5 class="card-title" style='margin-top: 80px; color:rgb(104, 6, 173);'>USER-FRIENDLY BLOG BUILDER</h5>
+                            <h1 class="card-subtitle mb-2 text-muted">The easiest way to build your own blog website</h1>
                             <p class="card-text">Making your site is like playing with building blocks. Add all types of content in just a few clicks, move it around or change it up anytime. Have fun with it.</p>
                             <a href="#" class="card-link">Templates</a>
                             <a href="#" class="card-link">Premium</a>
@@ -125,9 +126,9 @@
             <hr style='margin-top: 5rem;'>
             <div align='center' class='container' id='create-website'>
                 <h3>So what are you waiting for...</h3>
-                <h1>Create your own website for free!</h1>
+                <h1>Create your own blog for free!</h1>
                 <p>You can create an <strong>amazing website</strong> with WeBlog in just minutes</p>
-                <p>Join fellow web developers and <strong>build one yourself</strong>.</p>
+                <p>Join fellow bloggers and <strong>build one yourself</strong>.</p>
                 <button type="button" class="btn btn-dark" id='build-yourself'>Create a Website</button>
             </div>
             <div class='row' align='center' style='margin-top: 5rem'>
@@ -135,7 +136,7 @@
                     <div class="card border-0" style="width: 18rem;">
                         <img src="./assets/images/promote.png" class="card-img-top" alt="...">
                         <div class="card-body">
-                        <p class="card-text">Think you're alone? Why don't you meet up with the growing amount of junior developers around you?</p>
+                        <p class="card-text">Think you're alone? Why don't you meet up with the growing amount of junior developers/bloggers around you?</p>
                         </div>
                     </div>
                 </div>
@@ -143,7 +144,7 @@
                     <div class="card border-0" style="width: 18rem;">
                         <img src="./assets/images/teamwork.png" class="card-img-top" alt="...">
                         <div class="card-body">
-                        <p class="card-text">Witness your career jump, as you work on top-notch digital products to satisfy the public</p>
+                        <p class="card-text">Witness your career jump, as you work on top-notch digital content to satisfy the public</p>
                         </div>
                     </div>
                 </div>
@@ -186,8 +187,93 @@
                 CKEDITOR.replace( 'editor1' );
         </script>
     </section> -->
+    <section id='sign-up' style='display: none'>
+        <div id='sign-up-container'>
+            <div class="card" id='sign-up-card'>
+                <div class="card-body">
+                    <h1 class="card-title" id='sign-up-title'>Create your blog website</h1>
+                    <form>
+                        <label for="website">1. Enter the name of your blog</label>
+                        <input type="text" class="form-control" id="blogSignUp" placeholder="Blog name" data-toggle='tooltip' title="The name will be used for your blog's title">
+                        <div class="row">
+                            <div class='col-md-6'>
+                                <p style='margin-top: 2rem;'>2. Register</p>
+                                <div class="form-group">
+                                    <label for="sign-up-email">Email address</label>
+                                    <input type="email" class="form-control" id="signup-email" aria-describedby="emailHelp">
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                                <br>
+                                <div class='form-group'>
+                                    <label for="sign-up-password">Password</label>
+                                    <input type="password" class="form-control" id="sign-up-password">
+                                </div>
+                                <button type="button" class="btn btn-dark">Create a Blog Web</button>
+                            </div>
+                            <div class='col-md-6'>
+                                <div class='container' style='margin-top: 6.5rem; margin-left: 2rem; border-left: solid black; height:14.1rem;'>
+                                    <div class="g-signin2" data-onsuccess="onSignIn" style='margin-left: 2rem'></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style='margin-top: 2rem;'>
+                            <p>By registering and creating your website you agree to our Terms and conditions and the Privacy Policy.</p>
+                        </div>
+                    </form>
+                  <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="#" class="card-link">Card link</a>
+                  <a href="#" class="card-link">Another link</a> -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id='log-in'>
+        <div id='log-in-container'>
+            <div class="card" id='log-in-card'>
+                <div class="card-body">
+                    <h1 class="card-title" id='log-in-title'>Log In</h1>
+                    <form>
+                        <div class="row">
+                            <div class='col-md-6'>
+                                <div class="form-group">
+                                    <label for="sign-up-email">Email address</label>
+                                    <input type="email" class="form-control" id="signup-email" aria-describedby="emailHelp">
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                                <br>
+                                <div class='form-group'>
+                                    <label for="sign-up-password">Password</label>
+                                    <input type="password" class="form-control" id="sign-up-password">
+                                </div>
+                                <button type="button" class="btn btn-dark">Create a Blog Web</button>
+                            </div>
+                            <div class='col-md-6'>
+                                <div class='container' style='margin-top: 2.5rem; margin-left: 2rem; border-left: solid black; height:14.1rem;'>
+                                    <div class="g-signin2" data-onsuccess="onSignIn" style='margin-left: 2rem'></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style='margin-top: 6rem;'>
+                            <p>By logging in you agree to our Terms and conditions and the Privacy Policy.</p>
+                        </div>
+                    </form>
+                  <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                  <a href="#" class="card-link">Card link</a>
+                  <a href="#" class="card-link">Another link</a> -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
 </body>
 </html>

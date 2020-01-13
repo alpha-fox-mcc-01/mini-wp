@@ -84,3 +84,51 @@ footer {
     background-color: rgb(58, 58, 58);
     color: white;
 }
+
+#sign-up-card {
+    height: 35rem;
+    width: 55rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+#sign-up-title {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+#sign-up-container {
+    background-image: url("../images/mountainsBG.jpg");
+    min-height: 100vh;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#log-in-card {
+    height: 35rem;
+    width: 55rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+#log-in-title {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+#log-in-container {
+    background-image: url("../images/mountainsBG.jpg");
+    min-height: 100vh;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
