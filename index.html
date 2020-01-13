@@ -35,13 +35,13 @@
                   <a href="#" class='nav-link'>Home</a>
                </li>
                <li class="navbar-item">
-                  <a href="#" class='nav-link'>Gallery</a>
+                  <a href="#gallery" class='nav-link'>Gallery</a>
                </li>
                <li class="navbar-item">
-                  <a href="#" class='nav-link'>Blog</a>
+                  <a href="#blog" class='nav-link'>Blog</a>
                </li>
                <li class="navbar-item">
-                  <a href="#" class='nav-link'>Contact</a>
+                  <a href="#contact" class='nav-link'>Contact</a>
                </li>
             </ul>
          </div>
@@ -76,7 +76,7 @@
       </div>
    </section>
 
-   <section class='gallery py-5'>
+   <section id="gallery" class='py-5'>
       <!-- jangan lupa tambah padding -->
       <div class="container">
          <div class="gallery-heading text-center mb-5">
@@ -134,7 +134,7 @@
       </div>
    </section>
 
-   <section class="blog py-5">
+   <section id="blog" class="py-5">
       <div class="blog-heading text-center mb-5">
          <h1>blog</h1>
          <h3>&lowast;</h3>
@@ -142,31 +142,148 @@
       <div class="container">
          <div class="row">
             <div class="col-5">
-               <h5 class="blog-left-title text-center"
-                  style="font-family: 'Playfair Display SC', sans-serif;">List of all article</h5>
-               <div class="border" style='border-radius: 4px; overflow: auto; max-height: 50vh;'>
-                  <!-- bawah adalah get article -->
-                  <div id="all-article">
+               <!-- <h5 class="blog-left-title text-center"
+                  style="font-family: 'Playfair Display SC', sans-serif;">List of all article</h5> -->
+               <!-- bawah adalah get article -->
+               <div id="all-article">
+                  <div class="border" style='border-radius: 4px; overflow: auto; max-height: 80vh;'>
+                     <!-- lempar content ke sini -->
                      <div class="p-3 border-bottom">
-                        <h5 class="article-title text-center mb-5" onClick=''>World Number Two</h5>
+                        <h5 class="article-title text-center mb-5"><i class="fas fa-stars"></i>World Number Two<i
+                              class="fas fa-stars"></i></h5>
                         <div class="row">
                            <div class="col text-center">&uarr; 420 upvote</div>
-                           <div class="col text-center">&uarr; 420 upvote</div>
+                           <div class="col text-center"><a href="#blog" onclick="">Read article <i class="fas fa-play ml-2"></i></a></div>
                         </div>
+                     </div>
+                     <!-- sampai sini -->
+                     <!-- lempar content ke sini -->
+                     <div class="p-3 border-bottom">
+                        <h5 class="article-title text-center mb-5"><i class="fas fa-stars"></i>Opera house<i
+                              class="fas fa-stars"></i></h5>
+                        <div class="row">
+                           <div class="col text-center">&uarr; 420 upvote</div>
+                           <div class="col text-center"><a href="#blog" onclick="">Read article <i class="fas fa-play ml-2"></i></a></div>
+                        </div>
+                     </div>
+                     <!-- sampai sini -->
+                     <!-- lempar content ke sini -->
+                     <div class="p-3 border-bottom">
+                        <h5 class="article-title text-center mb-5"><i class="fas fa-stars"></i>Apple Cider<i
+                              class="fas fa-stars"></i></h5>
+                        <div class="row">
+                           <div class="col text-center">&uarr; 420 upvote</div>
+                           <div class="col text-center"><a href="#blog" onclick="">Read article <i class="fas fa-play ml-2"></i></a></div>
+                        </div>
+                     </div>
+                     <!-- sampai sini -->
+                     <!-- lempar content ke sini -->
+                     <div class="p-3 border-bottom">
+                        <h5 class="article-title text-center mb-5"><i class="fas fa-stars"></i>Someday I'll Find My Way Home<i
+                              class="fas fa-stars"></i></h5>
+                        <div class="row">
+                           <div class="col text-center">&uarr; 420 upvote</div>
+                           <div class="col text-center"><a href="#blog" onclick="">Read article <i class="fas fa-play ml-2"></i></a></div>
+                        </div>
+                     </div>
+                     <!-- sampai sini -->
+                     <!-- lempar content ke sini -->
+                     <div class="p-3 border-bottom">
+                        <h5 class="article-title text-center mb-5"><i class="fas fa-stars"></i>What's My Age Again?<i
+                              class="fas fa-stars"></i></h5>
+                        <div class="row">
+                           <div class="col text-center">&uarr; 420 upvote</div>
+                           <div class="col text-center"><a href="#blog" onclick="">Read article <i class="fas fa-play ml-2"></i></a></div>
+                        </div>
+                     </div>
+                     <!-- sampai sini -->
+                     <!-- lempar content ke sini -->
+                     <div class="p-3 border-bottom">
+                        <h5 class="article-title text-center mb-5"><i class="fas fa-stars"></i>Le Festin<i
+                              class="fas fa-stars"></i></h5>
+                        <div class="row">
+                           <div class="col text-center">&uarr; 420 upvote</div>
+                           <div class="col text-center"><a href="#blog" onclick="">Read article <i class="fas fa-play ml-2"></i></a></div>
+                        </div>
+                     </div>
+                     <!-- sampai sini -->
+                  </div>
+               </div>
+            </div>
+            <div class="col-7">
+               <div id="detail-article">
+                  <!-- bawah adalah get details article -->
+                  <div class="border" style="border-radius: 4px; overflow: auto; max-height: 80vh;">
+                     <div class="mx-4 my-3">
+                        <h4 style="font-family: 'Gelasio', serif">World Number two</h4>
+                        <p class="mt-4" style="font-family: 'Gelasio', serif;"><i>Honestly
+                           My eyes have never been so useless
+                           Unconsciously
+                           I dive into her warmth, her kindness
+                           Sever me from the rope that's keeping up, tying me down
+                           And here goes the free fall...
+                           Suffocating
+                           The thought of her suffocates me
+                           Duplicates my worries and fears that she'll never be mine
+                           Oh god help me, help me change her mind
+                           Just let me sleep
+                           So i can pick up where i left off
+                           Rewind it back, we'll hope that it makes sense
+                           And put the midnight fantasies all in repeat
+                           Dreams of her takes me higher
+                           Makes me decide to fall back asleep
+                           Cause she's too far in world number one
+                           She's my red rose in the other one
+                           Dreams of her takes me higher
+                           Beneath it all, she's all i could see
+                           Cause she's too far in world number one
+                           She's my red rose in the other one
+                           Take it from me
+                           I can't imagine you so beautiful
+                           As clearly
+                           Obviously
+                           I petrify when you walk near me
+                           You said that two wrongs make a right
+                           But has our distance minimized?
+                           One sec, i just blacked out
+                           So here goes the free fall...
+                           [Back to Chorus 1 &
+                           Now breathe in the smoke
+                           We'll find our way home
+                           This hasn't happened yet
+                           But it will, but it will.
+                           We're silver and gold
+                           We'll find our way home
+                           Our hearts set to reset
+                           Yeah it will, yeah it will
+                           For the thrill
+                           This heart keeps screaming louder
+                           This whole town can hear it, the city knows it
+                           She'll be my love in world number one
+                           And keep her running the other one</i>
+                        </p>
                      </div>
                   </div>
                   <!-- sampai sini -->
                </div>
             </div>
-            <div class="col-5">
-            </div>
          </div>
       </div>
    </section>
 
-   <footer>
-      <p class="my-2">change for the better &copy; 2020</p>
-   </footer>
+   <section id="add-article">
+      <div class="container">
+         <div class="button py-5" style="text-align: center;">
+            <button type="button" class="btn btn-outline-danger" onclick="">Add article</button>
+         </div>
+      </div>
+   </section>
+
+   <section id="contact">
+      <footer>
+         <p class="my-2">change for the better &copy; 2020</p>
+      </footer>
+   </section>
 
    <!-- script -->
    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

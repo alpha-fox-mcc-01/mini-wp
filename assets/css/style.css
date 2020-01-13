@@ -9,6 +9,13 @@ header {
    align-items: center;
    text-align: center;
 }
+a {
+   color: black;
+}
+a:hover {
+   text-decoration: none;
+   scroll-behavior: smooth;
+}
 
 .logo-head {
    font-family: 'Patrick Hand SC', cursive;
