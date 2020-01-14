@@ -91,6 +91,19 @@ a:hover {
    color: #384147;
 }
 
+.lightbox-content{
+   /* position: relative; */
+   overflow: hidden;
+}
+
+.lightbox-content img{
+   transition: transform 5s;
+}
+
+.lightbox-content img:hover{
+   transform: scale(1.2);
+}
+
 
 .blog-heading {
    font-family: 'Playfair Display SC', sans-serif;
