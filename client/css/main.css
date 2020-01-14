@@ -1,0 +1,25 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+html, body {
+	background-color: rgb(250, 250, 250);
+	font-family: 'Open Sans', sans-serif;
+	/* font-family: 'Merriweather', serif; */
+	/* overflow-x: hidden !important;
+	overflow-y: hidden !important;
+	overflow-y: scroll; */
+}
+
+.articles-header{
+	font-weight: bold;
+	font-family: 'Merriweather', serif;
+}
+
+.fa-btn:hover{
+	cursor: pointer;
+}
+
+.tags{
+	margin-right: 1em
+}
