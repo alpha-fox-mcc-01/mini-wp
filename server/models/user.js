@@ -24,8 +24,12 @@ userSchema.path('email').validate(function(input, done){
 
 userSchema.path('email').validate(function (email) {
     let emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-    return emailRegex.test(email); // Assuming email has a text attribute
- }, 'The e-mail provided is invalid')
+    if (email.length !== 0) {
+      return emailRegex.test(email);
+    } else {
+      return false
+    }
+}, 'The e-mail provided is invalid')
 
 
 userSchema.pre('save', function(next) {

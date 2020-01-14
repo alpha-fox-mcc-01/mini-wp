@@ -126,6 +126,7 @@ footer {
 
 #log-in-title {
     font-family: 'Ubuntu', sans-serif;
+    margin-bottom: 3rem;
 }
 
 #log-in-container {
@@ -206,4 +207,7 @@ footer {
 
 #create-blog {
     min-height: 30vh;
+}
+div.card-body.articles {
+    padding: 7rem;
 }

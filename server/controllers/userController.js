@@ -1,4 +1,6 @@
 const { User } = require('../models')
+const bcrypt = require('bcryptjs')
+const jwtAccess = require('../jwtAccess')
 module.exports = {
     getCurrentUser(req, res, next) {
         User.findById(req.currentUserId)
@@ -39,6 +41,25 @@ module.exports = {
         })
             .then(data => {
                 res.status(201).json(data)
+            })
+            .catch(err => {
+                console.log(err.message)
+                next(err)
+            })
+    },
+    signIn(req, res, next) {
+        User.findOne({email: req.body.email})
+            .then(user => {
+                if (!user) {
+                    res.status(400).json({error: 'Username/Password is wrong!'})
+                } else {
+                    if (bcrypt.compareSync(req.body.password, user.password)) {
+                        let access_token = jwtAccess.sign({_id: user._id}, process.env.JWT_SECRET)
+                        res.status(200).json({user, access_token})
+                    } else {
+                        res.status(400).json({error: 'Username/Password is wrong!'})
+                    }
+                }
             })
             .catch(err => {
                 console.log(err.message)
