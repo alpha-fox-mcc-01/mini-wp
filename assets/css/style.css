@@ -36,6 +36,10 @@ header {
     transition: all 0.3s ease 0s;
 }
 
+#btn-about h6 {
+    margin-top: 0.5rem;
+}
+
 #what-we-offer {
     margin-top: 6rem;
     width: 1500px;
