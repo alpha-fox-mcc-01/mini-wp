@@ -1,0 +1,209 @@
+header {
+    background-image: url("../images/mountainsBG.jpg");
+    min-height: 680px;
+    height: 100%;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+}
+
+#banner h1 {
+    text-align: center;
+    font-size: 6rem;
+    margin-top: 9rem;
+}
+
+#banner p {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 1rem;
+}
+
+#btn-about {
+    /* font-family: Raleway-SemiBold; */
+    margin-top: 20px;
+    font-size: 13px;
+    /* color: rgba(108, 88, 179, 0.75); */
+    height: 50px;
+    width: 170px;
+    letter-spacing: 1px;
+    line-height: 15px;
+    /* border: 2px solid rgba(108, 89, 179, 0.75); */
+    border-radius: 40px;
+    /* background: transparent; */
+    transition: all 0.3s ease 0s;
+}
+
+#btn-about h6 {
+    margin-top: 0.5rem;
+}
+
+#what-we-offer {
+    margin-top: 6rem;
+    width: 1500px;
+    margin-bottom: 3rem;
+}
+
+#what-we-offer #headline {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+#what-we-offer h1 {
+    font-family: 'Muli', sans-serif; 
+    font-size: 50px;
+    text-align: center;
+}
+
+.features {
+    margin-bottom: 3rem;
+}
+
+#key-features {
+    max-width: 95rem;
+    margin: 0 auto;
+}
+
+#key-features h3 {
+    color: rgb(104, 6, 173)
+}
+/* color: rgb(216, 112, 202) */
+
+#create-website {
+    margin-top: 7rem;
+    font-family: 'Ubuntu', sans-serif;  
+}
+
+#build-yourself {
+    margin-top: 2rem;
+    height: 50px;
+    width: 200px;
+    background-color: rgb(104, 6, 173);
+}
+
+footer {
+    margin-top: 17.5rem;
+    background-color: rgb(58, 58, 58);
+    color: white;
+}
+
+#sign-up-card {
+    height: 35rem;
+    width: 55rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+#sign-up-title {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+#sign-up-container {
+    background-image: url("../images/mountainsBG.jpg");
+    min-height: 100vh;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#log-in-card {
+    height: 35rem;
+    width: 55rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+#log-in-title {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+#log-in-container {
+    background-image: url("../images/mountainsBG.jpg");
+    min-height: 100vh;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.jumbotron-fluid {
+    color: white;
+    background-image: url("../images/caveBG.jpg");
+    min-height: 40vh;
+
+    /* background-position: center; */
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#dashboard-nav {
+    background-color: grey !important;
+}
+
+/* #dash-1 {
+    background-image: url("../images/div1.jpg");
+    min-height: 30vh;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.card-dash {
+    min-width: 1000px;
+} */
+
+#posts, .card-dash {
+    min-width: 160vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+#new-post-container {
+    min-width: 100rem;
+}
+
+#new-post-container h1{
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 4rem;
+}
+
+#new-post-container p{
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    margin-bottom: 5rem;
+}
+
+#new-post-container {
+    margin-top: 7rem;
+}
+
+#new-post-card {
+    background-image: url("../images/blue-flowers.png");
+
+    min-width: 100rem;
+    
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#create-blog {
+    min-height: 30vh;
+}
