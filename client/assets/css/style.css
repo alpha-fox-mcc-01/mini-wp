@@ -43,6 +43,7 @@ footer {
 
 .card {
   max-width: 100%;
+  max-height: 100%;
 }
 
 .add-btn {
@@ -62,6 +63,27 @@ footer {
     padding-left: 4rem;
     padding-right: 4rem;
   }
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.span-hover {
+  border-bottom: 1px solid white;
+}
+
+.span-hover:hover {
+  color: rgb(85, 85, 85) !important;
+  border-bottom: 1px solid black;
+}
+
+.dashboard-nav {
+  color: rgb(126, 126, 126) !important;
+}
+
+.dashboard-nav:hover {
+  color: rgb(85, 85, 85) !important;
 }
 
 /* .h-dashboard {
