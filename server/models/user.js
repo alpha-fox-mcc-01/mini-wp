@@ -6,7 +6,6 @@ const userSchema = new Schema({
     username: String,
     email: String,
     password: String,
-    avatar: String
 }, { timestamps: true });
 
 userSchema.path('email').validate(function(input, done){
@@ -23,9 +22,9 @@ userSchema.path('email').validate(function(input, done){
 }, 'Email has been registered, use another email')
  
 
-userSchema.path('email').validate(function (input) {
+userSchema.path('email').validate(function (email) {
     let emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-    return emailRegex.test(input.email); // Assuming email has a text attribute
+    return emailRegex.test(email); // Assuming email has a text attribute
  }, 'The e-mail provided is invalid')
 
 

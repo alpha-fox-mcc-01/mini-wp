@@ -21,7 +21,7 @@ module.exports = {
                     next(err)
                 })
         } else if (req.query.username) {
-            User.find({username: new RegExp('^'+req.query.username+'$', "i")}) 
+            User.find({username: {$regex: req.query.username, $options:'i'}}) 
                 .then(data => {
                     res.status(200).json(data)
                 })
@@ -36,7 +36,6 @@ module.exports = {
             username: req.body.username,
             email: req.body.email,
             password: req.body.password,
-            avatar: req.body.picture
         })
             .then(data => {
                 res.status(201).json(data)
