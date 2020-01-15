@@ -1,16 +1,15 @@
 const Article = require('../Models/article')
-// const User = require('../Models/user')
-const jwt = require('jsonwebtoken');
 
 class ArticleController{
 
   static createArticle(req, res, next){
-    let token = req.body.token
-    let user = jwt.verify(token, process.env.SECRET);
+    // Belum di pindah, semua proses jwt verify harusnya ada di middleware
+    // let token = req.body.token
+    // let user = jwt.verify(token, process.env.SECRET);
     let data = {
       title : req.body.title,
       content : req.body.content,
-      authorId : user.id
+      authorId : req.currentUserId
     }
     Article
       .create(data)
@@ -27,8 +26,7 @@ class ArticleController{
       .find()
       .populate('authorId', 'name')
       .then( articles => {
-        console.log(articles);
-        
+        // console.log(articles);
         res.status(200).json(articles)
       })
       .catch( err => {

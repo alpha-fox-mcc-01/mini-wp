@@ -8,7 +8,7 @@ module.exports = function (req, res, next) {
       _id : req.params.id
     })
     .then( article => {
-      // console.log(article, 'nih article');
+      console.log(article, 'nih article');
       if(article){
         if(article.authorId == req.currentUserId){
           next()

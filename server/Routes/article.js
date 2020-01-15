@@ -5,7 +5,7 @@ const authorization = require('../Middlewares/authorization')
 
 router.get('/', Article.getAll)
 router.get('/user', authentication, Article.getByUserId)
-router.post('/', Article.createArticle)
+router.post('/', authentication ,Article.createArticle)
 router.delete('/:id', authentication, authorization, Article.deletePost)
 /*
 

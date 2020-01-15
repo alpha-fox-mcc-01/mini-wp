@@ -43,6 +43,8 @@ let app = new Vue({
         .then(token => {
           // console.log(response);
           localStorage.setItem('token', token.data)
+          this.getArticles()
+          this.getUserArticle( localStorage.getItem('token') )
           this.currentPage = 'blog-feed'
           this.email = ''
           this.password = ''
@@ -73,20 +75,21 @@ let app = new Vue({
         })
     },
     postArticle(){
-      let token = localStorage.getItem('token')
       axios({
         method : 'POST',
         url : 'http://localhost:3000/articles',
         data : {
           title : this.title,
-          content : this.content,
-          token
+          content : this.content
+        },
+        headers : {
+          access_token : localStorage.getItem('token')
         }
       })
         .then( article => {
-          console.log(article);
+          console.log(article, "ini articles");
           this.getArticles()
-          this.getUserArticle(token)
+          this.getUserArticle( localStorage.getItem('token') )
           this.title = ''
           this.content = ''
         })
@@ -117,7 +120,7 @@ let app = new Vue({
         }
       })
       .then(response => {
-        console.log(response);
+        // console.log(response);
         this.userArticles = response.data
       })
       .catch(err => {
@@ -143,12 +146,12 @@ let app = new Vue({
     }
   },
   created(){
-    let userToken = localStorage.getItem('token')
-    console.log(userToken);
-    if(userToken){
+    let access_token = localStorage.getItem('token')
+    console.log(access_token);
+    if(access_token){
       this.changePage('blog-feed')
       this.getArticles()
-      this.getUserArticle(userToken)
+      this.getUserArticle(access_token)
     } else {
       this.currentPage = 'not-loggedin'
     }

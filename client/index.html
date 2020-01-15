@@ -67,6 +67,7 @@
                 </div>
               </div>
 
+
               <div class="col-md-4 text-left">
                 <button type="button" class="btn btn-dark" @click="changeButton('register')">Register</button>
                 <div v-if="currentButton === 'register'">
@@ -102,6 +103,7 @@
                 <h2>Blog Feed</h2>
               </div>
             </div>
+            
             <!-- div yg ini akan di fetch data dari data base -->
             <div class="row mb-4 justify-content-start" >
               <div class="col-md-4 mb-4" v-for="article in articles" :key=article.id>
@@ -122,6 +124,7 @@
 
         <!-- DASHBOARD -->
         <section class="dashboard pt-3">
+
           <div class="container mt-5" id="dashboard" v-if="currentPage === 'dashboard'">
             <div class="row justify-content-between">
               <div class="col-sm-3 mr-auto pl-2" id="dashboard-nav">
@@ -132,6 +135,8 @@
                   <p>Add Post</p>
                 </div>
               </div>
+
+
               <div class="col-sm-8 col1" v-if="dashboard === 'my-post'">
                 <h3>My Posts</h3>
                 <div class="row mb-4 mt-5 justify-content-center" v-for="article in userArticles" :key="article._id">
@@ -149,16 +154,18 @@
                     </div>
                 </div>
               </div>
+
+
               <div class="col-sm-8 col2" v-if="dashboard === 'add-post'">
                   <h3>Add Post</h3>
                   <form id="post-article" @submit.prevent="postArticle">
                     <div class="form-group">
                       <label for="title">Title</label>
-                      <input type="email" class="form-control" id="title">
+                      <input type="text" class="form-control" id="title" v-model="title">
                     </div>
                     <div class="form-group">
                       <label for="content">Content</label>
-                      <textarea class="form-control" name="content" id="content" rows="20"></textarea>
+                      <textarea class="form-control" name="content" id="content" rows="20" v-model="content"></textarea>
                     </div>
                     <div class="form-group form-check">
                       <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -171,79 +178,7 @@
           </div>
 
         </section>
-
-        
       </main>
-      <!-- about -->
-      <!-- <section id="about" class="about">
-        <div class="container">
-          <div class="row mb-4">
-            <div class="col text-center">
-              <h2>About</h2>
-            </div>
-          </div>
-        </div>
-        
-        <div class="container text-justify">
-          <div class="row justify-content-center">
-            <div class="col-md-5">
-              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Doloribus, quia! Quasi, ut amet! At illo pariatur nesciunt et perferendis, qui veniam dignissimos tempore amet, officia optio in quo harum a?</p>
-            </div>
-            <div class="col-md-5">
-              <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorem ipsum tempora, repellat ea laudantium praesentium neque distinctio impedit ullam dolore nemo maiores, quod vitae esse beatae eos tenetur! At, quibusdam!</p>
-            </div>
-          </div>
-        </div>
-      </section> -->
-
-      <!-- isi portfolio -->
-      
-<!-- 
-      <section id="contact" class="contact mb-5">
-        <div class="container">
-          <div class="row pt-4 mb-4">
-            <div class="col text-center">
-              <h2>Contuct Us</h2>
-            </div>
-          </div>
-
-          <div class="row justify-content-center">
-            <div class="col-lg-4">
-              <div class="card text-white bg-primary mb-3 text-center">
-                <div class="card-body">
-                  <h5 class="card-title">Contact Us </h5>
-                  <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, deleniti.</p>
-                </div>
-              </div>
-              <ul class="list-group">
-                <li class="list-group-item"><h1>Location</h1></li>
-                <li class="list-group-item">My Office</li>
-                <li class="list-group-item">Jl. Karet Pedurenan</li>
-              </ul>
-            </div>
-
-            <div class="col-md-6">
-              <form>
-                <div class="form-group">
-                  <label for="nama">Nama</label>
-                  <input type="text" class="form-control" id="nama" placeholder="Example input placeholder">
-                </div>
-                <div class="form-group">
-                  <label for="email">Email</label>
-                  <input type="text" class="form-control" id="email" placeholder="Example input placeholder">
-                </div>
-                <div class="form-group">
-                  <label for="pesan">Pesan</label>
-                  <textarea name="pesan" id="pesan" class="form-control"></textarea>
-                </div>
-                <div class="form-group">
-                  <button type="submit" class="btn-primary"> Submit</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section> -->
 
       <footer class="bg-dark text-white">
         <div class="container">
