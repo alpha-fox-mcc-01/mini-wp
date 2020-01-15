@@ -202,19 +202,19 @@
                         </div>
                         <form @submit.prevent="signUp">
                             <label for="website">1. Enter your username to be bound to your personal blog</label>
-                            <input type="text" class="form-control" id="blogSignUp" v-model="username" placeholder="johndoe" data-toggle='tooltip' title="The name will be used for your blog's title">
+                            <input type="text" class="form-control" id="blogSignUp" v-model="user.username" placeholder="johndoe" data-toggle='tooltip' title="The name will be used for your blog's title">
                             <div class="row">
                                 <div class='col-md-6'>
                                     <p style='margin-top: 2rem;'>2. Register</p>
                                     <div class="form-group">
                                         <label for="signup-email">Email address</label>
-                                        <input type="email" class="form-control" id="signup-email" v-model="email" placeholder="johndoe@mail.com" aria-describedby="emailHelp">
+                                        <input type="email" class="form-control" id="signup-email" v-model="user.email" placeholder="johndoe@mail.com" aria-describedby="emailHelp">
                                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                                     </div>
                                     <br>
                                     <div class='form-group'>
                                         <label for="sign-up-password">Password</label>
-                                        <input type="password" class="form-control" v-model="password" id="signup-password">
+                                        <input type="password" class="form-control" v-model="user.password" id="signup-password">
                                     </div>
                                     <button type="button" class="btn btn-dark" @click="signUp">Start a Blog Web</button>
                                 </div>
@@ -253,12 +253,12 @@
                                 <div class='col-md-6'>
                                     <div class="form-group">
                                         <label for="signin-email">Email address</label>
-                                        <input type="email" class="form-control" v-model="email" id="signin-email" aria-describedby="emailHelp">
+                                        <input type="email" class="form-control" v-model="user.email" id="signin-email" aria-describedby="emailHelp">
                                     </div>
                                     <br>
                                     <div class='form-group'>
                                         <label for="signin-password">Password</label>
-                                        <input type="password" class="form-control" v-model="password" id="signin-password">
+                                        <input type="password" class="form-control" v-model="user.password" id="signin-password">
                                     </div>
                                     <button type="button" class="btn btn-dark" @click="signIn">Enter Your Dashboard</button>
                                 </div>
@@ -310,17 +310,41 @@
                 <p class="lead">All your previous posts should appear here. It's all yours to manage and maintain.</p>
                 </div>
             </div>
-            <div align='center'class="row" id='dash-1'>
-                <div class="col-md-12">
-                    <div class="card card-dash" style="width: 18rem; height:25rem;">
-                        <div class="card-body articles">
-                        <h1 class="card-title">Whoops!</h1>
-                        <h6 class="card-subtitle mb-2 text-muted">It seems that you currently have no posts to display</h6>
-                        <p class="card-text"></p>
-                        <a href="#" class="card-link">Create Post</a>
-                        <a href="#" class="card-link">Browse Posts</a>
+            <div align='center' class="row" id='dash-1'>
+                <div class="col-md">
+                    <div class="card" id="no-articles" v-if='(user.articles.length === 0) && (user.isSearching === false)' style="width: 18rem; height:25rem;">
+                        <div class="card-body" id="no-articles-card">
+                            <h1 class="card-title">Whoops!</h1>
+                            <h6 class="card-subtitle mb-2 text-muted">It seems that you currently have no articles to display</h6>
+                            <button class="btn btn-link p-0 m-0 d-inline align-baseline">Create Article</button>&nbsp;
+                            <button class="btn btn-link p-0 m-0 d-inline align-baseline">Browse Articles</button>
                         </div>
                     </div>
+                    <hr>
+                    <div class="card card-dash" v-if='(user.articles.length > 0) && (user.isSearching === false)' v-for="article in user.articles" style="width: 18rem; height:25rem;">
+                        <div class="card-body articles">
+                            <h1 class="card-title">{{ article.title }}</h1>
+                            <h6 class="card-subtitle mb-2 text-muted">Published by {{ user.username }}</h6>
+                            <br>
+                            <p class="card-text">{{ article.content }}</p>
+                            <a href="#" class="card-link">Edit</a>
+                            <a href="#" class="card-link">Delete</a>
+                        </div>
+                    </div>
+                    <!-- <form class="form-inline my-2 my-lg-0" v-if='user.isSearching' @submit.prevent="getArticles">
+                        <input class="form-control mr-sm-2" v-model="search" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" @click="getArticles">Search</button>
+                    </form>
+                    <hr>
+                    <div class="card card-dash" v-if='user.isSearching' v-for="article in articles" style="width: 18rem; height:25rem;">
+                        <div class="card-body articles">
+                            <h1 class="card-title">{{ article.title }}</h1>
+                            <h6 class="card-subtitle mb-2 text-muted">Published by {{ user.username }}</h6>
+                            <br>
+                            <p class="card-text">{{ article.content }}</p>
+                        </div>
+                    </div> -->
+                    <hr>
                 </div>
             </div>
             <footer class="page-footer font-small teal pt-4">

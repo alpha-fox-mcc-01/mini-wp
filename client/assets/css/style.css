@@ -165,7 +165,7 @@ footer {
     min-width: 1000px;
 } */
 
-#posts, .card-dash {
+#posts, #no-articles {
     min-width: 160vh;
     position: absolute;
     top: 50%;
@@ -173,6 +173,12 @@ footer {
     -moz-transform: translateX(-50%) translateY(-50%);
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
+}
+
+.card-dash {
+    margin-bottom: 7rem;
+    min-width: 100rem;
+    min-height: 20rem;
 }
 
 #new-post-container {
@@ -208,6 +214,6 @@ footer {
 #create-blog {
     min-height: 30vh;
 }
-div.card-body.articles {
+#no-articles-card {
     padding: 7rem;
 }
