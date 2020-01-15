@@ -4,9 +4,10 @@ const jwt = require('jsonwebtoken')
 
 class UserController {
    static register(req, res, next) {
+
       var salt = bcrypt.genSaltSync(10);
       var hash = bcrypt.hashSync(req.body.password, salt);
-      let hashPassword = hash
+      let hashPassword = hash //pindah hashing di model nanti
 
       let newData = {
          name: req.body.name,
@@ -27,20 +28,20 @@ class UserController {
          .then(data => {
             if (data) {
                console.log(data);
-               let verified = bcrypt.compareSync(req.body.password, data.password)
+               let verified = bcrypt.compareSync(req.body.password, data.password) //harus nya bcrypt di model
                if (verified) {
                   const userId = data._id
                   const token = jwt.sign({id : userId}, process.env.SECRET)
-                  res.status(200).json({token})
+                  res.status(200).json({token, name : data.name})
                }
                else {
-                  console.log(`password wrong`);
+                  console.log(`email / password wrong`);
                   next()
                }
             }
          })
          .catch (err => {
-            console.log(`email not found`);
+            console.log(`email / password not found`);
             next()
          })
    }

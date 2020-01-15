@@ -6,7 +6,9 @@ const articleSchema = new Schema ({
    title : String,
    content : String,
    publish : Boolean,
-   userId : Array
+   userId : [{
+      type : Schema.Types.ObjectId, ref : 'User'
+   }]
 }, {
    timestamps : true
 })

@@ -1,9 +1,26 @@
+// notification belum
+
 let app = new Vue({
    el: '#app',
    data: {
       message: 'INI VUE WOY',
-      addArticle: false, //untuk conditional add article
+      addArticle: {
+         condition: false,
+         image: '',
+         title: '',
+         content: '',
+         publish: ''
+      },
       article: [],
+      readArticle: {
+         _id : '',
+         name: '',
+         title: '',
+         content: '',
+         author: '',
+         userId: '',
+         image: ''
+      },
       userLogin: {
          email: '',
          password: ''
@@ -14,10 +31,11 @@ let app = new Vue({
          email: '',
          password: ''
       },
-      someoneLogin : { //indikator ada yang login
-         condition : false,
-         token : ''
-      } 
+      someoneLogin: { //indikator ada yang login
+         condition: false,
+         token: '',
+         name: ''
+      }
    },
    methods: {
 
@@ -38,7 +56,6 @@ let app = new Vue({
 
       toggleAddArticle(toggle) { // pakai nanti saat toggle button show wysiwyg
          this.addArticle = toggle
-
       },
       toggleLoginRegister(toggle) {
          this.userRegister = toggle
@@ -76,34 +93,99 @@ let app = new Vue({
          }
          else {
             axios({
-               method : `POST`,
-               url : `http://localhost:3000/users/login`,
-               data : {
-                  email : this.userLogin.email,
-                  password : this.userLogin.password
+               method: `POST`,
+               url: `http://localhost:3000/users/login`,
+               data: {
+                  email: this.userLogin.email,
+                  password: this.userLogin.password
                }
             })
-               .then (response => {
+               .then(response => {
                   console.log(response);
-                  this.userLogin.email = '',
-                  this.userLogin.password = ''
-                  localStorage.setItem(`token`, response.data.token)
-                  
-                  this.someoneLogin.condition = true
-                  this.someoneLogin.token = response.data.token
+
+                  if (response.data.token) {
+                     this.userLogin.email = ''
+                     this.userLogin.password = ''
+                     localStorage.setItem(`token`, response.data.token)
+                     localStorage.setItem(`name`, response.data.name)
+
+                     this.getAllArticles()
+                     this.someoneLogin.condition = true
+                     this.someoneLogin.token = response.data.token
+                     this.someoneLogin.name = response.data.name
+                  }
+                  else {
+                     console.log(`wrong email / password`);
+                  }
                })
-               .catch (err => {
+               .catch(err => {
                   console.log(err.message);
                })
-               
+
          }
       },
-      logout () {
-         this.someoneLogin.condition = false,
+      logout() {
+         localStorage.removeItem(`token`)
+         this.someoneLogin.condition = false
          this.someoneLogin.token = ''
+         this.someoneLogin.name = ''
+      },
+      
+      readDetailArticle(articleId) {
+         axios({
+            method: `GET`,
+            url: `http://localhost:3000/articles/${articleId}`,
+            headers : {
+               token : localStorage.getItem(`token`)
+            }
+         })
+            .then((data) => {
+               // console.log(data);
+               console.log(data);
+               
+               this.readArticle._id = data.data.data._id
+               this.readArticle.title = data.data.data.title
+               this.readArticle.content = data.data.data.content
+               this.readArticle.author = data.data.data.userId[0].name
+               this.readArticle.userId = data.data.data.userId[0]._id
+               this.readArticle.image = data.data.data.image
+            })
+            .catch(err => {
+               console.log(err);
+            })
+      },
+      createArticle() {
+         if (this.addArticle.title.length < 1 || this.addArticle.content.length < 1) {
+            console.log(`kurang lengkap value nya bos!`);
+         }
+         else {
+            axios({
+               method: `POST`,
+               url: `http://localhost:3000/articles`,
+               headers: {
+                  token: localStorage.getItem(`token`)
+               },
+               data: {
+                  image: this.addArticle.image,
+                  title: this.addArticle.title,
+                  content: this.addArticle.content,
+                  publish: this.addArticle.publish
+               }
+            })
+               .then(({ response }) => {
+                  console.log(response);
+               })
+               .catch(err => {
+                  console.log(err);
+               })
+         }
       }
    },
    created() {
-      this.getAllArticles()
+      if (localStorage.getItem(`token`)) {
+         this.getAllArticles()
+         this.someoneLogin.condition = true
+         this.someoneLogin.name = localStorage.getItem(`name`)
+      }
    }
 })

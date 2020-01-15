@@ -24,36 +24,41 @@
       <div id="landing-page" v-if='someoneLogin.condition === false'>
          <div class="container">
             <div class="row">
-               <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+               <div class="col-sm-9 col-md-7 col-lg-5 mx-auto my-auto">
                   <div class="card card-signin my-5">
                      <div class="card-body">
                         <!-- bawah ini login -->
                         <div class="login" v-if="userRegister === false">
-                           <h5 class="card-title text-center">Sign In</h5>
+                           <div class="logo text-center">
+                              <h5 class="logo-head">change</h5>
+                              <h3 class="logo-sub">For the better</h3>
+                           </div>
                            <form class="form-signin">
                               <div class="form-label-group mb-4">
-                                 <input type="email" id="inputEmail" class="form-control" 
-                                    placeholder="Email address" required autofocus v-model="userLogin.email">
+                                 <input type="email" id="inputEmail" class="form-control" placeholder="Email address"
+                                    required autofocus v-model="userLogin.email">
                                  <!-- <label for="inputEmail">Email address</label> -->
                               </div>
-   
+
                               <div class="form-label-group mb-4">
                                  <input type="password" id="inputPassword" class="form-control" placeholder="Password"
                                     required v-model="userLogin.password">
                                  <!-- <label for="inputPassword">Password</label> -->
                               </div>
-                              <button type="button" class="btn btn-primary btn-block" @click="login">Sign in</button>
+                              <button type="button" class="btn btn-dark px-5 btn-block"
+                                 style="font-family: 'Playfair Display SC', serif;" @click="login">Sign in</button>
                               <hr class="my-4">
-                              <button class="btn btn-lg btn-danger btn-block" type="submit"><i
+                              <!-- <button class="btn btn-lg btn-danger btn-block" type="submit"><i
                                     class="fab fa-google mr-2"></i>
-                                 Sign in with Google</button>
-                              <p class="text-center mt-4" @click="toggleLoginRegister(true)">Don't have an account yet? <a href="">Click here to Register</a></p>
+                                 Sign in with Google</button> -->
+                              <p class="text-center mt-4" @click="toggleLoginRegister(true)" style="cursor: pointer;">
+                                 Don't have an account yet? Click here to Register</p>
                            </form>
                         </div>
                         <!-- login sampai sini -->
                         <!-- dibawah ini untuk register -->
                         <!-- still trouble here -->
-                        <div class="register" v-if="userRegister === true"> 
+                        <div class="register" v-if="userRegister === true">
                            <h5 class="card-title text-center">Register</h5>
                            <form class="form-signin">
                               <div class="form-label-group my-4">
@@ -61,16 +66,18 @@
                                     placeholder="Your name" required autofocus>
                               </div>
                               <div class="form-label-group my-4">
-                                 <input type="email" id="inputEmail" class="form-control" v-model="userRegisterData.email"
-                                    placeholder="Email address" required autofocus>
+                                 <input type="email" id="inputEmail" class="form-control"
+                                    v-model="userRegisterData.email" placeholder="Email address" required autofocus>
                               </div>
                               <div class="form-label-group my-4">
-                                 <input type="password" id="inputPassword" class="form-control" v-model="userRegisterData.password" placeholder="Password"
-                                    required>
+                                 <input type="password" id="inputPassword" class="form-control"
+                                    v-model="userRegisterData.password" placeholder="Password" required>
                               </div>
-   
-                              <button type="button" class="btn btn-primary btn-block" @click="registerUser">Sign Up</button>
-   
+
+                              <button type="button" class="btn btn-dark btn-block" @click="registerUser"
+                                 style="font-family: 'Playfair Display SC', serif;">Sign Up</button>
+                              <p class="text-center" @click="toggleLoginRegister(false)" style="cursor : pointer">Back
+                                 to sign in</p>
                            </form>
                         </div>
                         <!-- sampai sini -->
@@ -80,7 +87,9 @@
             </div>
          </div>
       </div>
+
       <div class="after-login" v-if="someoneLogin.condition === true">
+
          <header>
             <div class="logo">
                <h5 class="logo-head">change</h5>
@@ -103,10 +112,16 @@
                         <a href="#gallery" class='nav-link'>Gallery</a>
                      </li>
                      <li class="navbar-item">
-                        <a href="#blog" class='nav-link'>Blog</a>
+                        <a href="#blog" class='nav-link'>Article</a>
                      </li>
                      <li class="navbar-item">
                         <a href="#contact" class='nav-link'>Contact</a>
+                     </li>
+                     <li class="navbar-item">
+                        <a href="#myblog" class='nav-link'>{{someoneLogin.name}}'s article &#10019;</a>
+                     </li>
+                     <li class="navbar-item">
+                        <a href="" class='nav-link' @click="logout">Logout</a>
                      </li>
                   </ul>
                </div>
@@ -118,7 +133,6 @@
                <div class="showcase-content">
                   <div class="showcase-description">
                      <div class="logo">
-                        <!-- <h5 class="logo-head font-weight-bold">change</h5> -->
                         <h3 class="logo-sub">care for a little space in your mind?</h3>
                      </div>
                      <p class="m-0"><i>Tubuh yang berpatah hati.
@@ -201,153 +215,96 @@
 
          <section id="blog" class="py-5">
             <div class="blog-heading text-center mb-5">
-               <h1>blog</h1>
+               <h1>article</h1>
                <h3>&lowast;</h3>
             </div>
             <div class="container">
                <div class="row">
                   <div class="col-5">
-                     <!-- <h5 class="blog-left-title text-center"
-                        style="font-family: 'Playfair Display SC', sans-serif;">List of all article</h5> -->
                      <!-- bawah adalah get article -->
                      <div id="all-article">
                         <div class="border" style='border-radius: 4px; overflow: auto; max-height: 80vh;'>
                            <!-- lempar content ke sini -->
-                           <div class="p-3 border-bottom">
-                              <h5 class="article-title text-center mb-5"><strong>~ </strong>World Number Two<strong>
-                                    ~</strong></h5>
-                              <div class="row">
-                                 <div class="col text-center">&uarr; 420 upvote</div>
-                                 <div class="col text-center"><a href="#blog" onclick="contohBos()">Read article <i
-                                          class="fas fa-play ml-2"></i></a></div>
+                           <div class="no-article text-center" v-if="article.length < 1">
+                              <h5 class="my-5">there's no article</h5>
+                           </div>
+                           <div class="public-article" v-if="article.length > 0">
+                              <!-- disini loop public article -->
+                              <div v-for="item in article" :key="item._id">
+                                 <div class="p-3 border-bottom">
+                                    <h5 class="article-title text-center mb-4 mt-2"><strong>~
+                                       </strong>{{item.title}}<strong> ~</strong></h5>
+
+                                    <div class="row">
+                                       <div class="col text-center"><span @click="readDetailArticle(item._id)"
+                                             style="cursor: pointer;">Read article <i
+                                                class="fas fa-play ml-2"></i></span></div>
+                                    </div>
+                                 </div>
                               </div>
                            </div>
+
+
                            <!-- sampai sini -->
-                           <!-- lempar content ke sini -->
-                           <div class="p-3 border-bottom">
-                              <h5 class="article-title text-center mb-5"><strong>~ </strong>Opera house<strong>
-                                    ~</strong></i>
-                              </h5>
-                              <div class="row">
-                                 <div class="col text-center">&uarr; 420 upvote</div>
-                                 <div class="col text-center"><a href="#blog" onclick="">Read article <i
-                                          class="fas fa-play ml-2"></i></a></div>
-                              </div>
-                           </div>
-                           <!-- sampai sini -->
-                           <!-- lempar content ke sini -->
-                           <div class="p-3 border-bottom">
-                              <h5 class="article-title text-center mb-5"><strong>~ </strong>Apple Cider<strong>
-                                    ~</strong>
-                              </h5>
-                              <div class="row">
-                                 <div class="col text-center">&uarr; 420 upvote</div>
-                                 <div class="col text-center"><a href="#blog" onclick="">Read article <i
-                                          class="fas fa-play ml-2"></i></a></div>
-                              </div>
-                           </div>
-                           <!-- sampai sini -->
-                           <!-- lempar content ke sini -->
-                           <div class="p-3 border-bottom">
-                              <h5 class="article-title text-center mb-5"><strong>~ </strong>Someday I'll Find My Way
-                                 Home<strong> ~</strong></h5>
-                              <div class="row">
-                                 <div class="col text-center">&uarr; 420 upvote</div>
-                                 <div class="col text-center"><a href="#blog" onclick="">Read article <i
-                                          class="fas fa-play ml-2"></i></a></div>
-                              </div>
-                           </div>
-                           <!-- sampai sini -->
-                           <!-- lempar content ke sini -->
-                           <div class="p-3 border-bottom">
-                              <h5 class="article-title text-center mb-5"><strong>~ </strong>What's My Age Again?<strong>
-                                    ~</strong></i></h5>
-                              <div class="row">
-                                 <div class="col text-center">&uarr; 420 upvote</div>
-                                 <div class="col text-center"><a href="#blog" onclick="">Read article <i
-                                          class="fas fa-play ml-2"></i></a></div>
-                              </div>
-                           </div>
-                           <!-- sampai sini -->
-                           <!-- lempar content ke sini -->
-                           <div class="p-3 border-bottom">
-                              <h5 class="article-title text-center mb-5"><strong>~ </strong>Le Festin<strong> ~</strong>
-                              </h5>
-                              <div class="row">
-                                 <div class="col text-center">&uarr; 420 upvote</div>
-                                 <div class="col text-center"><a href="#blog" onclick="">Read article <i
-                                          class="fas fa-play ml-2"></i></a></div>
-                              </div>
-                           </div>
-                           <!-- sampai sini -->
+
                         </div>
                      </div>
                   </div>
                   <div class="col-7">
                      <div id="detail-article">
                         <!-- bawah adalah get details article -->
-                        <div class="border" style="border-radius: 4x; overflow: auto; max-height: 80vh;">
-                           <p class="text-center py-4 mb-0"><i>Select article to read</i></p>
+                        <div class="no-article-selected" v-if="readArticle.content.length < 1">
+                           <div class="border" style="border-radius: 4x; overflow: auto; max-height: 80vh;">
+                              <p class="text-center py-4 mb-0"><i>Select article to read</i></p>
+                           </div>
                         </div>
 
-                        <!-- <div class="border" style="border-radius: 4px; overflow: auto; max-height: 80vh;">
-                           <div class="mx-4 my-3">
-                              <h4 style="font-family: 'Gelasio', serif">World Number two</h4>
-                              <p class="mt-4" style="font-family: 'Gelasio', serif;"><i>Honestly
-                                    My eyes have never been so useless
-                                    Unconsciously
-                                    I dive into her warmth, her kindness
-                                    Sever me from the rope that's keeping up, tying me down
-                                    And here goes the free fall...
-                                    Suffocating
-                                    The thought of her suffocates me
-                                    Duplicates my worries and fears that she'll never be mine
-                                    Oh god help me, help me change her mind
-                                    Just let me sleep
-                                    So i can pick up where i left off
-                                    Rewind it back, we'll hope that it makes sense
-                                    And put the midnight fantasies all in repeat
-                                    Dreams of her takes me higher
-                                    Makes me decide to fall back asleep
-                                    Cause she's too far in world number one
-                                    She's my red rose in the other one
-                                    Dreams of her takes me higher
-                                    Beneath it all, she's all i could see
-                                    Cause she's too far in world number one
-                                    She's my red rose in the other one
-                                    Take it from me
-                                    I can't imagine you so beautiful
-                                    As clearly
-                                    Obviously
-                                    I petrify when you walk near me
-                                    You said that two wrongs make a right
-                                    But has our distance minimized?
-                                    One sec, i just blacked out
-                                    So here goes the free fall...
-                                    [Back to Chorus 1 &
-                                    Now breathe in the smoke
-                                    We'll find our way home
-                                    This hasn't happened yet
-                                    But it will, but it will.
-                                    We're silver and gold
-                                    We'll find our way home
-                                    Our hearts set to reset
-                                    Yeah it will, yeah it will
-                                    For the thrill
-                                    This heart keeps screaming louder
-                                    This whole town can hear it, the city knows it
-                                    She'll be my love in world number one
-                                    And keep her running the other one</i>
-                              </p>
+                        <div class="detail-article" v-if="readArticle.content.length > 0">
+                           <div class="border" style="border-radius: 4px; overflow: auto; max-height: 80vh;">
+                              <div class="mx-4 my-3">
+                                 <h4 style="font-family: 'Gelasio', serif">{{readArticle.title}}</h4>
+                                 <p class="mt-4" style="font-family: 'Gelasio', serif;"><i>
+                                       {{readArticle.content}}
+                                    </i>
+                                 </p>
+                              </div>
                            </div>
-                        </div> -->
-                        <!-- sampai sini -->
+                        </div>
+
                      </div>
                   </div>
                </div>
             </div>
          </section>
 
+
+
+         <section id='myblog' class="py-5">
+            <div class="blog-heading text-center mb-3">
+               <h2>{{someoneLogin.name}}'s article</h2>
+               <h3>&#10019;</h3>
+            </div>
+
+            <div class="container">
+               <nav class="navbar navbar-expand-md p-0">
+                  <button class="navbar-toggler" type="button" data-toggle='collapse' data-target='#trigger'>
+                     <i class="fas fa-bars"></i>
+                  </button>
+   
+                  <div class="collapse navbar-collapse d-md-flex justify-content-center" id="trigger">
+                     <ul class="navbar-nav">
+                        <li class="navbar-item">
+                           <span class='nav-link' style="cursor: pointer;">My Articles</span>
+                        </li>
+                        <li class="navbar-item">
+                           <span class='nav-link' style="cursor: pointer;">Add Article</span>
+                        </li>
+                     </ul>
+                  </div>
+               </nav>
+            </div>
+
+         </section>
          <section id="contact">
             <footer>
                <p class="my-2">change for the better &copy; 2020</p>
