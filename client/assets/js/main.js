@@ -11,7 +11,8 @@ let app = new Vue({
     content : '',
     articles : '',
     dashboard : '',
-    articleId : ''
+    articleId : '',
+    userArticles : ''
   },
   methods : {
     changeButton(button){
@@ -51,25 +52,25 @@ let app = new Vue({
         })
     },
     registerUser(){
-        axios({
-          method : 'POST',
-          url : 'http://localhost:3000/users/register',
-          data : {
-            name : this.name,
-            email : this.email,
-            password : this.password
-          }
+      axios({
+        method : 'POST',
+        url : 'http://localhost:3000/users/register',
+        data : {
+          name : this.name,
+          email : this.email,
+          password : this.password
+        }
+      })
+        .then(token => {
+          localStorage.setItem('token', token.data)
+          this.currentPage = 'blog-feed'
+          this.name = ''
+          this.email = ''
+          this.password = ''
         })
-          .then(token => {
-            localStorage.setItem('token', token.data)
-            this.currentPage = 'blog-feed'
-            this.name = ''
-            this.email = ''
-            this.password = ''
-          })
-          .catch(err => {
-            console.log(err);
-          })
+        .catch(err => {
+          console.log(err);
+        })
     },
     postArticle(){
       let token = localStorage.getItem('token')
@@ -85,6 +86,7 @@ let app = new Vue({
         .then( article => {
           console.log(article);
           this.getArticles()
+          this.getUserArticle(token)
           this.title = ''
           this.content = ''
         })
@@ -106,14 +108,34 @@ let app = new Vue({
           console.log(err);
         })
     },
-    deletePost(id){
+    getUserArticle(){
+      axios({
+        method : 'GET',
+        url : 'http://localhost:3000/articles/user',
+        headers : {
+          access_token : localStorage.getItem('token')
+        }
+      })
+      .then(response => {
+        console.log(response);
+        this.userArticles = response.data
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    },
+    deletePost(articleId){
       axios({
         method : 'DELETE',
-        url : 'http://localhost:3000/articles/' + id
+        url : `http://localhost:3000/articles/` + articleId,
+        headers : {
+          access_token : localStorage.getItem('token')
+        }
       })
         .then(response => {
           console.log(response);
           this.getArticles()
+          this.getUserArticle()
         })
         .catch(err => {
           console.log(err);
@@ -121,11 +143,12 @@ let app = new Vue({
     }
   },
   created(){
-    let loggedIn = localStorage.getItem('token')
-    console.log(loggedIn);
-    if(loggedIn){
+    let userToken = localStorage.getItem('token')
+    console.log(userToken);
+    if(userToken){
       this.changePage('blog-feed')
       this.getArticles()
+      this.getUserArticle(userToken)
     } else {
       this.currentPage = 'not-loggedin'
     }

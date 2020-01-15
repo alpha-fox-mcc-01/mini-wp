@@ -1,5 +1,5 @@
 const Article = require('../Models/article')
-const User = require('../Models/user')
+// const User = require('../Models/user')
 const jwt = require('jsonwebtoken');
 
 class ArticleController{
@@ -25,10 +25,27 @@ class ArticleController{
   static getAll(req, res, next) {
     Article
       .find()
+      .populate('authorId', 'name')
       .then( articles => {
+        console.log(articles);
+        
         res.status(200).json(articles)
       })
       .catch( err => {
+        next()
+      })
+  }
+
+  static getByUserId(req, res, next){
+    Article
+      .find({
+        authorId : req.currentUserId
+      })
+      .populate('authorId', 'name')
+      .then(articles => {
+        res.status(200).json(articles)
+      })
+      .catch(err =>{
         next()
       })
   }
