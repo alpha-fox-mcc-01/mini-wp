@@ -1,0 +1,49 @@
+gaboleh nyontek
+set up environment dicatet
+-server, express, mongoose, cors, jwt, bycript
+-client, vue and axios cdn
+
+npm install -D dotenv
+"dev": "NODE_ENV=development nodemon app.js" >> di script pakage.json
+express modular router
+
+common api erro:
+converting circular structure to json{
+    karna harus di destructure ({data})
+}
+
+//server
+steps:
+1.  npm init -y
+2. .gitignore (node_modules, .env)
+3. set up environment
+4. app js, set express, dotenv
+5. bikin routing(index, router)
+6. set up mongoose.connect, NYALAIN MONGO SHELL
+7. test, router, bikin controller lalu bikin model: schema(require harus catch error)-validation
+    checkout cutom validation utkj email unik
+    pre save utk hash, pre save hrs dgn function
+8. authentication{
+    dapetin acces otken dari headers
+    >>try catch (blm dipake)
+    verfift acc token di decode lwt jwt 
+    find di database dari hasil decode
+        kl ada 
+            simpan decoded user id di req.currenst user
+            next() di invoke
+        kl gaada 
+            response error
+    }
+9. authorization{
+    findOne car {_id: req.params.taregetid}
+        if id = req.currentUserId
+            next()
+        else
+            unauthorized
+}
+
+
+//client
+
+steps:
+1. pasang cdn vue js(setelah itu axios, setelah itu main.js )
