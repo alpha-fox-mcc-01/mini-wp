@@ -10,7 +10,11 @@ const app = new Vue({
             search: '',
         },
         currentPage: 'landing',
-        searchArticles: []
+        searchArticles: [],
+        article : {
+            title : '',
+            content: ''
+        }
     },
     methods: {
         changePage(pageName) {
@@ -57,7 +61,7 @@ const app = new Vue({
             this.currentPage = 'landing'
         },
         getArticles() {
-            if (this.search.length === 0) {
+            if (this.user.search.length === 0) {
                 axios.get('http://localhost:3000/articles')
                     .then(( {data} )  => {
                         this.articles = data
@@ -93,14 +97,29 @@ const app = new Vue({
                 .catch(err => {
                     console.log(err.message)
                 })
+        },
+        writeArticle() {
+            axios.get('')
+        },
+        publishArticle(id) {
+            axios.patch(`http://localhost:3000/articles/publish/?articleid=${id}`, {
+                headers: {
+                    access_token: localStorage.getItem('access_token')
+                }
+            })
+                .then(( {data} ) => {
+                    this.user.articles = data.data
+                })
+                .catch(err => {
+                    console.log(err.message)
+                })
         }
-    },
-    created() {
-        this.getArticles()
     },
     created() {
         if(localStorage.getItem('access_token')) {
             this.currentPage = 'dashboard';
+            this.getUserArticles()
         }
-    }
+        this.getArticles()
+    },
 })

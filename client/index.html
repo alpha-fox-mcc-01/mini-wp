@@ -130,7 +130,7 @@
                     <h1>Create your own blog for free!</h1>
                     <p>You can create an <strong>amazing blog</strong> with WeBlog in just minutes</p>
                     <p>Join fellow bloggers and <strong>build one yourself</strong>.</p>
-                    <button type="button" class="btn btn-dark" id='build-yourself'>Create a Blog</button>
+                    <button type="button" class="btn btn-dark" id='build-yourself' @click="changePage('signUp')">Create a Blog</button>
                 </div>
                 <div class='row' align='center' style='margin-top: 5rem'>
                     <div class='col-md-4'>
@@ -293,7 +293,7 @@
                 <div class="collapse navbar-collapse" id="navbarMenu">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <button type="button" class="btn btn-dark" style='margin-top: 0.2rem'>Write</button>
+                            <button type="button" class="btn btn-dark" style='margin-top: 0.2rem' @click="changePage('createArticle')">Write</button>
                         </li> 
                         <li class="nav-item">
                             <a href="#" class="nav-link"><img src='./assets/images/blank-avatar.png' width=25 height=25></a>
@@ -306,45 +306,79 @@
             </nav>
             <div class="jumbotron jumbotron-fluid">
                 <div class="container">
-                <h1 class="display-4">Welcome to Your Personal Dashboard</h1>
-                <p class="lead">All your previous posts should appear here. It's all yours to manage and maintain.</p>
+                    <h1 class="display-4">Welcome to Your Personal Dashboard</h1>
+                    <p class="lead">All your previous posts should appear here. It's all yours to manage and maintain.</p>
                 </div>
             </div>
-            <div align='center' class="row" id='dash-1'>
-                <div class="col-md">
-                    <div class="card" id="no-articles" v-if='(user.articles.length === 0) && (user.isSearching === false)' style="width: 18rem; height:25rem;">
-                        <div class="card-body" id="no-articles-card">
-                            <h1 class="card-title">Whoops!</h1>
-                            <h6 class="card-subtitle mb-2 text-muted">It seems that you currently have no articles to display</h6>
-                            <button class="btn btn-link p-0 m-0 d-inline align-baseline">Create Article</button>&nbsp;
-                            <button class="btn btn-link p-0 m-0 d-inline align-baseline">Browse Articles</button>
+            <div class="row" id='dash-1'>
+                <div class="col-md dash-div">
+                    <div class="container">
+                        <div class="card" id="no-articles" v-if='(user.articles.length === 0) && (user.isSearching === false)' style="width: 18rem; height:25rem;">
+                            <div class="card-body" id="no-articles-card">
+                                <h1 class="card-title">Whoops!</h1>
+                                <h6 class="card-subtitle mb-2 text-muted">It seems that you currently have no articles to display</h6>
+                                <button class="btn btn-link p-0 m-0 d-inline align-baseline">Create Article</button>&nbsp;
+                                <button class="btn btn-link p-0 m-0 d-inline align-baseline">Browse Articles</button>
+                            </div>
+                        </div>
+                        <div class="card card-dash" v-else-if='(user.articles.length > 0) && (user.isSearching === false)' v-for="article in user.articles" :key="article._id">
+                            <div class="card-body articles">
+                                <h6 class="card-subtitle mb-2" style='color:rgb(104, 6, 173)'>UNCATEGORIZED</h6>
+                                <h1 class="card-title">{{ article.title }}</h1>
+                                <h6 class="card-subtitle mb-2">{{ article.createdAt }} | by {{ article.authorId.username }}</h6>
+                                <h6 class="card-subtitle mb-2 text-muted">Last edited: {{ article.updatedAt }}</h6>
+                                <br>
+                                <p class="card-text">{{ article.content }}</p>
+                                <a href="#" class="card-link" @click="editArticle(article._id)">Edit</a>
+                                <a href="#" class="card-link" @click="deleteArticle(article._id)">Delete</a>
+                            </div>
+                            <hr>
+                        </div>
+                        <form class="form-inline my-2 my-lg-0" v-if='user.isSearching' @submit.prevent="getArticles">
+                            <input class="form-control mr-sm-2" v-model="search" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" @click="getArticles">Search</button>
+                        </form>
+                        <div class="card card-dash" v-if='user.isSearching' v-for="article in searchArticles" style="width: 18rem; height:25rem;">
+                            <div class="card-body articles">
+                                <h1 class="card-title">{{ article.title }}</h1>
+                                <h6 class="card-subtitle mb-2 text-muted">Published by {{ user.username }}</h6>
+                                <br>
+                                <p class="card-text">{{ article.content }}</p>
+                            </div>
                         </div>
                     </div>
-                    <hr>
-                    <div class="card card-dash" v-if='(user.articles.length > 0) && (user.isSearching === false)' v-for="article in user.articles" style="width: 18rem; height:25rem;">
-                        <div class="card-body articles">
-                            <h1 class="card-title">{{ article.title }}</h1>
-                            <h6 class="card-subtitle mb-2 text-muted">Published by {{ user.username }}</h6>
-                            <br>
-                            <p class="card-text">{{ article.content }}</p>
-                            <a href="#" class="card-link">Edit</a>
-                            <a href="#" class="card-link">Delete</a>
+                    <hr style='margin-bottom: 10rem; width: 100rem;'>
+                </div>
+            </div>
+            <div id='new-post'>
+                <div class='container' id='new-post-container'>
+                    <div class="card" id='new-post-card'>
+                        <div class="card-body">
+                            <h1 style="font-family: 'Muli', Sans-serif;">Create New Article</h1>
+                            <p style="font-family: 'Muli', Sans-serif;">Pour all your ideas out.</p>
+                            <form @submit.prevent="writeArticle">
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">Title</label>
+                                    <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" rows="1" v-model="article.title"></textarea>
+                                    <label for="exampleFormControlTextarea1">Content</label>
+                                    <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" rows="10" v-model="article.content"></textarea>
+                                </div>
+                                <!-- <div id="editor"></div>
+                                <script>
+                                        ClassicEditor
+                                                .create( document.querySelector( '#editor' ) )
+                                                .then( editor => {
+                                                        console.log( editor );
+                                                } )
+                                                .catch( error => {
+                                                        console.error( error );
+                                                } );
+                                </script> -->
+                                <br>
+                                <button type="submit" class="btn btn-dark">Post</button>
+                            </form>
                         </div>
                     </div>
-                    <!-- <form class="form-inline my-2 my-lg-0" v-if='user.isSearching' @submit.prevent="getArticles">
-                        <input class="form-control mr-sm-2" v-model="search" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" @click="getArticles">Search</button>
-                    </form>
-                    <hr>
-                    <div class="card card-dash" v-if='user.isSearching' v-for="article in articles" style="width: 18rem; height:25rem;">
-                        <div class="card-body articles">
-                            <h1 class="card-title">{{ article.title }}</h1>
-                            <h6 class="card-subtitle mb-2 text-muted">Published by {{ user.username }}</h6>
-                            <br>
-                            <p class="card-text">{{ article.content }}</p>
-                        </div>
-                    </div> -->
-                    <hr>
                 </div>
             </div>
             <footer class="page-footer font-small teal pt-4">
@@ -370,84 +404,7 @@
                 </div>
             </footer>
         </section>
-
-        
-
         <!-- INI CREATE NEW BLOG PAGE -->
-        <section id='create-blog' v-if="currentPage === 'createPost'">
-            <nav class="navbar navbar-expand-sm navbar-light bg-light" id='dashboard-nav'>
-                <a href='#' class="navbar-brand">WeBlog</a>
-                <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarMenu">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <button type="button" class="btn btn-dark" style='margin-top: 0.2rem'>Write</button>
-                        </li> 
-                        <li class="nav-item">
-                            <a href="#" class="nav-link"><img src='./assets/images/blank-avatar.png' width=25 height=25></a>
-                        </li>
-                        <li class="nav-item" style='margin-top: 0.6rem'>
-                            <a href="#" onclick="signOut();">Sign out</a>
-                        </li> 
-                    </ul>
-                </div>
-            </nav>
-            <div class="jumbotron jumbotron-fluid">
-                <div class="container">
-                <h1 class="display-4">Welcome to Your Personal Dashboard</h1>
-                <p class="lead">All your previous posts should appear here. It's all yours to manage and maintain.</p>
-                </div>
-            </div>
-            <div id='new-post'>
-            <div class='container' id='new-post-container'>
-                <div class="card" id='new-post-card'>
-                    <div class="card-body">
-                        <h1>Create new post</h1>
-                        <p>Pour all your ideas out.</p>
-                        <center>
-                        <!-- <div id="editor"></div>
-                        <script>
-                                ClassicEditor
-                                        .create( document.querySelector( '#editor' ) )
-                                        .then( editor => {
-                                                console.log( editor );
-                                        } )
-                                        .catch( error => {
-                                                console.error( error );
-                                        } );
-                        </script> -->
-                        <br>
-                        <button type="button" class="btn btn-dark">Post</button>
-                        </center>
-                    </div>
-                </div>
-            </div>
-            </div>
-            <footer class="page-footer font-small teal pt-4">
-                <div class="container-fluid text-center text-md-left">
-                        <div class="row">
-                            <div class="col-md-6 mt-md-0 mt-3">
-                                <h5 class="text-uppercase font-weight-bold">Disclaimer</h5>
-                                <p>Used for development/education only. Do NOT deploy for production use.</p>
-                            </div>
-                            <hr class="clearfix w-100 d-md-none pb-3">
-                            <div class="col-md-6 mb-md-0 mb-3">
-                                <h5 class="text-uppercase font-weight-bold">Support</h5>
-                                <ul>
-                                    <li><a href="#">About Us</a></li>
-                                    <li><a href="#">User testimonials</a></li>
-                                    <li><a href="#">FAQ</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                <div class="footer-copyright text-center py-3">© 2020 Copyright:
-                    <a href="#">Gabriel Timothy</a>
-                </div>
-            </footer>    
-        </section>
     </div>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>

@@ -23,13 +23,41 @@ module.exports = {
         }
     },
     getUserArticles(req, res, next) {
-        Article.find({authorId: ObjectID(req.currentUserId)})
+        Article.find({authorId: ObjectID(req.currentUserId)}).populate('authorId', 'username')
             .then(data => {
                 res.status(200).json({data})
             })
             .catch(err => {
                 console.log(err.message)
                 next(err)
+            })
+    },
+    writeArticle(req, res, next) {
+        Article.create({
+            title: req.body.title,
+            content: req.body.content,
+            published: false,
+            authorId: ObjectID(req.currentUserId),
+            image: req.body.image
+        })
+            .then(data => {
+                res.status(201).json({data})
+            })
+            .catch(err => {
+                console.log(err.message)
+                next(err)
+            })
+    },
+    publishArticle(req, res, next) {
+        Article.findByIdAndUpdate(req.query.articleid, {
+            published: true
+        })
+            .then(data => {
+                res.status(200).json({data})
+            })
+            .catch(err => {
+                console.log(err.message)
+                next(err);
             })
     }
 

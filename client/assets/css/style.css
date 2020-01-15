@@ -9,6 +9,10 @@ header {
     color: white;
 }
 
+.navbar-brand {
+    font-family: 'Muli', sans-serif; 
+}
+
 #banner h1 {
     text-align: center;
     font-size: 6rem;
@@ -84,7 +88,7 @@ header {
 }
 
 footer {
-    margin-top: 17.5rem;
+    margin-top: 15rem;
     background-color: rgb(58, 58, 58);
     color: white;
 }
@@ -140,30 +144,26 @@ footer {
 
 .jumbotron-fluid {
     color: white;
-    background-image: url("../images/caveBG.jpg");
+    background-image: url("../images/mountainsBG.jpg");
+    /* background-color:rgba(0, 255, 255, 0); */
+    /* background-color: rgba(211, 209, 209, 0.678); */
+    /* background-color: rgb(65, 63, 63); */
     min-height: 40vh;
 
-    /* background-position: center; */
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    margin-bottom: 7rem;
+}
+
+.jumbotron-fluid .container {
+    margin-top: 1rem;
 }
 
 #dashboard-nav {
     background-color: grey !important;
 }
 
-/* #dash-1 {
-    background-image: url("../images/div1.jpg");
-    min-height: 30vh;
-
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-.card-dash {
-    min-width: 1000px;
-} */
 
 #posts, #no-articles {
     min-width: 160vh;
@@ -177,8 +177,15 @@ footer {
 
 .card-dash {
     margin-bottom: 7rem;
-    min-width: 100rem;
+    min-width: 50rem;
     min-height: 20rem;
+    /* background-image: url("../images/blue-flowers.png") */
+}
+
+.dash-div {
+    /* background-image: url("../images/blue-flowers.png"); */
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 #new-post-container {
@@ -197,12 +204,18 @@ footer {
     margin-bottom: 5rem;
 }
 
-#new-post-container {
-    margin-top: 7rem;
+#create-blog {
+    /* background-image: url("../images/blue-flowers.png"); */
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 #new-post-card {
+    color: black;
+    background-color: rgba(128, 128, 128, 0.623);
+    padding: 20px;
     background-image: url("../images/blue-flowers.png");
+
 
     min-width: 100rem;
     
@@ -216,4 +229,14 @@ footer {
 }
 #no-articles-card {
     padding: 7rem;
+}
+
+#dashboard {
+    /* background-image: url("../images/blue-flowers.png"); */
+
+    min-width: 100rem;
+    
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
