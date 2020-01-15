@@ -7,9 +7,11 @@ const authorization = require('../middlewares/authorization')
 
 router.get('/', articleController.getArticles)
 
-router.get('/me', authentication, articleController.getUserArticles)
-
 router.post('/', authentication, articleController.writeArticle)
+
+router.post('/:id', articleController.getOneArticle)
+
+router.get('/me', authentication, articleController.getUserArticles)
 
 router.patch('/publish', authentication, authorization, articleController.publishArticle)
 

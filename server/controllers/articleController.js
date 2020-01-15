@@ -3,24 +3,33 @@ const { Article } = require('../models')
 module.exports = {
     getArticles(req, res, next) {
         if (!req.query.keyword) {
-            Article.find({published: true}).sort({'createdAt': -1}).limit(10)
+            Article.find({published: true}).sort({'createdAt': -1}).limit(10).populate('authorId', 'username')
             .then(data => {
-                res.status(200).json(data);
+                res.status(200).json({data});
             })
             .catch(err => {
                 console.log(err.message);
                 next(err);
             })
         } else {
-            Article.find({title: {$regex: req.query.keyword, $options: 'i'}})
+            Article.find({published: true, title: {$regex: req.query.keyword, $options: 'i'}})
                 .then(data => {
-                    res.status(200).json(data)
+                    res.status(200).json({data})
                 })
                 .catch(err => {
                     console.log(err.message);
                     next(err);
                 })
         }
+    },
+    getOneArticle(req, res, next) {
+        Article.findById(req.params.id).populate('authorId', 'username')
+            .then(data => {
+                res.status(200).json({data})
+            })
+            .catch(err => {
+                next(err)
+            })
     },
     getUserArticles(req, res, next) {
         Article.find({authorId: ObjectID(req.currentUserId)}).populate('authorId', 'username')

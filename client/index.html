@@ -311,8 +311,27 @@
                 </div>
             </div>
             <div class="row" id='dash-1'>
-                <div class="col-md dash-div">
-                    <div class="container">
+                <div class='col-md-3' id='user-posts'>
+                    <hr>
+                    <h1 style="font-family: 'Muli', sans-serif;"><center>Your Previous Posts</center></h1>
+                    <hr>
+                    <div class="card card-dash" v-if='user.articles.length > 0' v-for="article in user.articles" :key="article._id">
+                        <div class="card-body articles">
+                            <h6 class="card-subtitle mb-2" style='color:rgb(104, 6, 173)'>UNCATEGORIZED</h6>
+                            <h1 class="card-title">{{ article.title }}</h1>
+                            <h6 class="card-subtitle mb-2">{{ article.createdAt }} | by {{ article.authorId.username }}</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">Last edited: {{ article.updatedAt }}</h6>
+                            <br>
+                            <p class="card-text">{{ article.content }}</p>
+                            <button type="button" class="btn btn-link p-0 m-0 d-inline align-baseline" @click="publish(article._id)">Edit</button>
+                            <button type="button" class="btn btn-link p-0 m-0 d-inline align-baseline" @click="publish(article._id)">Delete</button>
+                            <a class="card-link" v-if="article.published" style='color: rgba(128, 128, 128, 0.548)'>Published</a>
+                            <button type="button" class="btn btn-link p-0 m-0 d-inline align-baseline" v-else-if="!article.published" @click="publish(article._id)">Publish</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 dash-div">
+                    <!-- <div class="container">
                         <div class="card" id="no-articles" v-if='(user.articles.length === 0) && (user.isSearching === false)' style="width: 18rem; height:25rem;">
                             <div class="card-body" id="no-articles-card">
                                 <h1 class="card-title">Whoops!</h1>
@@ -321,7 +340,50 @@
                                 <button class="btn btn-link p-0 m-0 d-inline align-baseline">Browse Articles</button>
                             </div>
                         </div>
-                        <div class="card card-dash" v-else-if='(user.articles.length > 0) && (user.isSearching === false)' v-for="article in user.articles" :key="article._id">
+                    </div> -->
+                    <div id='new-post'>
+                        <div class='container' id='new-post-container'>
+                            <div class="card" id='new-post-card'>
+                                <div class="card-body">
+                                    <h1 style="font-family: 'Muli', Sans-serif;">Create New Article</h1>
+                                    <p style="font-family: 'Muli', Sans-serif;">Pour all your ideas out.</p>
+                                    <form @submit.prevent="writeArticle">
+                                        <div class="form-group">
+                                            <label for="exampleFormControlTextarea1">Title</label>
+                                            <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" rows="1" v-model="article.title"></textarea>
+                                            <label for="exampleFormControlTextarea1">Content</label>
+                                            <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" rows="15" v-model="article.content"></textarea>
+                                        </div>
+                                        <!-- <div id="editor"></div>
+                                        <script>
+                                                ClassicEditor
+                                                        .create( document.querySelector( '#editor' ) )
+                                                        .then( editor => {
+                                                                console.log( editor );
+                                                        } )
+                                                        .catch( error => {
+                                                                console.error( error );
+                                                        } );
+                                        </script> -->
+                                        <br>
+                                        <button type="submit" class="btn btn-dark">Post</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <hr style='margin-bottom: 10rem; width: 100rem;'> -->
+                </div>
+                <div class="col-md-3">
+                    <hr>
+                    <h1 style="font-family: 'Muli', sans-serif;"><center>Discover</center></h1>
+                    <hr>
+                    <form class="form-inline my-2 my-lg-0" @submit.prevent="getArticles">
+                        <input class="form-control mr-sm-2" v-model="user.search" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                    <div id='search-posts'>
+                        <div class="card card-dash" v-if="searchArticles.length > 0" v-for="article in searchArticles" :key="article.id">
                             <div class="card-body articles">
                                 <h6 class="card-subtitle mb-2" style='color:rgb(104, 6, 173)'>UNCATEGORIZED</h6>
                                 <h1 class="card-title">{{ article.title }}</h1>
@@ -329,58 +391,12 @@
                                 <h6 class="card-subtitle mb-2 text-muted">Last edited: {{ article.updatedAt }}</h6>
                                 <br>
                                 <p class="card-text">{{ article.content }}</p>
-                                <a href="#" class="card-link" @click="editArticle(article._id)">Edit</a>
-                                <a href="#" class="card-link" @click="deleteArticle(article._id)">Delete</a>
                             </div>
-                            <hr>
-                        </div>
-                        <form class="form-inline my-2 my-lg-0" v-if='user.isSearching' @submit.prevent="getArticles">
-                            <input class="form-control mr-sm-2" v-model="search" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" @click="getArticles">Search</button>
-                        </form>
-                        <div class="card card-dash" v-if='user.isSearching' v-for="article in searchArticles" style="width: 18rem; height:25rem;">
-                            <div class="card-body articles">
-                                <h1 class="card-title">{{ article.title }}</h1>
-                                <h6 class="card-subtitle mb-2 text-muted">Published by {{ user.username }}</h6>
-                                <br>
-                                <p class="card-text">{{ article.content }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <hr style='margin-bottom: 10rem; width: 100rem;'>
-                </div>
-            </div>
-            <div id='new-post'>
-                <div class='container' id='new-post-container'>
-                    <div class="card" id='new-post-card'>
-                        <div class="card-body">
-                            <h1 style="font-family: 'Muli', Sans-serif;">Create New Article</h1>
-                            <p style="font-family: 'Muli', Sans-serif;">Pour all your ideas out.</p>
-                            <form @submit.prevent="writeArticle">
-                                <div class="form-group">
-                                    <label for="exampleFormControlTextarea1">Title</label>
-                                    <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" rows="1" v-model="article.title"></textarea>
-                                    <label for="exampleFormControlTextarea1">Content</label>
-                                    <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" rows="10" v-model="article.content"></textarea>
-                                </div>
-                                <!-- <div id="editor"></div>
-                                <script>
-                                        ClassicEditor
-                                                .create( document.querySelector( '#editor' ) )
-                                                .then( editor => {
-                                                        console.log( editor );
-                                                } )
-                                                .catch( error => {
-                                                        console.error( error );
-                                                } );
-                                </script> -->
-                                <br>
-                                <button type="submit" class="btn btn-dark">Post</button>
-                            </form>
                         </div>
                     </div>
                 </div>
             </div>
+            <hr>
             <footer class="page-footer font-small teal pt-4">
                 <div class="container-fluid text-center text-md-left">
                         <div class="row">

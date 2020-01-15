@@ -6,7 +6,6 @@ const app = new Vue({
             email: '',
             password: '',
             articles: [],
-            isSearching: false,
             search: '',
         },
         currentPage: 'landing',
@@ -64,7 +63,7 @@ const app = new Vue({
             if (this.user.search.length === 0) {
                 axios.get('http://localhost:3000/articles')
                     .then(( {data} )  => {
-                        this.articles = data
+                        this.searchArticles = data.data
                     })
                     .catch(err => {
                         console.log(err.message)
@@ -76,8 +75,7 @@ const app = new Vue({
                     }
                 })
                     .then(( {data} ) => {
-                        this.user.isSearching = true
-                        this.searchArticles = data
+                        this.searchArticles = data.data
                         this.user.search = ''
                     })
                     .catch(err => {
@@ -99,7 +97,36 @@ const app = new Vue({
                 })
         },
         writeArticle() {
-            axios.get('')
+            axios.post('http://localhost:3000/articles', {
+                title: this.article.title,
+                content: this.article.content
+            }, {
+                headers: {
+                    access_token: localStorage.getItem('access_token')
+                }
+            })
+                .then(({ data }) => {
+                    this.article.title = ''
+                    this.article.content = ''
+                    this.getUserArticles()
+                })
+                .catch(err => {
+                    console.log(err.message)
+                })
+        },
+        getOneArticle(id) {
+            axios.get(`http://localhost:3000/articles/${id}`, {
+                headers : {
+                    access_token: localStorage.getItem('access_token')
+                }
+            })
+                .then(({ data }) => {
+                    this.article.title = data.data.title
+                    this.article.content = data.data.article
+                })
+                .catch(err => {
+                    console.log(err)
+                })
         },
         publishArticle(id) {
             axios.patch(`http://localhost:3000/articles/publish/?articleid=${id}`, {
@@ -108,7 +135,37 @@ const app = new Vue({
                 }
             })
                 .then(( {data} ) => {
-                    this.user.articles = data.data
+                    this.getUserArticles();
+                    this.getArticles();
+                })
+                .catch(err => {
+                    console.log(err.message)
+                })
+        },
+        editArticle(id) {
+            axios.put(`http://localhost:3000/articles/publish/?articleid=${id}`, {
+                title: this.article.title,
+                content: this.article.content
+            },{
+                headers: {
+                    access_token: localStorage.getItem('access_token')
+                }
+            })
+                .then(({data}) => {
+                    this.getArticles()
+                })
+                .catch(err => {
+                    console.log(err.message)
+                })
+        },
+        deleteArticle(id) {
+            axios.delete(`http://localhost:3000/artices/${id}`, {
+                headers: {
+                    access_token: localStorage.getItem('access_token')
+                }
+            })
+                .then(({ data }) => {
+                    this.getArticles()
                 })
                 .catch(err => {
                     console.log(err.message)
