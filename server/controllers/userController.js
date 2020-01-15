@@ -1,6 +1,7 @@
-const { User } = require('../models')
+const { User, Article } = require('../models')
 const bcrypt = require('bcryptjs')
 const jwtAccess = require('../jwtAccess')
+const ObjectID = require('mongoose').Types.ObjectId
 module.exports = {
     getCurrentUser(req, res, next) {
         User.findById(req.currentUserId)

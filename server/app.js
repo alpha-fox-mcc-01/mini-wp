@@ -18,6 +18,9 @@ db.once('open', function() {
   console.log('Database connection successful')
 });
 
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 app.use('/', routes)
 
 app.listen(process.env.PORT, () => {
