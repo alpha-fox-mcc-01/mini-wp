@@ -20,7 +20,6 @@ const userSchema = new Schema({
 	name: {
 		type: String,
 		required: [ true, 'Name fields is required' ],
-		required: [ true, 'Name fields is required' ]
 	},
 	password: String,
 	googleAuth: {

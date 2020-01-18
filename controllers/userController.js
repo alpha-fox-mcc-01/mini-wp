@@ -56,4 +56,25 @@ module.exports = class UserController {
 	static googleAuth(req, res, next) {
 
 	}
+
+	static verifyToken(req, res, next) {
+		console.log(req.body);
+
+		const access_token = req.body.access_token
+		try {
+			let decoded = jwt.verify(access_token, process.env.JWT_PRIVATEKEY)
+			User
+				.findOne({ _id: decoded._id }, [ '_id', 'name' ])
+				.then(result => {
+					res.status(200).json(result)
+				})
+				.catch(err => {
+					console.log(err);
+
+					next(err)
+				})
+		} catch (error) {
+
+		}
+	}
 }

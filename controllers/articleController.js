@@ -6,8 +6,31 @@ module.exports = class ArticleController {
 			.populate('author', 'name')
 			.populate('likes', 'name')
 			.then(articles => {
-				console.log(articles)
-				res.status(200).json(articles)
+				let responseArticles = []
+
+				articles.forEach(article => {
+					let responseArticle = {
+						imgs: article.imgs,
+						categories: article.categories,
+						is_published: article.is_published,
+						likes: article.likes,
+						_id: article._id,
+						title: article.title,
+						article: article.article,
+						author: article.author,
+						created_at: article.created_at,
+						comments: article.comments,
+						likes_idOnly: []
+					}
+
+					article.likes.forEach(like => {
+						responseArticle.likes_idOnly.push(like._id)
+					})
+
+					responseArticles.push(responseArticle)
+				})
+
+				res.status(200).json(responseArticles)
 			})
 			.catch(err => {
 				next(err)

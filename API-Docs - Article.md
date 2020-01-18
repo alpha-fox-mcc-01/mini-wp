@@ -2,7 +2,32 @@
 
 \* = required parameters
 
+---
+## Fetch/Get all Articles
+URL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 
+&nbsp;&nbsp;/articles
 
+METHOD &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 
+&nbsp;&nbsp;GET
+
+PARAM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 
+&nbsp;&nbsp;
+
+### SUCCESS RESPONSE :
+
+Code: 200
+Response: array of Obj:
+ - _id: ObjectId
+ - imgs: [ Strings ]
+ - categories: [ Strings ]
+ - likes: [ ObjectId ]
+ - title: < String >
+ - article: < String >
+ - author: ObjectId
+ - created_at: timestamp
+ - comments: [ {userId, comment, published_at} ]
+
+-
 ---
 ## Create new Article
 URL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 
@@ -22,7 +47,7 @@ PARAM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
 ### SUCCESS RESPONSE :
 
 Code: 201
-Response: Obj:
+Response: (created) Obj:
  - _id: ObjectId
  - imgs: [ Strings ]
  - categories: [ Strings ]
@@ -32,8 +57,6 @@ Response: Obj:
  - author: ObjectId
  - created_at: timestamp
  - comments: [ {userId, comment, published_at} ]
-
-
 ### FAIL RESPONSE  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
 -
 
