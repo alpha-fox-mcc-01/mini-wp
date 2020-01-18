@@ -16,7 +16,8 @@ module.exports = function (req, res, next) {
 				}
 			} else {
 				next({
-					code: 404
+					code: 404,
+					resource: 'User'
 				})
 			}
 		})

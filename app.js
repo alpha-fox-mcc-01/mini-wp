@@ -1,10 +1,14 @@
-require('dotenv').config()
+if (process.env.NODE_ENV == 'development') {
+	require('dotenv').config()
+}
 
+const cors = require('cors')
 const mongoDBConnection = require('./configs/mongoDBconnection')
 mongoDBConnection()
 
 const express = require('express')
 const app = express()
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 

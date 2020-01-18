@@ -16,7 +16,6 @@ PARAM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
 [data]
   - title* < string >
   - article* < string >
-  - author* < ObjectId >
   - categories [ < string > ]
 
 
@@ -141,6 +140,37 @@ headers:
 Code: 200
 
 response: {message: "comment send"} 
+
+
+### FAIL RESPONSE  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+CODE: 401 {errmsg: "you are not authorized to do that"}
+
+CODE: 404 {errmsg: "Resource not found"}
+
+---
+## Update an Article
+URL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 
+&nbsp;&nbsp;/articles
+
+METHOD &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 
+&nbsp;&nbsp;PUT
+
+PARAM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 
+&nbsp;&nbsp;
+
+data:
+  - articleId* < ObjectId >
+  - title < String >
+  - article < String >
+  - categories < String >
+
+headers:
+  - access_token*
+
+### SUCCESS RESPONSE :
+Code: 200
+
+response: {message: "Article Updated"} 
 
 
 ### FAIL RESPONSE  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:

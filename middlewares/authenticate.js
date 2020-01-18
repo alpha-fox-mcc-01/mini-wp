@@ -6,7 +6,7 @@ module.exports = function (req, res, next) {
 		const access_token = req.headers.access_token
 		try {
 			const authenticated_id = jwt.verify(access_token, process.env.JWT_PRIVATEKEY)._id
-			User.find({
+			User.findOne({
 				_id: authenticated_id
 			})
 				.then(result => {

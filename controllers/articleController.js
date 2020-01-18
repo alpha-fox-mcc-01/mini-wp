@@ -1,11 +1,26 @@
 const Article = require('../models/Article')
 
 module.exports = class ArticleController {
+	static getAll(req, res, next) {
+		Article.find({ is_published: true })
+			.populate('author', 'name')
+			.populate('likes', 'name')
+			.then(articles => {
+				console.log(articles)
+				res.status(200).json(articles)
+			})
+			.catch(err => {
+				next(err)
+			})
+	}
+
 	static createArticle(req, res, next) {
 		let { title, article, author, categories } = req.body
 		let values = {
-			title, article, author
+			title, article
 		}
+		values.author = req.authenticated_id
+
 		if (categories) {
 			let splittedcategories = categories.split(',')
 			splittedcategories = splittedcategories.map(category => category.trim())
@@ -34,13 +49,14 @@ module.exports = class ArticleController {
 
 	static publish(req, res, next) {
 		let published
+		let updateValue
 		Article.findOne({
 			_id: req.body.articleId
 		})
 			.then(result => {
 				if (result) {
 					published = result.is_published
-					let updateValue = { is_published: !published }
+					updateValue = { is_published: !published }
 					if (!published) {
 						updateValue.published_at = Date.now()
 					}
@@ -50,7 +66,6 @@ module.exports = class ArticleController {
 						resource: 'Article'
 					})
 				}
-
 				return Article.updateOne({ _id: req.body.articleId }, updateValue)
 			})
 			.then(updated => {
@@ -88,9 +103,9 @@ module.exports = class ArticleController {
 			.then(liked => {
 				if (liked.nModified == 1) {
 					if (isLiked) {
-						res.status(200).json({ message: 'Article Liked' })
-					} else {
 						res.status(200).json({ message: 'Article un-Liked' })
+					} else {
+						res.status(200).json({ message: 'Article Liked' })
 					}
 				} else {
 					next({
@@ -135,6 +150,31 @@ module.exports = class ArticleController {
 						code: 400,
 					})
 				}
+			})
+			.catch(err => {
+				next(err)
+			})
+	}
+
+	static updateArticle(req, res, next) {
+		const { title, article } = req.body
+
+		let values = {
+			title,
+			article,
+		}
+
+		if (req.body.categories) {
+			let splittedcategories = req.body.categories.split(',')
+			splittedcategories = splittedcategories.map(category => category.trim())
+			values.categories = splittedcategories
+		}
+
+		Article.updateOne({
+			_id: req.body.articleId
+		}, values)
+			.then(result => {
+				res.send(result)
 			})
 			.catch(err => {
 				next(err)

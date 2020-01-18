@@ -3,15 +3,23 @@ const Schema = mongoose.Schema
 
 const bcrypt = require('bcryptjs')
 
+const regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
 const userSchema = new Schema({
 	email: {
 		type: String,
 		unique: true,
-		required: [ true, 'Email fields is required' ]
+		required: [ true, 'Email fields is required' ],
+		validate: {
+			message: value => `'${value.value}' is not a valid email format`,
+			validator: function (value) {
+				return regexEmail.test(value)
+			}
+		}
 	},
 	name: {
 		type: String,
+		required: [ true, 'Name fields is required' ],
 		required: [ true, 'Name fields is required' ]
 	},
 	password: String,
