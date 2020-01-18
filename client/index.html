@@ -76,7 +76,8 @@
 
                               <button type="button" class="btn btn-dark btn-block" @click="registerUser"
                                  style="font-family: 'Playfair Display SC', serif;">Sign Up</button>
-                              <p class="text-center" @click="toggleLoginRegister(false)" style="cursor : pointer">Back
+                              <p class="text-center mt-5" @click="toggleLoginRegister(false)" style="cursor : pointer">
+                                 Back
                                  to sign in</p>
                            </form>
                         </div>
@@ -225,20 +226,22 @@
                      <div id="all-article">
                         <div class="border" style='border-radius: 4px; overflow: auto; max-height: 80vh;'>
                            <!-- lempar content ke sini -->
-                           <div class="no-article text-center" v-if="article.length < 1">
-                              <h5 class="my-5">there's no article</h5>
+                           <div class="no-article text-center" v-if="article.length == 1 &&   article[0].publish == false">
+                              <p class="my-5">there's no public article to read</p>
                            </div>
                            <div class="public-article" v-if="article.length > 0">
                               <!-- disini loop public article -->
                               <div v-for="item in article" :key="item._id">
-                                 <div class="p-3 border-bottom">
-                                    <h5 class="article-title text-center mb-4 mt-2"><strong>~
-                                       </strong>{{item.title}}<strong> ~</strong></h5>
+                                 <div v-if="item.publish === true">
+                                    <div class="p-3 border-bottom">
+                                       <h5 class="article-title text-center mb-4 mt-2"><strong>~
+                                          </strong>{{item.title}}<strong> ~</strong></h5>
 
-                                    <div class="row">
-                                       <div class="col text-center"><span @click="readDetailArticle(item._id)"
-                                             style="cursor: pointer;">Read article <i
-                                                class="fas fa-play ml-2"></i></span></div>
+                                       <div class="row">
+                                          <div class="col text-center"><span @click="readDetailArticle(item._id)"
+                                                style="cursor: pointer;">Read article <i
+                                                   class="fas fa-play ml-2"></i></span></div>
+                                       </div>
                                     </div>
                                  </div>
                               </div>
@@ -262,7 +265,8 @@
                         <div class="detail-article" v-if="readArticle.content.length > 0">
                            <div class="border" style="border-radius: 4px; overflow: auto; max-height: 80vh;">
                               <div class="mx-4 my-3">
-                                 <h4 style="font-family: 'Gelasio', serif">{{readArticle.title}}</h4>
+                                 <h4 style="font-family: 'Gelasio', serif">{{readArticle.title}}</h4> </br>
+                                 <p style="font-family: 'Gelasio', serif">Author : {{readArticle.author}}</p>
                                  <p class="mt-4" style="font-family: 'Gelasio', serif;"><i>
                                        {{readArticle.content}}
                                     </i>
@@ -290,20 +294,112 @@
                   <button class="navbar-toggler" type="button" data-toggle='collapse' data-target='#trigger'>
                      <i class="fas fa-bars"></i>
                   </button>
-   
+
                   <div class="collapse navbar-collapse d-md-flex justify-content-center" id="trigger">
                      <ul class="navbar-nav">
                         <li class="navbar-item">
-                           <span class='nav-link' style="cursor: pointer;">My Articles</span>
+                           <span class='nav-link' style="cursor: pointer;" @click="getMyArticle">My Articles</span>
                         </li>
                         <li class="navbar-item">
-                           <span class='nav-link' style="cursor: pointer;">Add Article</span>
+                           <span class='nav-link' style="cursor: pointer;" @click="addArticle.condition = true; editingArticle.condition = false">Create
+                              Article</span>
                         </li>
                      </ul>
                   </div>
                </nav>
             </div>
+            <!-- batas navbar -->
+            <div class="container">
+               <div class="row">
+                  <div class="col-5">
+                     <!-- bawah adalah get my article -->
+                     <div id="all-my-article">
+                        <!-- lempar content ke sini -->
+                        <div class="my-article" v-if="myArticle.length > 0">
+                           <!-- disini loop my article -->
+                           <div class="border" style='border-radius: 4px; overflow: auto; max-height: 80vh;'>
+                              <div v-for="item in myArticle" :key="item._id">
+                                 <div class="p-3 border-bottom">
+                                    <h5 class="article-title text-center mb-4 mt-2"><strong>~
+                                       </strong>{{item.title}}<strong> ~</strong></h5>
 
+                                    <div class="row">
+                                       <div class="col text-center"><span @click="getMyArticleToUpdate(item._id)"
+                                             style="cursor: pointer;">Edit article <i class="fas fa-edit"></i></span>
+                                       </div>
+                                       <div class="col text-center"><span @click="deleteMyArticle(item._id); getMyArticle"
+                                             style="cursor: pointer;">Delete article <i class="fas fa-trash"></i></span>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <!-- sampai sini -->
+                     </div>
+                  </div>
+                  <div class="col-7">
+                     <div id="detail-article">
+                        <!-- bawah adalah get add article -->
+                        <div class="detail-article" v-if="addArticle.condition === true">
+                           <div class="border" style="border-radius: 4px; overflow: auto; max-height: 80vh;">
+                              <h3 class="mx-4 my-3 text-center" style="font-family: 'Gelasio', serif">Create Article</h3>
+                              <div class="mx-4 my-3">
+                                 <label>Title</label>
+                                 <input type="text" class="form-control"
+                                    placeholder="Enter title" v-model="addArticle.title">
+                                 <label>Content</label>
+                                 <textarea id="form7" class="md-textarea form-control" rows="3"
+                                    placeholder="Write your article here" v-model="addArticle.content"></textarea>
+                                 <label for="exampleFormControlFile1">upload with image</label>
+                                 <input type="file" class="form-control-file" v-model="addArticle.image">
+                                 <div class="form-check">
+                                    <div class="mt-3">
+                                       <input type="checkbox" class="form-check-input" id="exampleCheck1"
+                                          v-model="addArticle.publish">
+                                       <label class="form-check-label" for="exampleCheck1">Publish</label>
+                                    </div>
+                                 </div>
+                                 <button type="submit" class="btn btn-primary mt-3"
+                                    @click="createArticle">Submit</button>
+                              </div>
+                           </div>
+                        </div>
+                        <!-- add article sampai sini -->
+                        <!-- bawah ini adalah edit article -->
+                        <div class="detail-article" v-if="editingArticle.condition === true">
+                           <div class="border" style="border-radius: 4px; overflow: auto; max-height: 80vh;">
+                              <h3 class="mx-4 my-3 text-center" style="font-family: 'Gelasio', serif">Edit Article</h3>
+
+                              <div class="mx-4 my-3">
+                                 <label>Title</label>
+                                 <input type="text" class="form-control"
+                                    placeholder="Enter title" v-model="editingArticle.title">
+                                 <label>Content</label>
+                                 <textarea id="form7" class="md-textarea form-control" rows="3"
+                                    placeholder="Write your article here" v-model="editingArticle.content"></textarea>
+                                 <label for="exampleFormControlFile1">upload with image</label>
+                                 <input type="file" class="form-control-file" v-model="editingArticle.image">
+                                 <div class="form-check">
+                                    <div class="mt-3">
+                                       <input type="checkbox" class="form-check-input" id="exampleCheck1"
+                                          v-model="editingArticle.publish">
+                                       <label class="form-check-label" for="exampleCheck1">Publish</label>
+                                    </div>
+                                 </div>
+                                 <button type="submit" class="btn btn-primary mt-3"
+                                    @click="updateMyArticle">Submit</button>
+                              </div>
+                           </div>
+                        </div>
+
+                        <!-- sampai sini -->
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            
          </section>
          <section id="contact">
             <footer>
@@ -311,7 +407,6 @@
             </footer>
          </section>
       </div>
-
 
    </div> <!-- ini adalah div vue -->
 
