@@ -1,0 +1,76 @@
+<template>
+    <article>
+            {{check}}
+
+        <div class="container" v-if=" page == 'readarticle'">
+            <img src="" alt="">
+            <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="post-heading">
+            <h1>{{articleNow.title}}</h1>
+            <h2 class="subheading">{{articleNow.desc}}</h2>
+            <span class="meta">Posted by
+              <a href="#">Start Bootstrap</a>
+              on {{articleNow.createdAt}}</span>
+          </div>
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <p v-on:readArticle="this.page"></p>
+    
+              <p>Placeholder text by
+                <a href="http://spaceipsum.com">Space Ipsum</a>. Photographs by
+                <a href="https://www.flickr.com/photos/nasacommons/">NASA on The Commons</a>.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+</template>
+
+<script>
+name: 'readArticle'
+import axios from 'axios'
+export default {
+    data(){
+        return {
+            articleNow:{}
+        }
+    },
+    props:{
+        page: String,
+        readNow: String
+    },
+    methods:{
+        readArticle(){
+            // console.log('+++++++++++++');
+            
+             axios({
+                method: 'get',
+                url: `http://localhost:3000/article/read/${this.readNow}`
+            })
+                .then(({ data }) => {
+                    this.articleNow = data[0]
+                    console.log(data);
+                    
+                })
+                .catch(err => {
+                    console.log(err)
+
+                })
+        }
+    },
+    computed:{
+            check(){
+               if(this.readNow){
+            this.readArticle()        
+        }
+            }
+        },
+    created: function(){
+
+        }
+}
+</script>
+
+<style>
+
+</style>

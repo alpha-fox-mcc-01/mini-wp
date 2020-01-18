@@ -19,70 +19,7 @@
 <body>
         <div class="container">
 
-            
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
-                </li>
-            </ul>
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <div class="card card-i shadow p-3 mb-2 bg-white rounded regis-card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Register</h5>
-                                    <form id="regis-form" method="POST" action="./assets/js/main.js">
-                                        <div class="form-group">
-                                            <label for="InputEmail">Email address</label>
-                                            <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp">
-                                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                                                else.</small>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="InputPassword">Password</label>
-                                            <input type="password" class="form-control" id="InputPassword">
-                                        </div>
-                                        <button id="register-btn" type="submit" class="btn btn-primary">Register</button>
-                                    </form>
-                                    <p>or sign in with</p>
-                                    <div class="g-signin2" data-onsuccess="onSignIn">google</div>
-                                    <p> got an account? </p>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-                                            Sign In
-                                          </button>
-                </div>
-                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="card card-i shadow p-3 mb-2 bg-white rounded regis-card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Register</h5>
-                                    <form id="regis-form" method="POST" action="./assets/js/main.js">
-                                        <div class="form-group">
-                                            <label for="InputEmail">Email address</label>
-                                            <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp">
-                                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                                                else.</small>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="InputPassword">Password</label>
-                                            <input type="password" class="form-control" id="InputPassword">
-                                        </div>
-                                        <button id="register-btn" type="submit" class="btn btn-primary">Register</button>
-                                    </form>
-                                    <p>or sign in with</p>
-                                    <div class="g-signin2" data-onsuccess="onSignIn">google</div>
-                                    <p> got an account? </p>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-                                            Sign In
-                                          </button>
-                </div>
-                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
-            </div>
-        </div>
+       
             
             <div class="container" id="regis" style="width: 20rem; margin-top: 10rem; ">
         <div class="card card-i shadow p-3 mb-2 bg-white rounded regis-card">
@@ -104,15 +41,16 @@
                 <p>or sign in with</p>
                 <div class="g-signin2" data-onsuccess="onSignIn">google</div>
                 <p> got an account? </p>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+                <a href="index.html" class="btn btn-default">SignIn</a>
+                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
                         Sign In
-                      </button>
+                      </button> -->
                 
                
 
       
-      <!-- Modal -->
-      <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+      <!-- Modal to sign in -->
+      <!-- <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -134,16 +72,16 @@
                             <label for="InputPassword">Password</label>
                             <input type="password" class="form-control" id="InputPassword">
                         </div>
-                        <button id="register-btn" type="submit" class="btn btn-primary">Sign In</button>
+                        
                     </form>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+              <button type="button" class="btn btn-primary" >Save changes</button>
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
                 
             </div>
         </div>

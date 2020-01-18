@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
     img: String,
     author: { type: 'ObjectId', ref: 'User' },
     publish: Boolean,
+    paragraf: String,
     createdAt: { type : Date, default: Date.now }
   });
   

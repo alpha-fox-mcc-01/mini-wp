@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> -->
+
+  <link href="assets/css/style.css" rel="stylesheet">
+
+
+  <title>home</title>
+</head>
+
+<body>
+
+  <!-- vue js -->
+  <div id="app">
+    <!-- {{message}}
+    {{page}}
+    <div v-if="page === 'one'" @click="changePage('two')" >
+        page one
+      </div>
+  
+      <div v-if="page === 'two'" @click="changePage('one')">
+        page two++++
+      </div>
+
+      <form action="" @submit.prevent="addUser">
+        <input type="text" v-model="email">
+        <input type="text" v-model="password">
+        <button> add</button>
+      </form>
+
+      {{email}} -->
+      
+      <!-- login page -->
+      <div class="container mx-auto" style="width: 20rem; margin-top: 10rem;" v-if="page === 'login'">
+        <h3>Sign In</h3>
+          <form @submit.prevent="login">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" v-model="email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" v-model="password">
+              </div>
+              <button type="submit" class="btn btn-primary">Sign In</button>
+            </form>            
+            <p><a href="#" @click="changePage('register')">Register Here</a></p>
+      </div>
+
+      <!-- register page -->
+      <div class="container mx-auto" style="width: 20rem; margin-top: 10rem;" v-if="page === 'register'">
+          <h3>Register</h3>
+            <form @submit.prevent="register">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">name</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name" v-model="name">
+                  </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Email address</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" v-model="email">
+                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" v-model="password">
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+              </form>            
+              <p><a href="#" @click="changePage('login')">Sign In</a></p>
+        </div>
+     
+      <!-- navbar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light" v-if="page !== 'login' && page !== 'register' ">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="#" @click="changePage('home')">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item active">
+                  <a class="nav-link" href="#" @click="changePage('addPost')" >ADD post <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#" @click="changePage('myarticle'), myarticle()" >My Article <span class="sr-only"></span></a>
+                  </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              <a href="#"user></a>
+              <a href="#" @click.prevent="signOut" >SignOut</a>
+            </form>
+          </div>
+          
+        </nav>
+  
+
+        <!-- add post -->
+      <div class="container" v-if="page === 'addPost'" style="width: 20rem; margin-top: 10rem;">
+
+            <form @submit.prevent="addPost">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Title</label>
+                  <input type="text" class="form-control" v-model="title">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Description</label>
+                  <input type="text" class="form-control" v-model="desc">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Publish article?</label>
+                    <select name="publish" v-model="publish">
+                        <option value="true">Publish</option>
+                        <option value="false">Later</option>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                      <label for="exampleInputPassword1">Image</label>
+                      <input type="text" class="form-control" v-model="img">
+                    </div>
+
+                <button type="submit" class="btn btn-primary">ADD</button>
+              </form>
+              {{publish}}
+      </div>
+
+
+      <!-- update -->
+      <div class="container" v-if="page === 'update'" style="width: 20rem; margin-top: 10rem;">
+
+          <form @submit.prevent="updatePost(updatedPost.id)">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Title</label>
+                <input type="text" class="form-control" v-model="updatedPost.title" va >
+              </div>
+              
+              <button type="submit" class="btn btn-primary">update</button>
+            </form>
+          
+    </div>
+
+     <!-- my article -->
+
+  <div class="container" v-if="page == 'myarticle'">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-preview" v-for="post in posts" :key="post.id">
+          <a href="blog.html">
+            <h2 class="post-title">
+              {{post.title}}
+            </h2>
+            <h5 class="post-subtitle">
+              {{post.desc}}
+            </h5>
+          </a>
+          <p class="post-meta">Posted by
+            <a href="#">{{post.author.name}}</a>
+            on September 24, 2019</p>
+            <a type=""  @click.prevent="deletePost(post.id)">Delete</a>
+            <a type="" @click.prevent="setPost('update', post.id, post.title)">update</a>
+            <hr>
+        </div>
+        </div>
+        </div>  
+        </div>
+      
+   
+
+  </div> 
+
+
+
+
+
+  <!-- nav -->
+  <!-- <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="#">Start Bootstrap</a>
+        <button class="navbar-toggler navbar-toggler-right" 
+          data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false">
+          Menu
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="post.html">Sample Post</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav> -->
+  <!-- jumbotron -->
+
+  <!-- <header class="masthead">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>Clean Blog</h1>
+            <span class="subheading">Start Writing Now</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header> -->
+
+
+ 
+
+
+  <!-- Footer -->
+  <!-- <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <ul class="list-inline text-center">
+            <li class="list-inline-item">
+              <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+          </ul>
+          <p class="copyright text-muted">Copyright &copy; Your Website 2019</p>
+        </div>
+      </div>
+    </div>
+  </footer> -->
+  
+  <!-- vue cdn -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.1/axios.js"></script>
+  <script src="assets/js/main.js" > </script>
+  
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+
+  <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"></script> -->
+</body>
+
+</html>

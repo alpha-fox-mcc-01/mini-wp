@@ -62,7 +62,6 @@ class articleController{
             const obj = {
                 title: req.body.title,
                 desc: req.body.desc,
-                img: req.body.img,
             }
     
             // console.log(obj)
@@ -85,7 +84,7 @@ class articleController{
         let pk = req.currentUserid._id
         console.log(pk)
 
-        Article.find({ author: pk}).populate('author', ['name'])
+        Article.find({ author: pk}).populate({ path: 'author', select: 'name -_id' })
         .then(data => {
             // const result = data.filter(el => el.publish == true);
             console.log(data);
@@ -97,6 +96,34 @@ class articleController{
         })
 
     }
+
+    static getarticles(req, res){
+        // let pk = req.currentUserid._id
+        // console.log(pk)
+
+        Article.find({ publish: true}).populate({ path: 'author', select: 'name -_id' })
+        .then(data => {
+            // const result = data.filter(el => el.publish == true);
+            console.log(data);
+            res.status(200).json(data)
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json(err)
+        })
+    }
+    static readarticle(req, res){
+        Article.find({ _id: req.params.id}).populate({ path: 'author', select: 'name -_id' })
+        .then(data => {
+            console.log(data);
+            res.status(200).json(data)
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json(err)
+        })
+    }
+    
 }
 
 module.exports = articleController

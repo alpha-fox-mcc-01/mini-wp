@@ -1,0 +1,12 @@
+// schema
+User:
+name
+email
+password
+
+Article
+title
+desc
+created_date
+author= user_id
+tag: [string]
