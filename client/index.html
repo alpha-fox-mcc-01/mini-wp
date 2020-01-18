@@ -8,11 +8,11 @@
 
 
 	<!-- bootstrap css -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Merriweather|Open+Sans&display=swap" rel="stylesheet">
 
 	<script src="https://kit.fontawesome.com/c4c9c489d4.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.1/axios.min.js" crossorigin="anonymous"></script>
 
 	<link rel="stylesheet" href="./css/main.css">
 
@@ -24,7 +24,7 @@
 
 
 		<!-- DASHBOARD -->
-		<section id="main-section" v-if="currentPage == 'dashboard'">
+		<section id="main-section" v-if="currentPage == 'dashboard' && isLoggedOn">
 			<!-- <section id="main-section" class=""> -->
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 				<a class="navbar-brand" href="#"><i class="fab fa-wpressr"></i> MINI-WP</a>
@@ -38,7 +38,7 @@
 					</li>
 				</ul>
 
-				<a href="">{{ loggedOnName }}</a>
+				<a href="#">{{ loggedOnName }}</a>
 			</nav>
 
 			<div class="container">
@@ -50,33 +50,32 @@
 					</div>
 				</div>
 				<br>
-				<button class="btn btn-lg btn-outline-info my-2 my-sm-0" data-toggle="collapse" data-target="#add-post-card">Add
+				<button v-on:click="addNewPostVisible = !addNewPostVisible" class="btn btn-lg btn-outline-info my-2 my-sm-0">Add
 					new Post</button>
 
 				<br>
 				<br>
-				<div class="card card-body">
+				<div class="card card-body" v-if="addNewPostVisible">
 					<h4>Create new Post</h4>
 					<hr class="my-2">
 					<br>
 					<form>
 						<div class="form-group row">
-							<label for="staticEmail" class="col-sm-2 col-form-label">Post Title</label>
+							<label class="col-sm-2 col-form-label">Post Title</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control">
 							</div>
 						</div>
 
 						<div class="form-group row">
-							<label for="staticEmail" class="col-sm-2 col-form-label">keywords</label>
+							<label class="col-sm-2 col-form-label">Categories</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control">
-								<small id="" class="form-text text-muted">please separate each keywords with comma ", "</small>
+								<small id="" class="form-text text-muted">please separate each categories with comma ", "</small>
 							</div>
-
 						</div>
 
-						<label for="staticEmail" class="col-form-label">Post</label>
+						<label class="col-form-label">Post</label>
 						<textarea class="form-control" rows="10"></textarea>
 					</form><br>
 					<div class="d-flex justify-content-between">
@@ -86,7 +85,6 @@
 						</div>
 					</div>
 				</div>
-
 				<br>
 				<h4>Your Published Post: </h4>
 				<div id="publishedPosts">
@@ -109,8 +107,7 @@
 									<br><small>total likes: 0</small>
 								</div>
 								<div class="postbuttonlist">
-									<button class="btn btn-outline-info mr-1" data-toggle="collapse"
-										data-target="#comment-post-card-ID">comment</button>
+									<button class="btn btn-outline-info mr-1" data-toggle="collapse" data-target="#comment-post-card-ID">comment</button>
 									<button class="btn btn-outline-info mr-1">edit</button>
 									<button class="btn btn-outline-info mr-1">delete</button>
 								</div>
@@ -181,49 +178,49 @@
 
 		<!-- LANDING PAGE -->
 		<section id="landing-section" v-if="currentPage == 'landing'">
-			<nav class="navbar navbar-expand-lg navbar-light bg-light">
-				<a class="navbar-brand" href="#"><i class="fab fa-wpressr"></i> MINI-WP</a>
-
+			<nav class="navbar navbar-expand-lg navbar-light bg-light nav-sticky">
+				<p class="navbar-brand" href="#"><i class="fab fa-wpressr"></i> MINI-WP</p>
 				<div class="d-flex mr-auto">
-					<a class="nav-link" href="#">Posts <span class="sr-only">(current)</span></a>
-					<a class="nav-link" href="#">Draft</a>
-
+					<p class="nav-link" href="#">Posts <span class="sr-only">(current)</span></p>
+					<p class="nav-link" href="#">Draft</p>
 				</div>
 
-				<a href="">{{ loggedOnName }}</a>
+
+				<p v-on:click="" class="btn btn-outline-info mr-4">Dashboard</p>
+				<p href="" v-if="isLoggedOn">{{ loggedOnName }}</p>
 			</nav>
 			<br><br>
 			<div class="row">
 				<div class="col-8">
 
-					<h4 class="articles-header">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem hic odit sequi.
-					</h4>
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error deleniti, reiciendis laborum quis illo
-						veritatis voluptatum, neque, ipsa nesciunt suscipit quas omnis in quidem sunt fugiat et consequuntur unde
-						autem?</p>
-					<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi voluptatibus ducimus, soluta
-						exercitationem velit repudiandae ad laudantium officia dolor ipsa. Alias vero ullam aut voluptatem voluptas
-						libero illo rem excepturi!</p>
-					<div class="d-flex justify-content-between mb-2">
-						<div class="d-flex">
-							<div class="tags">tags1</div>
-							<div class="tags">tags2</div>
-							<div class="tags">tags3</div>
-							<div class="tags">tags4</div>
+					<div class="articlesList">
+						<div class="article" v-for="article in articles" v-bind:key="article._id">
+							<h4 class="articles-header"> {{article.title}}
+							</h4>
+							<p>{{article.article}}</p>
+							<div class="d-flex justify-content-between mb-2">
+								<div class="d-flex">
+									<div class="tags fa-btn" v-for="category in article.categories"><i>'{{category}}'</i></div>
+								</div>
+								<div class="">
+									<i class="far text-dark fa-comment-alt fa-2x fa-btn mr-3"></i>
+									<i class="far text-dark fa-heart fa-2x fa-btn"></i>
+									<i style="color: pink" class="fas fa-heart fa-2x fa-btn" v-if="article.likes.includes(loggedOnId)"></i>
+								</div>
+							</div>
+							<hr class="my-1">
+							<div class="d-flex justify-content-between">
+								<small>By: {{article.author.name}}</small>
+								<small>at: 02-02-2020</small>
+							</div>
+							<br>
+							<br>
 						</div>
-						<div class="">
-							<i class="far fa-comment-alt fa-2x fa-btn mr-3"></i>
-							<i class="far fa-heart fa-2x fa-btn"></i>
-						</div>
-					</div>
-					<hr class="my-1">
-					<div class="d-flex justify-content-between">
-						<small>By: Jelang Ramadhan</small>
-						<small>at: 02-02-2020</small>
 					</div>
 
 				</div>
 				<div class="col-4">
+
 
 					<div v-if='isLoggedOn == false' id="loginform">
 						<div class="card">
@@ -232,15 +229,15 @@
 									<h4>Signup and start sharing!</h4><br>
 									<div class="form-group">
 										<label for="exampleInputEmail1">Email address</label>
-										<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-										<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-											else.</small>
+										<input v-model="signinEmail" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+										<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else. 😏</small>
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword1">Password</label>
-										<input type="password" class="form-control" id="exampleInputPassword1">
+										<input v-model="signinPassword" type="password" class="form-control" id="exampleInputPassword1">
 									</div>
-									<button type="submit" class="btn btn-primary">Submit</button>
+									<button v-on:click="signIn" type="submit" class="btn btn-primary">Submit</button>
 								</form>
 							</div>
 						</div><br><br>
@@ -271,10 +268,8 @@
 
 
 	<br>
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
-	<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script> -->
-	<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> -->
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
 	<script src="./js/main.js"></script>
 
 

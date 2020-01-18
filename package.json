@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "server": "nodemon app.js",
+    "dev": "NODE_ENV=development nodemon app.js",
+    "start": "NODE_ENV=production nodemon app.js",
     "client": "cd client && live-server --host=localhost"
   },
   "repository": {

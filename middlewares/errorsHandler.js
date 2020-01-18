@@ -1,5 +1,4 @@
 module.exports = function (err, req, res, next) {
-	console.log(err)
 	let code
 	let response
 
@@ -17,7 +16,14 @@ module.exports = function (err, req, res, next) {
 		response = `${err.resource} not found`
 	} else if (err.code == 403) {
 		code = 403
-		response = "please login first"
+		if (err.errmsg) {
+			response = err.errmsg
+		} else {
+			response = "please login first"
+		}
+	} else if (err.code == 11000) {
+		code = 409
+		response = 'This Email is already Registered'
 	} else {
 		code = 500
 		response = 'Internal Server Error'
@@ -28,6 +34,17 @@ module.exports = function (err, req, res, next) {
 		response = 'Invalid Access Token'
 	}
 
+	if (err._message == 'User validation failed') {
+		code = 422
+		let failedFields = []
+
+		for (key in err.errors) {
+			failedFields.push(err.errors[ key ].message)
+		}
+
+		response = failedFields.join(', ')
+		// res.send(failedFields)
+	}
 
 	res.status(code).json({ errmsg: response })
 }
