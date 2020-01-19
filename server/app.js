@@ -7,7 +7,7 @@ const router = require('./Routes')
 const ErrorHandler = require('./Middlewares/errorHandler')
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/mini-wp', {
+mongoose.connect(process.env.ATLAS_CONNECT, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify:  false
