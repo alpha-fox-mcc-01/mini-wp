@@ -3,9 +3,6 @@ const Article = require('../Models/article')
 class ArticleController{
 
   static createArticle(req, res, next){
-    // Belum di pindah, semua proses jwt verify harusnya ada di middleware
-    // let token = req.body.token
-    // let user = jwt.verify(token, process.env.SECRET);
     let data = {
       title : req.body.title,
       content : req.body.content,
@@ -26,7 +23,6 @@ class ArticleController{
       .find()
       .populate('authorId', 'name')
       .then( articles => {
-        // console.log(articles);
         res.status(200).json(articles)
       })
       .catch( err => {
@@ -55,6 +51,36 @@ class ArticleController{
       })
       .then(() => {
         res.status(200).json({msg : 'deleted'})
+      })
+      .catch(err => {
+        next()
+      })
+  }
+
+  static getById(req, res, next) {
+    Article
+      .findOne({
+        _id : req.params.id
+      })
+      .populate('authorId', 'name')
+      .then( article => {
+        res.status(200).json(article)
+      })
+      .catch(err =>{
+        next()
+      })
+  }
+
+  static updateArticleById(req, res, next){
+    Article
+      .findOneAndUpdate({
+        _id : req.params.id
+      }, {
+        title : req.body.title,
+        content : req.body.content
+      })
+      .then( article => {
+        res.status(200).json(article)
       })
       .catch(err => {
         next()

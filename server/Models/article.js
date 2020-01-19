@@ -5,7 +5,10 @@ const articleSchema = new Schema({
   image : String,
   title : String,
   content : String,
-  published : Boolean,
+  published : {
+    type : String,
+    default : false
+  },
   authorId : {
     type: Schema.Types.ObjectId,
     ref: 'User'
