@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
     const authenticated = jwt.verify(userToken, process.env.SECRET)
     if (authenticated) {
       req.currentUserId = authenticated._id
-      User.findById(authenticated._id)
+      User.findById({_id: authenticated._id})
       .then(user => {
         if(user) {
           next()

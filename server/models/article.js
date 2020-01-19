@@ -5,12 +5,12 @@ const articleSchema = new Schema({
   title: {
     type: String,
     required: true,
-    minlength: [4, 'Title must be 4 characters long minimal']
+    minlength: [3, 'Title must be 3 characters long minimal']
   },
   content: {
     type: String,
     required: true,
-    minlength: [100, 'Content must be 100 characters long minimal']
+    minlength: [250, 'Content must be 250 characters long minimal']
   },
   created_at: {
     type: Date,
