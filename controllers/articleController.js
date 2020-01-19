@@ -1,13 +1,53 @@
 const Article = require('../models/Article')
 
 module.exports = class ArticleController {
+
+	static fetchMine(req, res, next) {
+		console.log(req.authenticated_id)
+		Article.find({
+			author: req.authenticated_id
+		})
+			.then(result => {
+				console.log(result)
+				res.status(200).json(result)
+			})
+			.catch(err => {
+				res.status(500).json(err)
+			})
+	}
+
 	static getAll(req, res, next) {
 		Article.find({ is_published: true })
 			.populate('author', 'name')
 			.populate('likes', 'name')
 			.then(articles => {
-				console.log(articles)
-				res.status(200).json(articles)
+				let responseArticles = []
+
+				articles.forEach(article => {
+					let responseArticle = {
+						imgs: article.imgs,
+						categories: article.categories,
+						is_published: article.is_published,
+						likes: article.likes,
+						_id: article._id,
+						title: article.title,
+						article: article.article,
+						author: article.author,
+						created_at: article.created_at,
+						comments: article.comments,
+						likes_idOnly: []
+					}
+
+					article.likes.forEach(like => {
+						responseArticle.likes_idOnly.push(like._id)
+					})
+
+					responseArticles.push(responseArticle)
+				})
+
+				// console.log(responseArticles);
+
+				res.status(200).json(responseArticles)
 			})
 			.catch(err => {
 				next(err)
@@ -20,17 +60,30 @@ module.exports = class ArticleController {
 			title, article
 		}
 		values.author = req.authenticated_id
+		values.categories = []
 
+		let splittedcategories = []
 		if (categories) {
-			let splittedcategories = categories.split(',')
-			splittedcategories = splittedcategories.map(category => category.trim())
-			values.categories = splittedcategories
+			splittedcategories = categories.split(',')
+			splittedcategories.forEach(row => {
+				row = row.trim()
+				if (row.length > 1) {
+					values.categories.push(row)
+				}
+			})
+		}
+		if (req.body.is_published) {
+			values.is_published = true
 		}
 		Article.create(values)
 			.then(result => {
+				console.log('creating record:...', result);
+
 				res.status(201).json(result)
 			})
 			.catch(err => {
+				console.log(err);
+
 				next(err)
 			})
 	}

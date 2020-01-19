@@ -46,5 +46,6 @@ module.exports = function (err, req, res, next) {
 		// res.send(failedFields)
 	}
 
+	// res.status(500).json({ errmsg: response })
 	res.status(code).json({ errmsg: response })
 }

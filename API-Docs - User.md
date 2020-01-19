@@ -12,13 +12,17 @@ METHOD &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
 PARAM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 
 &nbsp;&nbsp;
 [data]
-  - 1
-
-  - 
+  - email < String >
+  - password < String >
 
 RESPONSE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 
 &nbsp;&nbsp;
-* success &nbsp;:
+success &nbsp;: 
+Code: 201
+
+{</br>
+&nbsp;&nbsp;  "access_token":"w345erftyuhbnjkmlnyg7f65435rtyuinjkmlmoiju867561327yujbdnlkc...",</br>
+}
 * fail &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
 
 ---

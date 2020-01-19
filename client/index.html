@@ -5,14 +5,21 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="google-signin-client_id" content="859748516680-kvft4a5lbord2d9d6uptqtqqg552st8c.apps.googleusercontent.com">
 
+
+	<!-- animate css -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
 
 	<!-- bootstrap css -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Merriweather|Open+Sans&display=swap" rel="stylesheet">
-
 	<script src="https://kit.fontawesome.com/c4c9c489d4.js" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.1/axios.min.js" crossorigin="anonymous"></script>
+
+	<script src="https://apis.google.com/js/platform.js"></script>
+	<script src="https://apis.google.com/js/platform.js?onload=init"></script>
+
+
 
 	<link rel="stylesheet" href="./css/main.css">
 
@@ -20,260 +27,13 @@
 </head>
 
 <body class="p-0 m-0">
-	<div class="container" id="app">
-
-
-		<!-- DASHBOARD -->
-		<section id="main-section" v-if="currentPage == 'dashboard' && isLoggedOn">
-			<!-- <section id="main-section" class=""> -->
-			<nav class="navbar navbar-expand-lg navbar-light bg-light">
-				<a class="navbar-brand" href="#"><i class="fab fa-wpressr"></i> MINI-WP</a>
-
-				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active">
-						<a class="nav-link" href="#">Posts <span class="sr-only">(current)</span></a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Draft</a>
-					</li>
-				</ul>
-
-				<a href="#">{{ loggedOnName }}</a>
-			</nav>
-
-			<div class="container">
-
-				<br>
-				<div class="card">
-					<div class="card-body">
-						<input type="text" class="form-control" placeholder="search...">
-					</div>
-				</div>
-				<br>
-				<button v-on:click="addNewPostVisible = !addNewPostVisible" class="btn btn-lg btn-outline-info my-2 my-sm-0">Add
-					new Post</button>
-
-				<br>
-				<br>
-				<div class="card card-body" v-if="addNewPostVisible">
-					<h4>Create new Post</h4>
-					<hr class="my-2">
-					<br>
-					<form>
-						<div class="form-group row">
-							<label class="col-sm-2 col-form-label">Post Title</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control">
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label class="col-sm-2 col-form-label">Categories</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control">
-								<small id="" class="form-text text-muted">please separate each categories with comma ", "</small>
-							</div>
-						</div>
-
-						<label class="col-form-label">Post</label>
-						<textarea class="form-control" rows="10"></textarea>
-					</form><br>
-					<div class="d-flex justify-content-between">
-						<div class="postbuttonlist">
-							<button class="btn btn-outline-info mr-1"><i class="fas fa-save"></i> save to draft</button>
-							<button class="btn btn-info mr-1"><i class="fas fa-upload"></i> publish</button>
-						</div>
-					</div>
-				</div>
-				<br>
-				<h4>Your Published Post: </h4>
-				<div id="publishedPosts">
-					<div class="card">
-						<div class="card-body">
-							<h4>Post Title</h4>
-							<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores maiores iste dolor vitae ut
-								doloremque
-								dolore vero. Autem pariatur tempora adipisci vel asperiores. Libero voluptates labore perferendis
-								voluptas
-								dolorum cum?Cupiditate sapiente consequatur fuga corporis aut, omnis, delectus deserunt a at ratione
-								ipsa
-								soluta suscipit reiciendis est doloremque. Excepturi maiores tempora ducimus culpa fugit cupiditate
-								perspiciatis neque consequatur blanditiis minus.</p>
-							<small>Created at: 02/02/2020</small> | <small>Published at: 02/02/2020</small>
-							<hr class="my-2">
-							<div class="d-flex justify-content-between">
-								<div class="postinfolist">
-									<small>total comment: 99</small>
-									<br><small>total likes: 0</small>
-								</div>
-								<div class="postbuttonlist">
-									<button class="btn btn-outline-info mr-1" data-toggle="collapse" data-target="#comment-post-card-ID">comment</button>
-									<button class="btn btn-outline-info mr-1">edit</button>
-									<button class="btn btn-outline-info mr-1">delete</button>
-								</div>
-							</div>
-							<br>
-							<h5>Comments:</h5>
-							<hr class="my-2">
-							<div class="comments text-right">
-								<p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-									<i class="fas fa-quote-right"></i></p>
-								<footer class="blockquote-footer">Someone famous in <i title="Source Title">Source Title</i>
-								</footer>
-							</div>
-							<br>
-
-							<div class="comments text-right">
-								<p class="mb-0">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus necessitatibus esse, nam
-									debitis ducimus nemo vel natus, labore quaerat nihil rerum neque hic excepturi harum distinctio quod!
-									Alias, reiciendis soluta?Mollitia, error cupiditate? Neque officiis quae ipsum ducimus impedit
-									repellendus nulla? Optio sit dolor minima magni magnam reiciendis, deserunt repudiandae necessitatibus
-									dolorum sequi vitae consequatur qui ad officiis neque non!
-									<i class="fas fa-quote-right"></i></p>
-								<footer class="blockquote-footer">Someone famous in <i title="Source Title">Source Title</i>
-								</footer>
-							</div>
-							<br>
-
-							<div class="comments text-right">
-								<p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae!
-									<i class="fas fa-quote-right"></i></p>
-								<footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite>
-								</footer>
-							</div>
-							<br>
-							<form>
-								<textarea class="form-control" rows="5"></textarea>
-								<br>
-								<button class="btn btn-info">publish comment</button>
-							</form>
-						</div>
-					</div><br>
-				</div>
-
-				<br>
-				<h4>Your unpublished Works: </h4>
-				<div class="unpublishedPost list-group">
-					<div class="list-group-item">
-						<div class="d-flex justify-content-between">
-							<h5>Post Title</h5>
-							<small>last edited: 02/02/2020</small>
-						</div>
-						<div class="d-flex justify-content-between">
-							<small><b>Preview</b>: Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore, at?</small>
-							<div class="postbuttonlist">
-								<button class="btn btn-outline-info btn-sm mr-1">publish</button>
-								<button class="btn btn-outline-info btn-sm mr-1"><i class="fas fa-pencil"></i> edit</button>
-								<button class="btn btn-outline-danger btn-sm mr-1"><i class="fas fa-trash"></i> delete</button>
-							</div>
-						</div>
-					</div>
-					<!-- dummies -->
-
-					<!-- end dummies -->
-				</div>
-
-			</div>
-		</section>
-
-		<!-- LANDING PAGE -->
-		<section id="landing-section" v-if="currentPage == 'landing'">
-			<nav class="navbar navbar-expand-lg navbar-light bg-light nav-sticky">
-				<p class="navbar-brand" href="#"><i class="fab fa-wpressr"></i> MINI-WP</p>
-				<div class="d-flex mr-auto">
-					<p class="nav-link" href="#">Posts <span class="sr-only">(current)</span></p>
-					<p class="nav-link" href="#">Draft</p>
-				</div>
-
-
-				<p v-on:click="" class="btn btn-outline-info mr-4">Dashboard</p>
-				<p href="" v-if="isLoggedOn">{{ loggedOnName }}</p>
-			</nav>
-			<br><br>
-			<div class="row">
-				<div class="col-8">
-
-					<div class="articlesList">
-						<div class="article" v-for="article in articles" v-bind:key="article._id">
-							<h4 class="articles-header"> {{article.title}}
-							</h4>
-							<p>{{article.article}}</p>
-							<div class="d-flex justify-content-between mb-2">
-								<div class="d-flex">
-									<div class="tags fa-btn" v-for="category in article.categories"><i>'{{category}}'</i></div>
-								</div>
-								<div class="">
-									<i class="far text-dark fa-comment-alt fa-2x fa-btn mr-3"></i>
-									<i class="far text-dark fa-heart fa-2x fa-btn"></i>
-									<i style="color: pink" class="fas fa-heart fa-2x fa-btn" v-if="article.likes.includes(loggedOnId)"></i>
-								</div>
-							</div>
-							<hr class="my-1">
-							<div class="d-flex justify-content-between">
-								<small>By: {{article.author.name}}</small>
-								<small>at: 02-02-2020</small>
-							</div>
-							<br>
-							<br>
-						</div>
-					</div>
-
-				</div>
-				<div class="col-4">
-
-
-					<div v-if='isLoggedOn == false' id="loginform">
-						<div class="card">
-							<div class="card-body">
-								<form>
-									<h4>Signup and start sharing!</h4><br>
-									<div class="form-group">
-										<label for="exampleInputEmail1">Email address</label>
-										<input v-model="signinEmail" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-
-										<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else. 😏</small>
-									</div>
-									<div class="form-group">
-										<label for="exampleInputPassword1">Password</label>
-										<input v-model="signinPassword" type="password" class="form-control" id="exampleInputPassword1">
-									</div>
-									<button v-on:click="signIn" type="submit" class="btn btn-primary">Submit</button>
-								</form>
-							</div>
-						</div><br><br>
-					</div>
-
-					<h4>Most Commented Articles:</h4>
-					<hr class="my-2">
-					<div class="row">
-						<div class="col-1 text-secondary">1</div>
-						<div class="col-11"><b>Judul Article</b></div>
-					</div>
-
-					<br><br>
-					<h4>Most Liked Articles:</h4>
-					<hr class="my-2">
-					<div class="row">
-						<div class="col-1 text-secondary">1</div>
-						<div class="col-11"><b>Judul Article</b></div>
-					</div>
-
-				</div>
-			</div>
-		</section>
-	</div>
-
-
-	</div>
-
-
-	<br>
-	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
-	<script src="./js/main.js"></script>
-
-
-
+	<div id="app"></div>
+	<script src="./src/main.js"></script>
+	<!-- <script>
+		ClassicEditor.create(document.querySelector(".ckeditor")).catch(error => {
+			console.error(error);
+		});
+	</script> -->
 </body>
 
 </html>

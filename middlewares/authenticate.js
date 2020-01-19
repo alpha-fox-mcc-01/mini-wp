@@ -12,6 +12,7 @@ module.exports = function (req, res, next) {
 				.then(result => {
 					if (result) {
 						req.authenticated_id = authenticated_id
+						req.authenticated_name = result.name
 						next()
 					} else {
 						next({

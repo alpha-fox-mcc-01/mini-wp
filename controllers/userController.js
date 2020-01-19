@@ -54,6 +54,51 @@ module.exports = class UserController {
 	}
 
 	static googleAuth(req, res, next) {
+		let access_token
+		User.findOne({ email: req.body.email })
+			.then(result => {
+				if (result) {
+					access_token = jwt.sign({ _id: result._id }, process.env.JWT_PRIVATEKEY)
+					return User.updateOne({ _id: result._id }, {
+						googleAuth: true
+					})
+				} else {
+					return User.create({
+						name: req.body.name,
+						password: Math.random(),
+						email: req.body.email
+					}).then(user => {
+						res.status(201).json(user)
+					})
+				}
+			})
+			.then(result => {
+				console.log(result)
+				res.status(200).json(result)
+			})
+			.catch(err => {
+				res.status(500).json(err)
+			})
+	}
 
+	static verifyToken(req, res, next) {
+		console.log('verifying access token');
+
+		const access_token = req.body.access_token
+		try {
+			let decoded = jwt.verify(access_token, process.env.JWT_PRIVATEKEY)
+			User
+				.findOne({ _id: decoded._id }, [ '_id', 'name' ])
+				.then(result => {
+					res.status(200).json(result)
+				})
+				.catch(err => {
+					console.log(err);
+
+					next(err)
+				})
+		} catch (error) {
+
+		}
 	}
 }
