@@ -14,7 +14,6 @@ class articleController{
         const obj = {
             title: req.body.title,
             desc: req.body.desc,
-            img: req.body.img||''||req.file.cloudStoragePublicUrl,
             author: userid,
             paragraf: req.body.paragraf,
             publish: published,
@@ -82,6 +81,34 @@ class articleController{
                 console.log(err)
                 res.status(500).json(err)
             })
+    }
+
+    static addImg(req, res){
+
+        let pr = req.params.id
+
+        console.log(req.file.cloudStoragePublicUrl);
+        let obj={
+            img: req.file.cloudStoragePublicUrl
+        }
+
+        Article.updateOne({_id: pr},
+            obj
+        )
+        .then(data => {
+            console.log(data);
+            
+            res.status(200).json({ 
+                status: 200,
+                message: 'Your file is successfully uploaded',
+                link: req.file.cloudStoragePublicUrl,
+                data
+             })
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json(err)
+        })
     }
 
     static getmyarticle (req, res){

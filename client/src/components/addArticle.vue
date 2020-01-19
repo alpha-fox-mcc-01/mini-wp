@@ -23,14 +23,6 @@
                         <option value="false">Later</option>
                       </select>
                   </div>
-                  <div class="form-group">
-                      <label for="exampleInputPassword1">Image</label>
-                         <div class="custom-file" >
-                    <input type="file" class="custom-file-input" id="customFile"  @change="fileChange"/>
-                    <label class="custom-file-label" for="customFile" >Choose file</label>
-                    </div>
-
-                    </div>
 
                 <button type="submit" class="btn btn-primary" @click.prevent="addPost">ADD</button>
                 
@@ -52,7 +44,6 @@ export default {
             publish:'',
             paragraf:'',
             // myHTML:''
-            image:''
         }
     },
     props:{
@@ -62,10 +53,6 @@ export default {
         
     },
     methods:{
-          fileChange (event) {
-            console.log(event.target.files[0], '<<>>')
-            this.image = event.target.files[0]
-            },
         addPost(){
             
             const obj = {
@@ -80,7 +67,7 @@ export default {
             console.log(this.paragraf)
             axios({
                 method: 'post',
-                url: 'http://localhost:3000/article/add',
+                url: 'http://34.87.116.76/article/add',
                 headers: { 'access_token': userid },
                 data: obj
             })
@@ -92,7 +79,7 @@ export default {
                     this.paragraf=''
                     console.log(data);
                     
-                     this.$emit('change-Page', 'home')
+                     this.$emit('article-Image', data.data._id)
                 })
                 .catch(err => {
                     console.log(err)

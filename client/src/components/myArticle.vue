@@ -44,7 +44,7 @@ export default {
 
             axios({
                 method:'GET',
-                url:'http://localhost:3000/article/myarticle',
+                url:'http://34.87.116.76/article/myarticle',
                 headers: { 'access_token': userid }
             })
             .then(({data})=> {

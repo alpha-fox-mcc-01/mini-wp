@@ -11116,14 +11116,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 name: 'addArticle';
 
 var _default = {
@@ -11133,9 +11125,8 @@ var _default = {
       img: '',
       desc: '',
       publish: '',
-      paragraf: '',
-      // myHTML:''
-      image: ''
+      paragraf: '' // myHTML:''
+
     };
   },
   props: {
@@ -11143,10 +11134,6 @@ var _default = {
   },
   components: {},
   methods: {
-    fileChange: function fileChange(event) {
-      console.log(event.target.files[0], '<<>>');
-      this.image = event.target.files[0];
-    },
     addPost: function addPost() {
       var _this = this;
 
@@ -11161,7 +11148,7 @@ var _default = {
       console.log(this.paragraf);
       (0, _axios.default)({
         method: 'post',
-        url: 'http://localhost:3000/article/add',
+        url: 'http://34.87.116.76/article/add',
         headers: {
           'access_token': userid
         },
@@ -11175,7 +11162,7 @@ var _default = {
         _this.paragraf = '';
         console.log(data);
 
-        _this.$emit('change-Page', 'home');
+        _this.$emit('article-Image', data.data._id);
       }).catch(function (err) {
         console.log(err);
       });
@@ -11325,29 +11312,6 @@ exports.default = _default;
               )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "exampleInputPassword1" } }, [
-                _vm._v("Image")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "custom-file" }, [
-                _c("input", {
-                  staticClass: "custom-file-input",
-                  attrs: { type: "file", id: "customFile" },
-                  on: { change: _vm.fileChange }
-                }),
-                _vm._v(" "),
-                _c(
-                  "label",
-                  {
-                    staticClass: "custom-file-label",
-                    attrs: { for: "customFile" }
-                  },
-                  [_vm._v("Choose file")]
-                )
-              ])
-            ]),
-            _vm._v(" "),
             _c(
               "button",
               {
@@ -11457,7 +11421,7 @@ var _default = {
       console.log(userid);
       (0, _axios.default)({
         method: 'GET',
-        url: 'http://localhost:3000/article/myarticle',
+        url: 'http://34.87.116.76/article/myarticle',
         headers: {
           'access_token': userid
         }
@@ -11728,7 +11692,7 @@ var _default = {
       console.log('bisa update');
       (0, _axios.default)({
         method: 'put',
-        url: "http://localhost:3000/article/update/".concat(id),
+        url: "http://34.87.116.76/article/update/".concat(id),
         data: {
           title: this.updatedPost.title,
           desc: this.updatedPost.desc,
@@ -12286,7 +12250,7 @@ var _default = {
 
       (0, _axios.default)({
         method: 'post',
-        url: 'http://mini-wp.hylrd.site/user/regis',
+        url: 'http://34.87.116.76/user/regis',
         data: {
           name: this.name,
           email: this.email,
@@ -12724,7 +12688,7 @@ var _default = {
       // console.log('+++++++++++++');
       (0, _axios.default)({
         method: 'get',
-        url: "http://localhost:3000/article/read/".concat(this.readNow)
+        url: "http://34.87.116.76/article/read/".concat(this.readNow)
       }).then(function (_ref) {
         var data = _ref.data;
         _this.articleNow = data[0];
@@ -12831,6 +12795,188 @@ render._withStripped = true
       
       }
     })();
+},{"axios":"node_modules/axios/index.js","_css_loader":"../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/articleImage.vue":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _axios = _interopRequireDefault(require("axios"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+name: 'articleImage';
+
+var _default = {
+  data: function data() {
+    return {
+      image: ''
+    };
+  },
+  props: {
+    page: String,
+    currentArticle: String
+  },
+  methods: {
+    fileChange: function fileChange(event) {
+      console.log(event.target.files[0], '<<>>');
+      this.image = event.target.files[0];
+    },
+    submitFile: function submitFile() {
+      var _this = this;
+
+      this.$emit('pageplus');
+      var formData = new FormData();
+      formData.append("image", this.image);
+      console.log(">> formData >> ", formData); // You should have a server side REST API
+
+      _axios.default.post("http://34.87.116.76/article/upload/".concat(this.currentArticle), formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      }).then(function (_ref) {
+        var data = _ref.data;
+        _this.resultimg = data;
+        console.log(data);
+        console.log("SUCCESS!!");
+
+        _this.$emit('change-Page', 'home');
+      }).catch(function (err) {
+        console.log("FAILURE!!");
+      });
+    }
+  }
+};
+exports.default = _default;
+        var $9cf0bc = exports.default || module.exports;
+      
+      if (typeof $9cf0bc === 'function') {
+        $9cf0bc = $9cf0bc.options;
+      }
+    
+        /* template */
+        Object.assign($9cf0bc, (function () {
+          var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.page == "articleImage"
+    ? _c(
+        "div",
+        {
+          staticClass: "container",
+          staticStyle: { width: "40rem", "margin-top": "10rem" }
+        },
+        [
+          _c("h4", { staticClass: "mb-4 " }, [
+            _vm._v("add picture to your article")
+          ]),
+          _vm._v(" "),
+          _c(
+            "form",
+            {
+              attrs: {
+                action: "/profile",
+                method: "post",
+                enctype: "multipart/form-data"
+              },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.submitFile($event)
+                }
+              }
+            },
+            [
+              _c("div", { staticClass: "custom-file" }, [
+                _c("input", {
+                  staticClass: "custom-file-input",
+                  attrs: { type: "file", id: "customFile" },
+                  on: { change: _vm.fileChange }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    staticClass: "custom-file-label",
+                    attrs: { for: "customFile" }
+                  },
+                  [_vm._v("Choose file")]
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(0)
+            ]
+          )
+        ]
+      )
+    : _vm._e()
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group mt-3" }, [
+      _c("input", {
+        staticClass: "form-control btn btn-warning",
+        attrs: { type: "submit" }
+      })
+    ])
+  }
+]
+render._withStripped = true
+
+          return {
+            render: render,
+            staticRenderFns: staticRenderFns,
+            _compiled: true,
+            _scopeId: null,
+            functional: undefined
+          };
+        })());
+      
+    /* hot reload */
+    (function () {
+      if (module.hot) {
+        var api = require('vue-hot-reload-api');
+        api.install(require('vue'));
+        if (api.compatible) {
+          module.hot.accept();
+          if (!module.hot.data) {
+            api.createRecord('$9cf0bc', $9cf0bc);
+          } else {
+            api.reload('$9cf0bc', $9cf0bc);
+          }
+        }
+
+        
+        var reloadCSS = require('_css_loader');
+        module.hot.dispose(reloadCSS);
+        module.hot.accept(reloadCSS);
+      
+      }
+    })();
 },{"axios":"node_modules/axios/index.js","_css_loader":"../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/App.vue":[function(require,module,exports) {
 "use strict";
 
@@ -12859,8 +13005,17 @@ var _footerBlog = _interopRequireDefault(require("./components/footerBlog"));
 
 var _readArticle = _interopRequireDefault(require("./components/readArticle"));
 
+var _articleImage = _interopRequireDefault(require("./components/articleImage"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -12922,7 +13077,8 @@ var _default = {
       articles: {},
       page: 'login',
       updatedPost: {},
-      readNow: ''
+      readNow: '',
+      currentArticle: ''
     };
   },
   components: {
@@ -12934,13 +13090,14 @@ var _default = {
     loginPage: _loginPage.default,
     registerPage: _registerPage.default,
     footerBlog: _footerBlog.default,
-    readArticle: _readArticle.default
+    readArticle: _readArticle.default,
+    articleImage: _articleImage.default
   },
   methods: {
     getArticle: function getArticle() {
       var _this = this;
 
-      _axios.default.get('http://localhost:3000/article').then(function (_ref) {
+      _axios.default.get('http://34.87.116.76/article').then(function (_ref) {
         var data = _ref.data;
         // handle success
         _this.articles = data;
@@ -12949,6 +13106,11 @@ var _default = {
         // handle error
         console.log(error);
       });
+    },
+    addArticleImage: function addArticleImage(id) {
+      console.log(id, 'berubah page');
+      this.currentArticle = id;
+      this.page = 'articleImage';
     },
     changePage: function changePage(laman) {
       console.log('dari root', laman);
@@ -13000,7 +13162,10 @@ exports.default = _default;
       _vm._v(" "),
       _c("addArticle", {
         attrs: { page: _vm.page },
-        on: { "change-Page": _vm.changePage }
+        on: {
+          "change-Page": _vm.changePage,
+          "article-Image": _vm.addArticleImage
+        }
       }),
       _vm._v(" "),
       _c("myArticle", {
@@ -13029,6 +13194,11 @@ exports.default = _default;
       _c("readArticle", {
         attrs: { page: _vm.page, readNow: _vm.readNow },
         on: { "read-Page": _vm.readPage }
+      }),
+      _vm._v(" "),
+      _c("articleImage", {
+        attrs: { page: _vm.page, currentArticle: _vm.currentArticle },
+        on: { "change-Page": _vm.changePage }
       }),
       _vm._v(" "),
       _c("footerBlog")
@@ -13069,7 +13239,7 @@ render._withStripped = true
       
       }
     })();
-},{"axios":"node_modules/axios/index.js","./components/navbarHome":"src/components/navbarHome.vue","./components/feedArticle":"src/components/feedArticle.vue","./components/addArticle":"src/components/addArticle.vue","./components/myArticle":"src/components/myArticle.vue","./components/updateArticle":"src/components/updateArticle.vue","./components/loginPage":"src/components/loginPage.vue","./components/registerPage":"src/components/registerPage.vue","./components/footerBlog":"src/components/footerBlog.vue","./components/readArticle":"src/components/readArticle.vue","_css_loader":"../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"node_modules/tinymce/tinymce.js":[function(require,module,exports) {
+},{"axios":"node_modules/axios/index.js","./components/navbarHome":"src/components/navbarHome.vue","./components/feedArticle":"src/components/feedArticle.vue","./components/addArticle":"src/components/addArticle.vue","./components/myArticle":"src/components/myArticle.vue","./components/updateArticle":"src/components/updateArticle.vue","./components/loginPage":"src/components/loginPage.vue","./components/registerPage":"src/components/registerPage.vue","./components/footerBlog":"src/components/footerBlog.vue","./components/readArticle":"src/components/readArticle.vue","./components/articleImage":"src/components/articleImage.vue","_css_loader":"../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"node_modules/tinymce/tinymce.js":[function(require,module,exports) {
 var define;
 var global = arguments[3];
 var process = require("process");
@@ -90152,7 +90322,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44705" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34167" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

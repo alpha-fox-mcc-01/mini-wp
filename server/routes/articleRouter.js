@@ -8,6 +8,7 @@ router.post('/add', authenticated, images.multer.single('image'),
 images.sendUploadToGCS, articleController.addArticle)
 router.delete('/delete/:id', authenticated, authorized,articleController.delete)
 router.put('/update/:id', authenticated, articleController.update)
+router.put('/addImg/:id', articleController.addImg)
 router.get('/myarticle', authenticated, articleController.getmyarticle)
 router.get('/', articleController.getarticles)
 router.get('/read/:id', articleController.readarticle)
@@ -15,15 +16,16 @@ router.get('/test', (req, res)=>{
     res.send('masuk =====+++++++=======')
     
 })
-router.post('/upload',
+router.post('/upload/:id',
   images.multer.single('image'), 
-  images.sendUploadToGCS,
-  (req, res) => {
-    res.send({
-      status: 200,
-      message: 'Your file is successfully uploaded',
-      link: req.file.cloudStoragePublicUrl
-    })
-  })
+  images.sendUploadToGCS, articleController.addImg
+//   (req, res) => {
+//     res.send({
+//       status: 200,
+//       message: 'Your file is successfully uploaded',
+//       link: req.file.cloudStoragePublicUrl
+//     })
+//   }
+  )
 
 module.exports = router

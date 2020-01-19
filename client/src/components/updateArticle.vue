@@ -45,7 +45,7 @@ export default {
             console.log('bisa update')
             axios({
                 method: 'put',
-                url: `http://localhost:3000/article/update/${id}`,
+                url: `http://34.87.116.76/article/update/${id}`,
                 data: {
                     title: this.updatedPost.title,
                     desc: this.updatedPost.desc,

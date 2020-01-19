@@ -15,6 +15,7 @@
   <addArticle 
   :page="page" 
   v-on:change-Page="changePage"
+  v-on:article-Image="addArticleImage"
   ></addArticle>
 
   <myArticle 
@@ -45,6 +46,12 @@ v-on:change-Page="changePage"
 v-on:read-Page="readPage"
 ></readArticle>
 
+<articleImage
+:page="page" 
+:currentArticle="currentArticle" 
+v-on:change-Page="changePage"
+></articleImage>
+
 
 <footerBlog></footerBlog>
 
@@ -62,6 +69,7 @@ import loginPage from './components/loginPage'
 import registerPage from './components/registerPage'
 import footerBlog from './components/footerBlog'
 import readArticle from './components/readArticle'
+import articleImage from './components/articleImage'
 
 export default {
   data() {
@@ -70,7 +78,8 @@ export default {
       articles:{},
       page:'login',
       updatedPost: {},
-      readNow:''
+      readNow:'',
+      currentArticle:''
 
     };
   },
@@ -83,12 +92,13 @@ export default {
     loginPage,
     registerPage,
     footerBlog,
-    readArticle
+    readArticle,
+    articleImage
   },
   methods:{
     getArticle(){
 
-      axios.get('http://localhost:3000/article')
+      axios.get('http://34.87.116.76/article')
       .then(({data})=> {
         // handle success
         this.articles = data
@@ -99,6 +109,11 @@ export default {
         console.log(error);
       })
 
+    },
+    addArticleImage(id){
+      console.log(id, 'berubah page')
+      this.currentArticle = id
+      this.page = 'articleImage'
     },
     changePage(laman){
       console.log('dari root', laman)

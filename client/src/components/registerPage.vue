@@ -39,7 +39,7 @@ export default {
         register(){
             axios({
                 method: 'post',
-                url: 'http://mini-wp.hylrd.site/user/regis',
+                url: 'http://34.87.116.76/user/regis',
                 data: {
                     name: this.name,
                     email: this.email,

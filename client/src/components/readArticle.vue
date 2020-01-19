@@ -47,7 +47,7 @@ export default {
             
              axios({
                 method: 'get',
-                url: `http://localhost:3000/article/read/${this.readNow}`
+                url: `http://34.87.116.76/article/read/${this.readNow}`
             })
                 .then(({ data }) => {
                     this.articleNow = data[0]
