@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- CSS -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+    <!-- CKED -->
+    <!-- <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script> -->
+
+    <title>Ganda Webs</title>
+  </head>
+
+  <body>
+    <div id="app">
+    <!-- navbar / header -->
+      <header v-if="currentPage !== 'not-loggedin'">
+        <nav class="bg-dark fixed-top">
+          <div class="container text-white">
+            <div class="row justify-content-between">
+              <div class="col-xs-2">
+                <img src="./assets/img/wp-logo.png" alt="Logo" id="wp-logo">
+              </div>
+              <div class="col-xs-2 navigation" @click="changePage('blog-feed')">
+                <p>Home</p>
+              </div>
+              <div class="col-xs-2 navigation" @click="changePage('blog-feed')">
+                <p>Blog Feed</p>
+              </div>
+              <div class="col-xs-2 navigation" @click="changePage('dashboard'),changeDash('my-post')">
+                <p>Dashboard</p>
+              </div>
+              <div class="col-xs-2 navigation" @click="logOut(), changePage('not-loggedin')">
+                <p>Logout</p>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+      
+      <main>
+        <!-- jumbtron -->
+        <section class="landing" v-if="currentPage === 'not-loggedin'">
+          <div class=" container landing-page">
+            <div class="row justify-content-center">
+              <div class="col-md-4 text-right">
+                <button type="button" class="btn btn-dark" @click="changeButton('login')">Login</button>
+                <div v-if="currentButton === 'login'">
+                  <h2 class="text-white">LOGIN</h2>
+                  <form class="text-center px-2 py-2" id="login" @submit.prevent="logIn">
+                    <div class="form-group">
+                      <label for="email">Email address</label>
+                      <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" v-model="email">
+                      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                      <label for="password">Password</label>
+                      <input type="password" class="form-control" id="password" placeholder="Password" v-model="password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+                </div>
+              </div>
+
+
+              <div class="col-md-4 text-left">
+                <button type="button" class="btn btn-dark" @click="changeButton('register')">Register</button>
+                <div v-if="currentButton === 'register'">
+                  <h2 class="text-white">REGISTER</h2>
+                  <form class="text-center px-2 py-2" id="register" @submit.prevent="registerUser">
+                    <div class="form-group">
+                      <label for="fullname">Full Name</label>
+                      <input type="fullname" class="form-control" id="fullname" placeholder="Enter Name" v-model="name" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="email">Email address</label>
+                      <input type="email" class="form-control" id="email" placeholder="Enter email" v-model="email" required>
+                      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                      <label for="password">Password</label>
+                      <input type="password" class="form-control" id="password" placeholder="Password" v-model="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- JUMBOTRON END -->
+
+        <!-- BLOG FEED / ARTICLE -->
+        <section id="blog-feed" class="portfolio bg-light pt-5" v-if="currentPage === 'blog-feed'">
+          <div class="container">
+            <div class="row mb-4 pt-4">
+              <div class="col text-center text-white">
+                <h2>Blog Feed</h2>
+              </div>
+            </div>
+            
+            <!-- div yg ini akan di fetch data dari data base -->
+            <div class="row mb-4 justify-content-start" >
+              <div class="col-md-4 mb-4" v-for="article in articles" :key=article.id>
+                <div class="card" style="width: 18rem;">
+                  <img src="" class="card-img-top" alt="">
+                  <div class="card-body">
+                    <h3>{{ article.title }}</h3>
+                    <p class="card-text"><p>{{ article.content }} </p>
+                    <small>Posted By : {{article.authorId.name}} </small><br>
+                    <small>Posted At : {{article.createdAt}} </small><br>
+                    <button class="btn-primary">Read More</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- DASHBOARD -->
+        <section class="dashboard pt-3">
+
+          <div class="container mt-5" id="dashboard" v-if="currentPage === 'dashboard'">
+            <div class="row justify-content-between">
+              <div class="col-sm-3 mr-auto pl-2" id="dashboard-nav">
+                <div class="row" id="my-post" @click="changeDash('my-post')">
+                  <p>My Post</p>
+                </div>
+                <div class="row" id="add-post" @click="changeDash('add-post')">
+                  <p>Add Post</p>
+                </div>
+              </div>
+
+
+              <div class="col-sm-8 col1" v-if="dashboard === 'my-post'">
+                <h3>My Posts</h3>
+                <div class="row mb-4 mt-5 justify-content-center" v-for="article in userArticles" :key="article._id">
+                    <div class="card px-2 py-2" style="width: 95%;">
+                      <img src="" class="card-img-top" alt="">
+                      <div class="card-body">
+                        <h3>{{ article.title }}</h3>
+                        <p class="card-text"><p>{{ article.content }} </p>
+                        <small>Posted By : {{article.authorId.name}} </small><br>
+                        <small>Posted At : {{article.createdAt}} </small><br>
+                        <button class="btn-primary">Read More</button>
+                        <button class="btn-primary">Edit</button>
+                        <button class="btn-primary" @click="deletePost(article._id)">Delete</button>
+                      </div>
+                    </div>
+                </div>
+              </div>
+
+              <div class="col-sm-8 col2" v-if="dashboard === 'add-post'">
+                  <h3>Add Post</h3>
+                  <form id="post-article" @submit.prevent="postArticle">
+                    <div class="form-group">
+                      <label for="title">Title</label>
+                      <input type="text" class="form-control" id="title" v-model="title">
+                    </div>
+                    <div class="form-group">
+                      <label for="content">Content</label>
+                      <textarea class="form-control" name="content" id="content" rows="20" v-model="content"></textarea>
+                    </div>
+                    <div class="form-group form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+              </div>
+            </div>
+          </div>
+
+        </section>
+      </main>
+
+      <footer class="bg-dark text-white">
+        <div class="container">
+          <div class="row pt-3">
+            <div class="col text-center">
+              <p>Copyleft 2020</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente, molestias! Eveniet quae minus odio. Officiis sequi quisquam, exercitationem atque eaque, tempora quas aut ipsum perferendis harum adipisci aliquid suscipit cumque facere quod similique hic numquam soluta. Veritatis totam porro consequatur velit labore reprehenderit officiis repellendus eaque! Obcaecati placeat deleniti quas ipsam dolore. Dolorem velit molestiae odit debitis modi amet perferendis soluta aliquam architecto laudantium similique officiis voluptatum, eum laboriosam eaque omnis deserunt nostrum sapiente libero incidunt maiores voluptate. Eveniet quos suscipit laboriosam nesciunt! Voluptates, saepe unde? Adipisci deserunt impedit consequuntur labore aliquam quibusdam beatae iusto? Laudantium dolor illum esse officia iure error facere excepturi nostrum tempore debitis maxime molestiae vel neque optio ratione distinctio doloribus, tempora adipisci quia vitae? Ipsum beatae in quas quod, reiciendis nihil dicta recusandae doloribus odit nemo excepturi quae rerum cupiditate. Exercitationem veniam quisquam totam culpa dolorem expedita cumque fugiat quasi dolores ratione? Voluptatibus quasi deserunt voluptates id repudiandae voluptas vel, officiis impedit itaque libero tempora soluta aperiam atque nihil! Quibusdam illum quasi fugiat consequuntur tempore quo ab odit cum ea. Laudantium architecto corporis magni fuga laboriosam. Quia libero nobis vero earum omnis nisi at itaque voluptates sapiente repudiandae quidem eum magnam magni eligendi soluta doloremque dolore ad nemo dolorem dicta nostrum modi exercitationem, placeat sunt! Ratione blanditiis error unde dolorum neque hic, quia doloremque dolores iste perspiciatis, cupiditate esse ad optio repellendus alias nulla tempora ex qui officiis asperiores eos consectetur! Repellendus dignissimos officia doloremque. Sequi ut incidunt, repudiandae quo quam voluptate sit at dolor velit quas voluptatem tempora suscipit eveniet? Debitis error magnam fugiat, optio odit at corporis perferendis blanditiis nihil dolorum, maxime obcaecati commodi soluta exercitationem ratione velit molestias aspernatur adipisci quo. Quisquam sint voluptatem autem doloremque nostrum fugiat odit voluptates, quibusdam aut ducimus architecto numquam a qui excepturi eum ut et itaque repellendus quo consequatur tempore accusantium nesciunt? Molestias consequuntur ut facere iure error voluptate assumenda, mollitia cupiditate dolor dolorem nisi aperiam illo obcaecati, iste ea veritatis magni, omnis eligendi fugit deserunt. Ea minus necessitatibus reiciendis, harum at, non facilis aliquid eum ducimus accusamus temporibus vitae quaerat aliquam a, id et? Repellendus dolore voluptate assumenda dignissimos nisi, illum quis, et magni quos est odit dolores magnam delectus fugiat culpa. Sint architecto atque velit optio, voluptatem obcaecati aliquid, eveniet odio adipisci incidunt cupiditate aspernatur distinctio. Eius odio debitis quibusdam provident voluptas aspernatur, natus dolor dolorum labore facere ipsam quas atque eligendi officiis repellat quidem, omnis dignissimos! At possimus modi deserunt culpa! Explicabo tenetur repudiandae distinctio, aliquam voluptates et voluptas dignissimos minus asperiores, veritatis nemo sequi culpa nobis in quis cupiditate ab cumque repellendus. Itaque, necessitatibus facere enim vero voluptas ratione nobis, hic quos voluptates beatae eligendi ad aut sequi, eum repellendus possimus nulla blanditiis commodi ducimus explicabo natus perspiciatis laboriosam optio numquam? Deleniti officia nemo debitis iste possimus iusto odio vitae, modi quaerat illum, itaque id distinctio praesentium fugit rerum voluptas voluptatem aliquid at ut saepe! Cum dolorum id quod quo accusamus dolore eos ipsum totam amet quos laudantium, est modi? At cum quos obcaecati laboriosam consectetur magni totam ex, blanditiis labore numquam, accusantium assumenda, tempora veritatis voluptas consequuntur perspiciatis rerum incidunt nesciunt? Esse excepturi doloribus perspiciatis odio magni sequi atque qui a? Eos molestiae deserunt veniam atque nostrum magnam sunt totam est quae dignissimos accusantium eveniet sed reprehenderit nihil ea sit obcaecati, distinctio alias sequi possimus temporibus nam iure excepturi! Aperiam necessitatibus exercitationem quos voluptate voluptatibus, sint doloribus iusto illo, blanditiis alias enim quidem laboriosam eum quas aliquam accusantium. Suscipit possimus fugiat aut libero, reprehenderit assumenda rerum saepe praesentium sequi numquam? Suscipit vitae iste, perferendis ut laborum rerum alias ducimus. Quae fugit at optio non vel nostrum autem, itaque quod alias, tempore animi reiciendis ducimus, iste excepturi enim odit ad obcaecati a veritatis inventore tenetur natus facilis. Fugit cum, accusantium molestiae veritatis labore deleniti. Ipsum culpa ut earum facilis necessitatibus debitis eos itaque voluptatem alias vero dolore sit, sint praesentium excepturi tenetur perspiciatis nemo, impedit sed recusandae quae. Inventore nesciunt quidem veritatis aut officiis ea ullam corrupti sint nostrum doloremque nam, est ducimus harum voluptas nisi accusamus et rem error. Enim natus nesciunt itaque libero aliquam. Obcaecati placeat, temporibus debitis minima dignissimos quod, vero ullam totam cum facere molestiae voluptate quaerat corporis dolores. Voluptate, fugit? Quod magnam alias quae quas id aliquid iusto fugiat unde. Perspiciatis ratione esse delectus voluptas maxime fugiat, necessitatibus numquam quas soluta! Earum debitis ea iste sint, quod facere officia eius cum soluta explicabo velit totam pariatur iusto architecto maxime praesentium atque hic laudantium vitae dicta, ipsam magni repudiandae. Dolores officia debitis cumque vitae architecto eligendi consequatur. Unde voluptates nemo voluptatum eveniet harum, minus aperiam, sapiente quam iusto facere officiis? Nesciunt magnam eum aliquam debitis sequi eaque, cupiditate rerum at sit optio nulla explicabo maxime culpa saepe error tempore aspernatur? Veritatis, aliquid reprehenderit. Repellat aperiam molestiae assumenda provident corrupti. Provident sed illo quidem alias dolores aliquid, corrupti inventore totam nostrum? Animi harum ab maxime sapiente, alias necessitatibus cum beatae facilis, consequuntur, voluptates expedita laborum nulla nisi praesentium. Rem numquam praesentium fuga voluptate totam inventore sint nobis beatae aperiam quaerat, facere fugit explicabo, quasi ipsam eius atque commodi hic voluptatum cupiditate? Repellendus hic quisquam quasi mollitia, ut adipisci quidem laborum libero labore quod accusamus eos explicabo delectus eius voluptas, voluptates temporibus. Praesentium ipsa aspernatur velit aliquid reiciendis esse totam perferendis autem rerum sed, expedita mollitia, fugit obcaecati facilis at pariatur suscipit? Amet, aspernatur minus, fuga voluptates laudantium corporis qui veniam voluptatum illo, iusto voluptatibus dignissimos! Ipsum magnam odit ea cumque quasi maxime omnis totam sint optio placeat, repellat odio neque. Eos delectus assumenda doloribus dolores, maxime nam ad laboriosam impedit molestiae, dignissimos, ipsum praesentium fuga laudantium. Nobis quam sed dolorum molestias ducimus, placeat quae dicta magni at expedita fugit hic odit modi illum quisquam exercitationem magnam perferendis iure temporibus quod quis corrupti laborum? Quam dolore libero consectetur dolorum sint ullam! Cumque, perspiciatis repellat? Quod officia error alias soluta culpa, sit hic? Molestias fuga nesciunt expedita earum itaque, deleniti reiciendis ex sapiente, beatae animi aliquam doloribus magni recusandae velit enim?
+      </p>
+  </div>
+    <!-- Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.1/axios.js"></script>
+    <script src="./assets/js/main.js"></script>
+  </body>
+</html>

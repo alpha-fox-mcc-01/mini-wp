@@ -1,0 +1,45 @@
+
+/* Navbar */
+.navigation {
+  padding-top: 1rem;
+}
+
+#blog-feed {
+  min-width: 100vh;
+  min-height: 100vh;
+}
+
+.dashboard {
+  min-height: 100vh;
+}
+
+#dashboard {
+  min-width: 90%;
+}
+
+#dashboard-nav {
+  border-right: solid 2px black;
+  min-height: 100%;
+}
+
+
+#my-post,
+#anotherPost,
+#add-post {
+  height: 3rem;
+  width: 100%;
+  text-align: center;
+}
+
+
+
+#content {
+  min-width: 80vh;
+  min-height: 30vh;
+}
+
+#article {
+  border: solid 1px gray;
+}
+
+/*# sourceMappingURL=/style.a11e3109.css.map */

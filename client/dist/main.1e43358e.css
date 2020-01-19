@@ -1,0 +1,146 @@
+nav[data-v-5b2eb9] {
+  border-bottom: solid 1px grey;
+}
+p[data-v-5b2eb9] {
+  cursor: pointer;
+}
+p[data-v-5b2eb9]::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #000;
+  transition: width 0.3s;
+}
+p[data-v-5b2eb9]:hover::after {
+  width: 100%;
+}
+.login {
+  position: absolute;
+}
+.register {
+  position: absolute;
+}
+.login_btn {
+  color: black;
+  background-color: #ffc312;
+  width: 100px;
+}
+
+.login_btn:hover {
+  color: black;
+  background-color: white;
+}
+
+.links {
+  color: white;
+}
+@import url('https://fonts.googleapis.com/css?family=Numans');
+
+html,body{
+/* background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg'); */
+background-size: cover;
+background-repeat: no-repeat;
+height: 100%;
+font-family: 'Numans', sans-serif;
+}
+
+.container{
+height: 100%;
+align-content: center;
+}
+
+.card{
+height: 370px;
+margin-top: auto;
+margin-bottom: auto;
+width: 400px;
+background-color: rgba(0,0,0,0.5) !important;
+}
+
+.card-header h3{
+color: black;
+}
+
+.input-group-prepend span{
+width: 50px;
+background-color: #FFC312;
+color: black;
+border:0 !important;
+}
+
+input:focus{
+outline: 0 0 0 0  !important;
+box-shadow: 0 0 0 0 !important;
+
+}
+
+.remember{
+color: white;
+}
+
+.remember input
+{
+width: 20px;
+height: 20px;
+margin-left: 15px;
+margin-right: 5px;
+}
+
+.register_btn{
+color: black;
+background-color: #FFC312;
+width: 100px;
+}
+
+.register_btn:hover{
+color: black;
+background-color: white;
+}
+
+.links{
+color: black;
+}
+h2 {
+  border-bottom: 1px solid grey;
+}
+.col-md-3 {
+  border-right: 1px solid grey;
+}
+
+li {
+  list-style-type: none;
+}
+
+li::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #000;
+  transition: width 0.3s;
+}
+
+li:hover::after {
+  width: 100%;
+  /* transition: width .3s; */
+}
+
+.content {
+  border: 1px grey solid;
+}
+
+.dashboard-nav {
+  min-height: 100vh;
+}
+
+.card {
+  background-color: white !important;
+}
+
+img {
+  max-width: 10rem !important;
+}
+.mx-2 {
+  border: 1px solid grey;
+}
