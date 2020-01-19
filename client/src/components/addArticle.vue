@@ -13,7 +13,7 @@
                 <div class="form-group">
                   <label for="exampleInputPassword1">Text</label>
                    <tinymce id="d1" v-model="paragraf"></tinymce>
-                   {{paragraf}}
+                   <!-- {{paragraf}} -->
                    <!-- <wysiwyg v-model="myHTML" /> -->
                 </div>
                 <div class="form-group">
@@ -25,7 +25,11 @@
                   </div>
                   <div class="form-group">
                       <label for="exampleInputPassword1">Image</label>
-                      <input type="text" class="form-control" v-model="img">
+                         <div class="custom-file" >
+                    <input type="file" class="custom-file-input" id="customFile"  @change="fileChange"/>
+                    <label class="custom-file-label" for="customFile" >Choose file</label>
+                    </div>
+
                     </div>
 
                 <button type="submit" class="btn btn-primary" @click.prevent="addPost">ADD</button>
@@ -48,6 +52,7 @@ export default {
             publish:'',
             paragraf:'',
             // myHTML:''
+            image:''
         }
     },
     props:{
@@ -57,12 +62,18 @@ export default {
         
     },
     methods:{
+          fileChange (event) {
+            console.log(event.target.files[0], '<<>>')
+            this.image = event.target.files[0]
+            },
         addPost(){
+            
             const obj = {
                 title: this.title,
                 desc: this.desc,
                 img: this.img,
                 publish: this.publish,
+                paragraf: this.paragraf
             }
             let userid =  localStorage.getItem('access_token')
 
@@ -78,6 +89,7 @@ export default {
                     this.desc = ''
                     this.img = ''
                     this.publish = ''
+                    this.paragraf=''
                     console.log(data);
                     
                      this.$emit('change-Page', 'home')

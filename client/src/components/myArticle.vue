@@ -17,7 +17,7 @@
             <a href="#">author</a>
             on September 24, 2019</p>
             <a type=""  @click.prevent="deletePost(post._id)">Delete</a>
-            <a type="" @click.prevent="updatePost(post._id, post.title, post.desc)">update</a>
+            <a type="" @click.prevent="updatePost(post._id, post.title, post.desc, post.paragraf, post.publish, post.img)">update</a>
             <hr>
         </div>
         </div>
@@ -76,11 +76,13 @@ export default {
                     console.log(err)
                 })
         },
-        updatePost(id, title, desc){
+        updatePost(id, title, desc, paragraf, publish){
             let obj = {
                 id: id,
                 title: title,
-                desc: desc
+                desc: desc,
+                paragraf: paragraf,
+                publish: publish
             }
 
             this.$emit('update-Article', obj)

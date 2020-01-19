@@ -11120,6 +11120,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
 name: 'addArticle';
 
 var _default = {
@@ -11129,8 +11133,9 @@ var _default = {
       img: '',
       desc: '',
       publish: '',
-      paragraf: '' // myHTML:''
-
+      paragraf: '',
+      // myHTML:''
+      image: ''
     };
   },
   props: {
@@ -11138,6 +11143,10 @@ var _default = {
   },
   components: {},
   methods: {
+    fileChange: function fileChange(event) {
+      console.log(event.target.files[0], '<<>>');
+      this.image = event.target.files[0];
+    },
     addPost: function addPost() {
       var _this = this;
 
@@ -11145,7 +11154,8 @@ var _default = {
         title: this.title,
         desc: this.desc,
         img: this.img,
-        publish: this.publish
+        publish: this.publish,
+        paragraf: this.paragraf
       };
       var userid = localStorage.getItem('access_token');
       console.log(this.paragraf);
@@ -11162,6 +11172,7 @@ var _default = {
         _this.desc = '';
         _this.img = '';
         _this.publish = '';
+        _this.paragraf = '';
         console.log(data);
 
         _this.$emit('change-Page', 'home');
@@ -11266,10 +11277,7 @@ exports.default = _default;
                     },
                     expression: "paragraf"
                   }
-                }),
-                _vm._v(
-                  "\n              " + _vm._s(_vm.paragraf) + "\n              "
-                )
+                })
               ],
               1
             ),
@@ -11322,27 +11330,22 @@ exports.default = _default;
                 _vm._v("Image")
               ]),
               _vm._v(" "),
-              _c("input", {
-                directives: [
+              _c("div", { staticClass: "custom-file" }, [
+                _c("input", {
+                  staticClass: "custom-file-input",
+                  attrs: { type: "file", id: "customFile" },
+                  on: { change: _vm.fileChange }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
                   {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.img,
-                    expression: "img"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "text" },
-                domProps: { value: _vm.img },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.img = $event.target.value
-                  }
-                }
-              })
+                    staticClass: "custom-file-label",
+                    attrs: { for: "customFile" }
+                  },
+                  [_vm._v("Choose file")]
+                )
+              ])
             ]),
             _vm._v(" "),
             _c(
@@ -11489,11 +11492,13 @@ var _default = {
         console.log(err);
       });
     },
-    updatePost: function updatePost(id, title, desc) {
+    updatePost: function updatePost(id, title, desc, paragraf, publish) {
       var obj = {
         id: id,
         title: title,
-        desc: desc
+        desc: desc,
+        paragraf: paragraf,
+        publish: publish
       };
       this.$emit('update-Article', obj);
       console.log('ini update');
@@ -11598,7 +11603,14 @@ exports.default = _default;
                     on: {
                       click: function($event) {
                         $event.preventDefault()
-                        return _vm.updatePost(post._id, post.title, post.desc)
+                        return _vm.updatePost(
+                          post._id,
+                          post.title,
+                          post.desc,
+                          post.paragraf,
+                          post.publish,
+                          post.img
+                        )
                       }
                     }
                   },
@@ -11687,6 +11699,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 name: 'updateArticle';
 
 var _default = {
@@ -11708,7 +11731,10 @@ var _default = {
         url: "http://localhost:3000/article/update/".concat(id),
         data: {
           title: this.updatedPost.title,
-          desc: this.updatedPost.desc
+          desc: this.updatedPost.desc,
+          paragraf: this.updatedPost.paragraf,
+          publish: this.updatedPost.publish,
+          img: this.updatedPost.img
         }
       }).then(function (_ref) {
         var data = _ref.data;
@@ -11738,7 +11764,7 @@ exports.default = _default;
         "div",
         {
           staticClass: "container",
-          staticStyle: { width: "20rem", "margin-top": "10rem" }
+          staticStyle: { width: "40rem", "margin-top": "10rem" }
         },
         [
           _c(
@@ -11803,7 +11829,78 @@ exports.default = _default;
                       _vm.$set(_vm.updatedPost, "desc", $event.target.value)
                     }
                   }
-                })
+                }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("label", { attrs: { for: "exampleInputPassword1" } }, [
+                      _vm._v("Text")
+                    ]),
+                    _vm._v(" "),
+                    _c("tinymce", {
+                      attrs: { id: "d1" },
+                      model: {
+                        value: _vm.updatedPost.paragraf,
+                        callback: function($$v) {
+                          _vm.$set(_vm.updatedPost, "paragraf", $$v)
+                        },
+                        expression: "updatedPost.paragraf"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                    _vm._v("Publish article?")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.updatedPost.publish,
+                          expression: "updatedPost.publish"
+                        }
+                      ],
+                      attrs: { name: "publish" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.updatedPost,
+                            "publish",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "true" } }, [
+                        _vm._v("Publish")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "false" } }, [
+                        _vm._v("Later")
+                      ])
+                    ]
+                  )
+                ])
               ]),
               _vm._v(" "),
               _c(
@@ -11812,7 +11909,8 @@ exports.default = _default;
                 [_vm._v("update")]
               )
             ]
-          )
+          ),
+          _vm._v("\n          " + _vm._s(_vm.updatedPost) + "\n  ")
         ]
       )
     : _vm._e()
@@ -11880,6 +11978,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
 name: 'loginPage';
 
 var _default = {
@@ -11893,15 +11992,22 @@ var _default = {
     page: String
   },
   methods: {
-    login: function login() {
+    onSignIn: function onSignIn(googleUser) {
       var _this = this;
 
+      var profile = googleUser.getBasicProfile(); // console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      // console.log('Name: ' + profile.getName());
+      // console.log('Image URL: ' + profile.getImageUrl());
+      // console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+      // this.page = 'home'   
+
+      var username = profile.getName();
       (0, _axios.default)({
         method: 'post',
-        url: 'http://localhost:3000/user/login',
+        url: "http://localhost:3000/user/googlesignin",
         data: {
-          email: this.email,
-          password: this.password
+          google_token: google_token,
+          username: username
         }
       }).then(function (_ref) {
         var data = _ref.data;
@@ -11913,6 +12019,31 @@ var _default = {
           _this.password = '';
 
           _this.changePage('home');
+        }
+      }).catch(function (err) {
+        console.log(err);
+      });
+    },
+    login: function login() {
+      var _this2 = this;
+
+      (0, _axios.default)({
+        method: 'post',
+        url: 'http://localhost:3000/user/login',
+        data: {
+          email: this.email,
+          password: this.password
+        }
+      }).then(function (_ref2) {
+        var data = _ref2.data;
+
+        if (data.token) {
+          localStorage.setItem('access_token', data.token);
+          console.log(data);
+          _this2.email = '';
+          _this2.password = '';
+
+          _this2.changePage('home');
         }
       }).catch(function (err) {
         console.log(err);
@@ -12054,7 +12185,16 @@ exports.default = _default;
               },
               [_vm._v("Register Here")]
             )
-          ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "g-signin2 mt-3",
+              attrs: { "data-onsuccess": "onSignIn" }
+            },
+            [_vm._v("GoogleSignIn")]
+          )
         ]
       )
     : _vm._e()
@@ -12563,12 +12703,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
 name: 'readArticle';
 
 var _default = {
   data: function data() {
     return {
-      articleNow: {}
+      articleNow: {},
+      paragraf: ''
     };
   },
   props: {
@@ -12586,6 +12728,7 @@ var _default = {
       }).then(function (_ref) {
         var data = _ref.data;
         _this.articleNow = data[0];
+        _this.paragraf = _this.articleNow.paragraf;
         console.log(data);
       }).catch(function (err) {
         console.log(err);
@@ -12625,14 +12768,14 @@ exports.default = _default;
               _c("div", { staticClass: "post-heading" }, [
                 _c("h1", [_vm._v(_vm._s(_vm.articleNow.title))]),
                 _vm._v(" "),
-                _c("h2", { staticClass: "subheading" }, [
+                _c("h3", { staticClass: "subheading" }, [
                   _vm._v(_vm._s(_vm.articleNow.desc))
                 ]),
                 _vm._v(" "),
                 _c("span", { staticClass: "meta" }, [
                   _vm._v("Posted by\n          "),
                   _c("a", { attrs: { href: "#" } }, [
-                    _vm._v("Start Bootstrap")
+                    _vm._v(_vm._s(_vm.articleNow.author.name))
                   ]),
                   _vm._v("\n          on " + _vm._s(_vm.articleNow.createdAt))
                 ])
@@ -12640,9 +12783,13 @@ exports.default = _default;
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col-lg-8 col-md-10 mx-auto" }, [
-                  _c("p", { on: { readArticle: this.page } }),
+                  _c("img", { attrs: { src: _vm.articleNow.img, alt: "" } }),
                   _vm._v(" "),
-                  _vm._m(0)
+                  _c("p", [
+                    _c("span", {
+                      domProps: { innerHTML: _vm._s(_vm.paragraf) }
+                    })
+                  ])
                 ])
               ])
             ])
@@ -12651,33 +12798,14 @@ exports.default = _default;
       : _vm._e()
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", [
-      _vm._v("Placeholder text by\n            "),
-      _c("a", { attrs: { href: "http://spaceipsum.com" } }, [
-        _vm._v("Space Ipsum")
-      ]),
-      _vm._v(". Photographs by\n            "),
-      _c(
-        "a",
-        { attrs: { href: "https://www.flickr.com/photos/nasacommons/" } },
-        [_vm._v("NASA on The Commons")]
-      ),
-      _vm._v(".")
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
           return {
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: null,
+            _scopeId: "data-v-8b3ecc",
             functional: undefined
           };
         })());
@@ -90024,7 +90152,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34563" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44705" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

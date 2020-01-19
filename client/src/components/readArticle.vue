@@ -8,18 +8,19 @@
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="post-heading">
             <h1>{{articleNow.title}}</h1>
-            <h2 class="subheading">{{articleNow.desc}}</h2>
+            <h3 class="subheading">{{articleNow.desc}}</h3>
             <span class="meta">Posted by
-              <a href="#">Start Bootstrap</a>
+              <a href="#">{{articleNow.author.name}}</a>
               on {{articleNow.createdAt}}</span>
           </div>
           <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
-              <p v-on:readArticle="this.page"></p>
-    
-              <p>Placeholder text by
+                <img :src="articleNow.img" alt="">
+              <!-- <p v-on:readArticle="this.page"></p> -->
+                <p><span v-html="paragraf"></span> </p>
+              <!-- <p>Placeholder text by
                 <a href="http://spaceipsum.com">Space Ipsum</a>. Photographs by
-                <a href="https://www.flickr.com/photos/nasacommons/">NASA on The Commons</a>.</p>
+                <a href="https://www.flickr.com/photos/nasacommons/">NASA on The Commons</a>.</p> -->
             </div>
           </div>
         </div>
@@ -32,7 +33,8 @@ import axios from 'axios'
 export default {
     data(){
         return {
-            articleNow:{}
+            articleNow:{},
+            paragraf: ''
         }
     },
     props:{
@@ -49,6 +51,7 @@ export default {
             })
                 .then(({ data }) => {
                     this.articleNow = data[0]
+                    this.paragraf = this.articleNow.paragraf 
                     console.log(data);
                     
                 })
@@ -71,6 +74,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+img{
+    max-height: 20rem;
+}
 </style>
