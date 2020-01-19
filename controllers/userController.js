@@ -68,13 +68,16 @@ module.exports = class UserController {
 						password: Math.random(),
 						email: req.body.email
 					}).then(user => {
-						res.status(201).json(user)
+						access_token = jwt.sign({ _id: user._id }, process.env.JWT_PRIVATEKEY)
+						res.status(201).json(access_token)
+					}).catch(err => {
+						res.status(500).json(err)
 					})
 				}
 			})
 			.then(result => {
 				console.log(result)
-				res.status(200).json(result)
+				res.status(200).json(access_token)
 			})
 			.catch(err => {
 				res.status(500).json(err)

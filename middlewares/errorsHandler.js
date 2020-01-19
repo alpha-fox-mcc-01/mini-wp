@@ -26,7 +26,10 @@ module.exports = function (err, req, res, next) {
 		response = 'This Email is already Registered'
 	} else {
 		code = 500
-		response = 'Internal Server Error'
+		response = {
+			msg: 'Internal Server Error',
+			details: err
+		}
 	}
 
 	if (err.name == 'JsonWebTokenError') {

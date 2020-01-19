@@ -3,12 +3,10 @@ const Article = require('../models/Article')
 module.exports = class ArticleController {
 
 	static fetchMine(req, res, next) {
-		console.log(req.authenticated_id)
 		Article.find({
 			author: req.authenticated_id
 		})
 			.then(result => {
-				console.log(result)
 				res.status(200).json(result)
 			})
 			.catch(err => {
@@ -45,8 +43,6 @@ module.exports = class ArticleController {
 					responseArticles.push(responseArticle)
 				})
 
-				// console.log(responseArticles);
-
 				res.status(200).json(responseArticles)
 			})
 			.catch(err => {
@@ -55,10 +51,11 @@ module.exports = class ArticleController {
 	}
 
 	static createArticle(req, res, next) {
-		let { title, article, author, categories } = req.body
+		let { title, article, categories } = req.body
 		let values = {
 			title, article
 		}
+		values.imgs = req.file.cloudStoragePublicUrl
 		values.author = req.authenticated_id
 		values.categories = []
 
@@ -77,7 +74,6 @@ module.exports = class ArticleController {
 		}
 		Article.create(values)
 			.then(result => {
-				console.log('creating record:...', result);
 
 				res.status(201).json(result)
 			})

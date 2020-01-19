@@ -7,10 +7,11 @@
     <br />
     <createArticleCard
       :createArticleCardShowed="createArticleCardShowed"
+      v-on:refetch="fetchMyArticles"
       v-on:closeCreateCard="toggleCreateArticleCard"
     ></createArticleCard>
-    <drafts :myDrafts="myDrafts"></drafts>
-    <publishedarticleList :myPublishedArticles="myPublishedArticles"></publishedarticleList>
+    <drafts v-on:refetch="fetchMyArticles" :myDrafts="myDrafts"></drafts>
+    <publishedarticleList v-on:refetch="fetchMyArticles" :myPublishedArticles="myPublishedArticles"></publishedarticleList>
     <br />
     <br />
   </div>
@@ -44,16 +45,15 @@ export default {
         }
       })
         .then(({ data }) => {
-          console.log("ini artikel punya yang login");
-          console.log(data);
-
           this.myDrafts = data.filter(row => {
             return !row.is_published;
           });
+          this.myDrafts.reverse();
 
           this.myPublishedArticles = data.filter(row => {
             return row.is_published;
           });
+          this.myPublishedArticles.reverse();
         })
         .catch(err => {
           console.log(err);

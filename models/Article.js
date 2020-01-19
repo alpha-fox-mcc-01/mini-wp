@@ -7,12 +7,18 @@ const schemaOptions = {
 	}
 }
 const articleSchema = new Schema({
-	title: String,
-	article: String,
+	title: {
+		type: String,
+		required: [ true, 'Title cannot be empty' ]
+	},
+	article: {
+		type: String,
+		required: [ true, 'Article cannot be empty' ]
+	},
 	author: {
 		type: Schema.Types.ObjectId, ref: 'User'
 	},
-	imgs: [ String ],
+	imgs: String,
 	categories: [ String ],
 	created_at: {
 		type: Date,
