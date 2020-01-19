@@ -10,12 +10,12 @@ app.use(express.urlencoded({ extended: false}))
 app.use(express.json())
 app.use(cors())
 
-// mongoose.connect(process.env.ATLAS_CONNECT, {useNewUrlParser: true, useUnifiedTopology: true});
-mongoose.connect('mongodb://localhost/miniWP', {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify:false});
+mongoose.connect(process.env.ATLAS_CONNECT, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
+// mongoose.connect('mongodb://localhost/miniWP', {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify:false});
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
+db.once('open', function(err, success) {
   console.log('Database connection successful')
 });
 
