@@ -79,8 +79,8 @@ class userController{
             .then(userData => {
                 if (!userData) {
                     return User.create({
+                        name:req.body.name,
                         email: payload.email,
-                        googleSignIn: true
                     })
                 }
                 else {

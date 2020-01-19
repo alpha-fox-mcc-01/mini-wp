@@ -4,6 +4,8 @@ const express = require('express');
 const router = require ('./routes')
 const port = process.env.PORT 
 const app = express()
+const logger = require('morgan')
+app.use(logger('dev'))
 
 app.use(express.json()) //IMPORTANT INVOKE
 // app.use((req, res, next) => {

@@ -4,7 +4,7 @@ const User = require('../models/user')
 class articleController{
 
     static addArticle(req, res){
-
+        // console.log(req.file.cloudStoragePublicUrl)
         console.log(req.currentUserid._id)
         let published = true 
         if(req.body.publish === 'false') {
@@ -14,8 +14,9 @@ class articleController{
         const obj = {
             title: req.body.title,
             desc: req.body.desc,
-            img: req.body.img,
+            img: req.body.img||''||req.file.cloudStoragePublicUrl,
             author: userid,
+            paragraf: req.body.paragraf,
             publish: published,
         }
 
@@ -62,6 +63,9 @@ class articleController{
             const obj = {
                 title: req.body.title,
                 desc: req.body.desc,
+                paragraf: req.body.paragraf,
+                publish: req.body.publish,
+                img: req.body.img
             }
     
             // console.log(obj)
