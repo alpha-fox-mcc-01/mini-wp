@@ -6,6 +6,7 @@ const authorizeArticle = require('../middlewares/authorizeArticles')
 
 // get all published articles
 Router.get('/', ArticleController.getAll)
+Router.get('/mine', authenticate, ArticleController.fetchMine)
 Router.post('/', authenticate, ArticleController.createArticle)
 Router.delete('/', authenticate, authorizeArticle, ArticleController.removeArticle)
 Router.patch('/', authenticate, authorizeArticle, ArticleController.publish)

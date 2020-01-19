@@ -18,8 +18,8 @@ export default {
     articleHighlight
   },
   methods: {
-    verify(token) {
-      this.$emit("verify", token);
+    verify() {
+      this.$emit("verify");
     }
   }
 };

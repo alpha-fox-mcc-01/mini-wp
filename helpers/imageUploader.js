@@ -1,0 +1,1 @@
+const GoogleStorage = require('@google-cloud/storage')

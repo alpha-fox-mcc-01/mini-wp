@@ -51,7 +51,9 @@
           </p>
           <p class="text-right">change your mind and wanna use GoogleAuth instead?</p>
           <hr class="my-3" />
-          <center>`{google button here}`</center>
+          <center>
+            <googleSignin></googleSignin>
+          </center>
         </form>
       </div>
     </div>
@@ -98,7 +100,9 @@
             class="text-right"
           >or use your google account to skip registration process and login direcly</p>
           <hr class="my-3" />
-          <center>`{google button here}`</center>
+          <center>
+            <googleSignin></googleSignin>
+          </center>
         </form>
       </div>
     </div>
@@ -112,9 +116,13 @@
 import axios from "../axios";
 import Swal from "sweetalert2";
 
+import googleSignin from "./googleSignin";
 export default {
   props: {
     isLoggedOn: Boolean
+  },
+  components: {
+    googleSignin
   },
   data() {
     return {
@@ -132,6 +140,15 @@ export default {
     };
   },
   methods: {
+    onSignIn(googleUser) {
+      console.log("fireds");
+
+      var profile = googleUser.getBasicProfile();
+      console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      console.log("Name: " + profile.getName());
+      console.log("Image URL: " + profile.getImageUrl());
+      console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
+    },
     toggleCard() {
       this.signupCardShowed = !this.signupCardShowed;
     },
@@ -173,6 +190,8 @@ export default {
       }
     },
     login() {
+      console.log("LOGIN");
+
       axios({
         method: "POST",
         url: "/users/signin",
@@ -183,9 +202,8 @@ export default {
       })
         .then(({ data }) => {
           const access_token = data;
-          this.$emit("verify", access_token);
-
           localStorage.setItem("access_token", data.access_token);
+          this.$emit("verify");
         })
         .catch(err => {
           console.log(err);

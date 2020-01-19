@@ -15,8 +15,9 @@
 </template>
 
 <script>
-import navigationBar from "../components/NavigationBar";
+import axios from "axios";
 
+import navigationBar from "../components/NavigationBar";
 import mainSection from "../components/MainSection";
 import sidebarSection from "../components/SidebarSection";
 export default {
@@ -34,10 +35,11 @@ export default {
     pageChange(value) {
       this.$emit("pageChange", value);
     },
-    verify(token) {
-      this.$emit("verify", token);
+    verify() {
+      this.$emit("verify");
     }
-  }
+  },
+  created() {}
 };
 </script>
 

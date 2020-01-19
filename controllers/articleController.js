@@ -1,6 +1,21 @@
 const Article = require('../models/Article')
 
 module.exports = class ArticleController {
+
+	static fetchMine(req, res, next) {
+		console.log(req.authenticated_id)
+		Article.find({
+			author: req.authenticated_id
+		})
+			.then(result => {
+				console.log(result)
+				res.status(200).json(result)
+			})
+			.catch(err => {
+				res.status(500).json(err)
+			})
+	}
+
 	static getAll(req, res, next) {
 		Article.find({ is_published: true })
 			.populate('author', 'name')
@@ -30,6 +45,8 @@ module.exports = class ArticleController {
 					responseArticles.push(responseArticle)
 				})
 
+				// console.log(responseArticles);
+
 				res.status(200).json(responseArticles)
 			})
 			.catch(err => {
@@ -43,17 +60,30 @@ module.exports = class ArticleController {
 			title, article
 		}
 		values.author = req.authenticated_id
+		values.categories = []
 
+		let splittedcategories = []
 		if (categories) {
-			let splittedcategories = categories.split(',')
-			splittedcategories = splittedcategories.map(category => category.trim())
-			values.categories = splittedcategories
+			splittedcategories = categories.split(',')
+			splittedcategories.forEach(row => {
+				row = row.trim()
+				if (row.length > 1) {
+					values.categories.push(row)
+				}
+			})
+		}
+		if (req.body.is_published) {
+			values.is_published = true
 		}
 		Article.create(values)
 			.then(result => {
+				console.log('creating record:...', result);
+
 				res.status(201).json(result)
 			})
 			.catch(err => {
+				console.log(err);
+
 				next(err)
 			})
 	}
