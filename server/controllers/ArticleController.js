@@ -16,6 +16,8 @@ class ArticleController {
    static read(req, res, next) {
       Article.findOne({ _id: req.params.articleId }).populate('userId', 'name')
          .then(data => {
+            console.log(data);
+            
             res.status(200).json({data})
          })
          .catch(err => {
@@ -41,6 +43,8 @@ class ArticleController {
    }
 
    static delete(req, res, next) {
+      console.log(`masuk delete`);
+      
       Article.findOneAndDelete({ _id: req.params.id })
          .then(() => {
             res.status(200).json({ msg: `deleted` })
@@ -51,7 +55,7 @@ class ArticleController {
    }
 
    static update(req, res, next) {
-      // console.log(`masuk update`);
+      console.log(`masuk update`);
       
       let newData = {
          image: req.body.image,
@@ -60,7 +64,7 @@ class ArticleController {
          publish: req.body.publish
       }
 
-      ArticleController.findOneAndUpdate({ _id : req.params.articleId }, newData)
+      Article.findOneAndUpdate({ _id : req.params.id }, newData)
          .then(data => {
             console.log(data);
             res.status(201).json({data, msg : `updated`})
@@ -69,6 +73,10 @@ class ArticleController {
             next()
          })
    }
+
+   // static getMyArticles (req, res, next) {
+   //    Article.find({userId : req.params.id})
+   // }
 }
 
 module.exports = ArticleController

@@ -6,8 +6,9 @@ const authorization = require ('../middlewares/authorization')
 
 router.get('/', ArticleController.getAll) 
 router.get('/:articleId', authentication, ArticleController.read)
+router.get('/:userId')
 router.post('/', authentication, ArticleController.add)
 router.delete('/:id', authentication, authorization, ArticleController.delete)
-router.put('/:articleId', authentication, authorization, ArticleController.update)
+router.put('/:id', authentication, authorization, ArticleController.update)
 
 module.exports = router

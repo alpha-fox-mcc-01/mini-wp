@@ -32,7 +32,7 @@ class UserController {
                if (verified) {
                   const userId = data._id
                   const token = jwt.sign({id : userId}, process.env.SECRET)
-                  res.status(200).json({token, name : data.name})
+                  res.status(200).json({token, name : data.name, userId : userId})
                }
                else {
                   console.log(`email / password wrong`);

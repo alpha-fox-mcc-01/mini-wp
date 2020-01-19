@@ -1,0 +1,168 @@
+html {
+   font-family: 'Roboto', sans-serif;
+}
+
+header {
+   justify-content: center;
+   display: flex;
+   height: 150px;
+   align-items: center;
+   text-align: center;
+}
+a {
+   color: black;
+}
+a:hover {
+   text-decoration: none;
+   scroll-behavior: smooth;
+}
+
+
+.logo-head {
+   font-family: 'Fondamento', cursive;
+   /* text-align: center; */
+   font-size: 75px;
+   margin-bottom: 0px;
+   color: #384147;
+}
+
+.logo-sub{
+   font-family: 'Playfair Display SC', serif;
+   font-size: 18px;
+   margin-top: 10px;
+   color: #384147;
+}
+
+.navbar {
+   background-color: #384147;;
+}
+
+.navbar-toggler i {
+   color: whitesmoke;
+   font-size: 25px;
+}
+
+.navbar-nav {
+   padding: 15px;
+}
+
+.nav-link {
+   color: whitesmoke;
+   text-transform: uppercase;
+   font-family: 'Playfair Display SC', sans-serif;
+   
+}
+
+.nav-link:hover {
+   color: wheat;
+   opacity: 0.5;     
+   /* zoom: 1; */
+}
+
+.showcase-content {
+   display: flex;
+   flex-direction: column;
+}
+
+.showcase-description {
+   text-align: center;
+   width: 50%;
+   background-color: white;
+   padding: 40px;
+   outline: 5px solid rgba(56, 65, 72, 0.5);
+   outline-offset: -5px;
+   order: 2;
+   margin-top: 5px;
+   font-family: 'Gelasio', serif;
+}
+
+.showcase-image {
+   order: 1;
+}
+
+.showcase-image img{
+   width: 70%;
+   height: auto;
+   display: block;
+   margin-left: auto;
+}
+
+.gallery-heading {
+   font-family: 'Playfair Display SC', sans-serif;
+   color: #384147;
+}
+
+.lightbox-content{
+   /* position: relative; */
+   overflow: hidden;
+}
+
+.lightbox-content img{
+   transition: transform 5s;
+}
+
+.lightbox-content img:hover{
+   transform: scale(1.2);
+}
+
+
+.blog-heading {
+   font-family: 'Playfair Display SC', sans-serif;
+   color: #384147;
+}
+
+.blog-left-title {
+   font-family: 'Playfair Display SC', sans-serif;
+   color: #384147;
+   margin-bottom: 40px;
+}
+
+.article-title {
+   /* font-family: 'Playfair Display SC', sans-serif; */
+   font-family: 'Gelasio', serif;
+
+}
+
+footer {
+   padding: 5px;
+    margin-top: 20px;
+    color: white;
+    background: rgb(48, 45, 45);
+    text-align: center;
+    font-family: 'Playfair Display SC', sans-serif;
+   font-size: 15px;
+}
+
+
+@media screen and (min-width:768px) {
+   .navbar {
+      background-color: transparent;
+   }
+
+   .nav-link {
+      color: #384147;
+   }
+
+   .nav-link:hover {
+      color: rgb(241, 70, 99);
+   }
+
+   .navbar-nav {
+      padding: 4;
+   }
+
+   .showcase-description{
+      position: absolute;
+      top: 80%;
+      transform: translateY(-45%);
+      width: 40%;
+      outline-offset: -10px;
+   }
+
+   .container .logo{
+      margin-bottom: 30px;
+   }
+   
+}
+
+/*# sourceMappingURL=/style.8df46a69.css.map */
