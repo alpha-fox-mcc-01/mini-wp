@@ -7,9 +7,15 @@ const authorization = require('../middlewares/authorization')
 
 router.get('/', articleController.getArticles)
 
+router.get('/drafts', articleController.showDrafts)
+
 router.post('/', authentication, articleController.writeArticle)
 
-router.post('/:id', articleController.getOneArticle)
+router.put('/:id', authentication, authorization, articleController.editArticle)
+
+router.delete('/:id', authentication, authorization, articleController.removeArticle)
+
+router.get('/:id', articleController.getOneArticle)
 
 router.get('/me', authentication, articleController.getUserArticles)
 

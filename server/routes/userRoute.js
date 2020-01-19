@@ -12,5 +12,6 @@ router.get('/me', authentication, userController.getCurrentUser)
 
 router.post('/signin', userController.signIn)
 
+router.post('/google-sign-in', userController.googleSignIn)
 
 module.exports = router

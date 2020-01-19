@@ -2,6 +2,9 @@ const { User, Article } = require('../models')
 const bcrypt = require('bcryptjs')
 const jwtAccess = require('../jwtAccess')
 const ObjectID = require('mongoose').Types.ObjectId
+const { OAuth2Client } = require('google-auth-library')
+const client = new OAuth2Client(process.env.CLIENT_ID)
+
 module.exports = {
     getCurrentUser(req, res, next) {
         User.findById(req.currentUserId)
@@ -64,6 +67,40 @@ module.exports = {
             })
             .catch(err => {
                 console.log(err.message)
+                next(err)
+            })
+    },
+    googleSignIn(req, res, next) {
+        let userData = null;
+        client.verifyIdToken({
+            idToken: req.body.google_token,
+            audience: process.env.CLIENT_ID
+        })
+            .then(ticket => {
+                userData = ticket.getPayload();
+                return User.findOne({
+                    email: userData.email
+                })
+            })
+            .then(user => {
+                if(user) {
+                    return user
+                } else {
+                    return User.create({
+                        username: userData.fullname,
+                        email: userData.email,
+                        password: process.env.DEFAULT_PASSWORD_OAUTH
+                    })
+                }
+            })
+            .then(user => {
+                const access_token = jwt.sign({
+                    _id: user._id
+                }, process.env.JWT_SECRET)
+                res.status(200).json({access_token})
+            })
+            .catch(err => {
+                console.log(err)
                 next(err)
             })
     }

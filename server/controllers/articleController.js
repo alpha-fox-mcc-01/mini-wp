@@ -22,6 +22,15 @@ module.exports = {
                 })
         }
     },
+    showDrafts(req, res, next) {
+        Article.find({authorId: req.currentUserId, published: false}).populate('authorId', 'username')
+            .then(data => {
+                res.status(200).json({data})
+            })
+            .catch(err => {
+                next(err)
+            })
+    },
     getOneArticle(req, res, next) {
         Article.findById(req.params.id).populate('authorId', 'username')
             .then(data => {
@@ -57,6 +66,30 @@ module.exports = {
                 next(err)
             })
     },
+    editArticle(req, res, next) {
+        Article.findByIdAndUpdate(req.params.id, {
+            title: req.body.title,
+            content: req.body.content,
+            image: req.body.image
+        })
+            .then(data => {
+                res.status(200).json({data})
+            })
+            .catch(err => {
+                console.log(err.message)
+                next(err)
+            })
+    },
+    removeArticle(req, res, next) {
+        Article.findByIdAndDelete(req.params.id)
+            .then(data => {
+                res.status(200).json({data})
+            })
+            .catch(err => {
+                console.log(err.message)
+                next(err)
+            })
+    },
     publishArticle(req, res, next) {
         Article.findByIdAndUpdate(req.query.articleid, {
             published: true
@@ -69,5 +102,4 @@ module.exports = {
                 next(err);
             })
     }
-
 }
