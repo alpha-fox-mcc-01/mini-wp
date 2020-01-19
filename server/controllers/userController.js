@@ -18,7 +18,7 @@ module.exports = {
     },
     getOneUser(req, res, next) {
         if (req.query.userId) {
-            User.findById(req.query.userId)
+            User.findById(req.query.userId).select('username')
                 .then(data => {
                     res.status(200).json(data)
                 })

@@ -56,7 +56,7 @@ module.exports = {
             content: req.body.content,
             published: false,
             authorId: ObjectID(req.currentUserId),
-            image: req.body.image
+            featured_image: req.body.featured_image
         })
             .then(data => {
                 res.status(201).json({data})

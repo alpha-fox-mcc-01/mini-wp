@@ -3,7 +3,7 @@ const router = express.Router()
 
 const userRoute = require('./userRoute')
 const articleRoute = require('./articleRoute')
-
+const authentication = require('../middlewares/authentication')
 
 const files = require('../middlewares/files')
 
@@ -11,7 +11,7 @@ const files = require('../middlewares/files')
 router.get('/', (req, res, next) => {
   res.send({ message: 'Welcome Buddy!' })
 })
-router.post('/upload',
+router.post('/upload', authentication,
   files.multer.single('file'),
   files.sendUploadToGCS,
   (req, res) => {

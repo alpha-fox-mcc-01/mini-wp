@@ -7,7 +7,7 @@ const authorization = require('../middlewares/authorization')
 
 router.get('/', articleController.getArticles)
 
-router.get('/drafts', articleController.showDrafts)
+router.get('/drafts', authentication, articleController.showDrafts)
 
 router.post('/', authentication, articleController.writeArticle)
 

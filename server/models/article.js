@@ -6,7 +6,7 @@ const articleSchema = new Schema({
     content: String,
     published: Boolean,
     authorId: {type: Schema.Types.ObjectId, ref: 'User'},
-    image: String
+    featured_image: String
 }, {timestamps: true});
 
 const Article = mongoose.model('Article', articleSchema);
