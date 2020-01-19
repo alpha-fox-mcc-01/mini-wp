@@ -1,41 +1,10 @@
-#wp-logo {
-  max-width: 40px;
-  padding-top: 0.5rem;
-}
 
 /* Navbar */
 .navigation {
   padding-top: 1rem;
 }
 
-.navigation:hover {
-  background-color: aqua;
-  cursor: pointer;
-}
-
-/* Landing Page */
-.landing {
-  background-image: url(../img/bg-jumbotron.png);
-  min-width: 100vh;
-  min-height: 100vh;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-.landing-page {
-  position: absolute;
-  top: 20%;
-  min-width: 100%;
-}
-
-#login,
-#register {
-  background-color:rgba(0, 0, 0, 0.8);
-  color: white; 
-}
-
 #blog-feed {
-  background-image: url(../img/bg-2.jpg);
   min-width: 100vh;
   min-height: 100vh;
 }
@@ -53,18 +22,6 @@
   min-height: 100%;
 }
 
-.col1,
-.col2 {
-  border: solid 2px whitesmoke;
-  min-height: 100vh;
-  padding: 2rem;
-}
-
-.col1 {
-  height: 100vh;
-  overflow: scroll;
-  border: 1px solid #ccc;
-}
 
 #my-post,
 #anotherPost,
@@ -74,13 +31,6 @@
   text-align: center;
 }
 
-
-#my-post:hover,
-#add-post:hover {
-  border: solid 1px black;
-  background-color: cornsilk;
-  color: blue;
-}
 
 
 #content {

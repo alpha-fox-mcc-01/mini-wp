@@ -1,199 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <!-- CSS -->
-    <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>mini-wp</title>
+</head>
+<body>
+  <div id="app"></div>
 
-    <!-- CKED -->
-    <!-- <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script> -->
-
-    <title>Ganda Webs</title>
-  </head>
-
-  <body>
-    <div id="app">
-    <!-- navbar / header -->
-      <header v-if="currentPage !== 'not-loggedin'">
-        <nav class="bg-dark fixed-top">
-          <div class="container text-white">
-            <div class="row justify-content-between">
-              <div class="col-xs-2">
-                <img src="./assets/img/wp-logo.png" alt="Logo" id="wp-logo">
-              </div>
-              <div class="col-xs-2 navigation" @click="changePage('blog-feed')">
-                <p>Home</p>
-              </div>
-              <div class="col-xs-2 navigation" @click="changePage('blog-feed')">
-                <p>Blog Feed</p>
-              </div>
-              <div class="col-xs-2 navigation" @click="changePage('dashboard'),changeDash('my-post')">
-                <p>Dashboard</p>
-              </div>
-              <div class="col-xs-2 navigation" @click="logOut(), changePage('not-loggedin')">
-                <p>Logout</p>
-              </div>
-            </div>
-          </div>
-        </nav>
-      </header>
-      
-      <main>
-        <!-- jumbtron -->
-        <section class="landing" v-if="currentPage === 'not-loggedin'">
-          <div class=" container landing-page">
-            <div class="row justify-content-center">
-              <div class="col-md-4 text-right">
-                <button type="button" class="btn btn-dark" @click="changeButton('login')">Login</button>
-                <div v-if="currentButton === 'login'">
-                  <h2 class="text-white">LOGIN</h2>
-                  <form class="text-center px-2 py-2" id="login" @submit.prevent="logIn">
-                    <div class="form-group">
-                      <label for="email">Email address</label>
-                      <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" v-model="email">
-                      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                    </div>
-                    <div class="form-group">
-                      <label for="password">Password</label>
-                      <input type="password" class="form-control" id="password" placeholder="Password" v-model="password">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                  </form>
-                </div>
-              </div>
-
-
-              <div class="col-md-4 text-left">
-                <button type="button" class="btn btn-dark" @click="changeButton('register')">Register</button>
-                <div v-if="currentButton === 'register'">
-                  <h2 class="text-white">REGISTER</h2>
-                  <form class="text-center px-2 py-2" id="register" @submit.prevent="registerUser">
-                    <div class="form-group">
-                      <label for="fullname">Full Name</label>
-                      <input type="fullname" class="form-control" id="fullname" placeholder="Enter Name" v-model="name" required>
-                    </div>
-                    <div class="form-group">
-                      <label for="email">Email address</label>
-                      <input type="email" class="form-control" id="email" placeholder="Enter email" v-model="email" required>
-                      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                    </div>
-                    <div class="form-group">
-                      <label for="password">Password</label>
-                      <input type="password" class="form-control" id="password" placeholder="Password" v-model="password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <!-- JUMBOTRON END -->
-
-        <!-- BLOG FEED / ARTICLE -->
-        <section id="blog-feed" class="portfolio bg-light pt-5" v-if="currentPage === 'blog-feed'">
-          <div class="container">
-            <div class="row mb-4 pt-4">
-              <div class="col text-center text-white">
-                <h2>Blog Feed</h2>
-              </div>
-            </div>
-            
-            <!-- div yg ini akan di fetch data dari data base -->
-            <div class="row mb-4 justify-content-start" >
-              <div class="col-md-4 mb-4" v-for="article in articles" :key=article.id>
-                <div class="card" style="width: 18rem;">
-                  <img src="" class="card-img-top" alt="">
-                  <div class="card-body">
-                    <h3>{{ article.title }}</h3>
-                    <p class="card-text"><p>{{ article.content }} </p>
-                    <small>Posted By : {{article.authorId.name}} </small><br>
-                    <small>Posted At : {{article.createdAt}} </small><br>
-                    <button class="btn-primary">Read More</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- DASHBOARD -->
-        <section class="dashboard pt-3">
-
-          <div class="container mt-5" id="dashboard" v-if="currentPage === 'dashboard'">
-            <div class="row justify-content-between">
-              <div class="col-sm-3 mr-auto pl-2" id="dashboard-nav">
-                <div class="row" id="my-post" @click="changeDash('my-post')">
-                  <p>My Post</p>
-                </div>
-                <div class="row" id="add-post" @click="changeDash('add-post')">
-                  <p>Add Post</p>
-                </div>
-              </div>
-
-
-              <div class="col-sm-8 col1" v-if="dashboard === 'my-post'">
-                <h3>My Posts</h3>
-                <div class="row mb-4 mt-5 justify-content-center" v-for="article in userArticles" :key="article._id">
-                    <div class="card px-2 py-2" style="width: 95%;">
-                      <img src="" class="card-img-top" alt="">
-                      <div class="card-body">
-                        <h3>{{ article.title }}</h3>
-                        <p class="card-text"><p>{{ article.content }} </p>
-                        <small>Posted By : {{article.authorId.name}} </small><br>
-                        <small>Posted At : {{article.createdAt}} </small><br>
-                        <button class="btn-primary">Read More</button>
-                        <button class="btn-primary">Edit</button>
-                        <button class="btn-primary" @click="deletePost(article._id)">Delete</button>
-                      </div>
-                    </div>
-                </div>
-              </div>
-
-
-              <div class="col-sm-8 col2" v-if="dashboard === 'add-post'">
-                  <h3>Add Post</h3>
-                  <form id="post-article" @submit.prevent="postArticle">
-                    <div class="form-group">
-                      <label for="title">Title</label>
-                      <input type="text" class="form-control" id="title" v-model="title">
-                    </div>
-                    <div class="form-group">
-                      <label for="content">Content</label>
-                      <textarea class="form-control" name="content" id="content" rows="20" v-model="content"></textarea>
-                    </div>
-                    <div class="form-group form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                  </form>
-              </div>
-            </div>
-          </div>
-
-        </section>
-      </main>
-
-      <footer class="bg-dark text-white">
-        <div class="container">
-          <div class="row pt-3">
-            <div class="col text-center">
-              <p>Copyleft 2020</p>
-            </div>
-          </div>
-        </div>
-      </footer>
-
-  </div>
-    <!-- Vue -->
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.1/axios.js"></script>
-    <script src="./assets/js/main.js"></script>
-  </body>
+  
+  <script src="./src/main.js"></script>
+</body>
 </html>
