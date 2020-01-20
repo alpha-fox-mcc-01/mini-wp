@@ -2,7 +2,12 @@
   <div class>
     <h4>Your Published Articles:</h4>
     <div>
-      <articleCard v-for="article in myPublishedArticles" :key="article._id" :article="article"></articleCard>
+      <articleCard
+        v-on:refetch="refetch"
+        v-for="article in myPublishedArticles"
+        :key="article._id"
+        :article="article"
+      ></articleCard>
     </div>
   </div>
 </template>
@@ -16,7 +21,11 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    refetch() {
+      this.$emit("refetch");
+    }
+  },
   components: {
     articleCard
   },

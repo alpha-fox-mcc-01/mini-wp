@@ -6,6 +6,7 @@ const UserController = require('../controllers/userController')
 Router.post('/signup', UserController.signup)
 Router.post('/signin', UserController.signin)
 Router.post('/verify', UserController.verifyToken)
+Router.post('/gAuth', UserController.googleAuth)
 
 
 module.exports = Router

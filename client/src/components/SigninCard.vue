@@ -52,7 +52,7 @@
           <p class="text-right">change your mind and wanna use GoogleAuth instead?</p>
           <hr class="my-3" />
           <center>
-            <googleSignin></googleSignin>
+            <googleSignin v-on:verify="verify"></googleSignin>
           </center>
         </form>
       </div>
@@ -101,7 +101,7 @@
           >or use your google account to skip registration process and login direcly</p>
           <hr class="my-3" />
           <center>
-            <googleSignin></googleSignin>
+            <googleSignin v-on:verify="verify"></googleSignin>
           </center>
         </form>
       </div>
@@ -140,14 +140,8 @@ export default {
     };
   },
   methods: {
-    onSignIn(googleUser) {
-      console.log("fireds");
-
-      var profile = googleUser.getBasicProfile();
-      console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
-      console.log("Name: " + profile.getName());
-      console.log("Image URL: " + profile.getImageUrl());
-      console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
+    verify() {
+      this.$emit("verify");
     },
     toggleCard() {
       this.signupCardShowed = !this.signupCardShowed;
@@ -156,6 +150,18 @@ export default {
       if (this.signupPassword !== this.signupPasswordConfirm) {
         this.signupErrors.push("Password does not match");
       } else {
+        Swal.fire({
+          title: "Saving...",
+          showConfirmButton: false,
+          showClass: {
+            popup: "animated fadeInDown faster"
+          },
+          hideClass: {
+            popup: "animated fadeOutUp faster"
+          }
+        });
+        Swal.showLoading();
+
         axios({
           method: "POST",
           url: "/users/signup",
@@ -167,7 +173,6 @@ export default {
           }
         })
           .then(response => {
-            console.log(response);
             Swal.fire({
               icon: "success",
               title: `Registered as: ${this.signupFullname}`,
@@ -184,7 +189,19 @@ export default {
             localStorage.setItem("access_token", data.access_token);
           })
           .catch(err => {
-            this.signupErrors.push(err);
+            Swal.fire({
+              icon: "error",
+              title: `Registration Fail`,
+              showConfirmButton: true,
+              timer: 2000,
+              showClass: {
+                popup: "animated fadeInDown faster"
+              },
+              hideClass: {
+                popup: "animated fadeOutUp faster"
+              }
+            });
+            this.signupErrors.push(err.data.errmsg);
             console.log(err.response);
           });
       }

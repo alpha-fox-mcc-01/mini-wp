@@ -22,19 +22,27 @@
 
         <label class="col-form-label">Featured Images</label>
         <div class="custom-file">
-          <input type="file" class="custom-file-input" id="customFile" />
+          <input
+            v-on:change="featuredImageSelected($event)"
+            type="file"
+            class="custom-file-input"
+            id="customFile"
+          />
           <label class="custom-file-label" for="customFile">Choose file</label>
+          <small v-if="newArticleFeaturedImage" id class="form-text text-muted">
+            <b>Selected File:</b>
+            {{newArticleFeaturedImage.name}}
+            <br />
+            <b>Type:</b>
+            {{newArticleFeaturedImage.type}}
+          </small>
         </div>
         <br />
         <br />
         <!-- WYSIWYG -->
         <label class="col-form-label">Post</label>
         <!-- <input class="ckeditor" type="text" /> -->
-        <tinymce-editor
-          v-model="newArticlePost"
-          :init="{plugins: 'wordcount'}"
-          class="form-control"
-        ></tinymce-editor>
+        <tinymce-editor v-model="newArticlePost"></tinymce-editor>
       </form>
       <br />
       <div class="d-flex justify-content-between">
@@ -69,28 +77,50 @@ export default {
     return {
       newArticleTitle: "",
       newArticleCategories: "",
-      newArticlePost: ""
+      newArticlePost: "",
+      newArticleFeaturedImage: null
     };
   },
   methods: {
+    featuredImageSelected(event) {
+      this.newArticleFeaturedImage = event.target.files[0];
+
+      const validFormat = this.newArticleFeaturedImage.type.includes("image");
+      console.log(validFormat);
+
+      if (!validFormat) {
+        console.log("Salah Format", this.newArticleFeaturedImage.type);
+        Swal.fire({
+          icon: "error",
+          title: "Please only select an image file",
+          showConfirmButton: true,
+          showClass: {
+            popup: "animated fadeInDown faster"
+          },
+          hideClass: {
+            popup: "animated fadeOutUp faster"
+          }
+        });
+        this.newArticleFeaturedImage = null;
+      }
+    },
     saveNewArticle() {
-      axios({
-        method: "POST",
-        url: "/articles",
-        data: {
-          is_published: false,
-          title: this.newArticleTitle,
-          article: this.newArticlePost,
-          categories: this.newArticleCategories
-        },
+      const url = "/articles";
+      var formData = new FormData();
+      formData.append("image", this.newArticleFeaturedImage);
+      formData.append("title", this.newArticleTitle);
+      formData.append("article", this.newArticlePost);
+      formData.append("categories", this.newArticleCategories);
+      const config = {
         headers: {
+          "content-type": `multipart/form-data;`,
           access_token: localStorage.getItem("access_token")
         }
-      })
+      };
+
+      axios
+        .post(url, formData, config)
         .then(({ data }) => {
-          this.newArticleCategories = "";
-          this.newArticleTitle = "";
-          this.newArticlePost = "";
           Swal.fire({
             icon: "success",
             title: `Post Saved to draft`,
@@ -103,28 +133,35 @@ export default {
               popup: "animated fadeOutUp faster"
             }
           });
+          this.newArticleCategories = "";
+          this.newArticleTitle = "";
+          this.newArticlePost = "";
 
           this.$emit("closeCreateCard");
+          this.$emit("refetch");
         })
         .catch(err => {
+          console.log("error disini <<<<<<<<<<<");
           console.log(err);
         });
     },
-
     publishNewArticle() {
-      axios({
-        method: "POST",
-        url: "/articles",
-        data: {
-          is_published: true,
-          title: this.newArticleTitle,
-          article: this.newArticlePost,
-          categories: this.newArticleCategories
-        },
+      const url = "/articles";
+      var formData = new FormData();
+      formData.append("image", this.newArticleFeaturedImage);
+      formData.append("title", this.newArticleTitle);
+      formData.append("article", this.newArticlePost);
+      formData.append("categories", this.newArticleCategories);
+      formData.append("is_published", true);
+      const config = {
         headers: {
+          "content-type": `multipart/form-data;`,
           access_token: localStorage.getItem("access_token")
         }
-      })
+      };
+
+      axios
+        .post(url, formData, config)
         .then(({ data }) => {
           Swal.fire({
             icon: "success",
@@ -143,8 +180,10 @@ export default {
           this.newArticlePost = "";
 
           this.$emit("closeCreateCard");
+          this.$emit("refetch");
         })
         .catch(err => {
+          console.log("error disini <<<<<<<<<<<");
           console.log(err);
         });
     }

@@ -1,8 +1,16 @@
 <template>
   <div v-if="loaded" class="articlesList">
     <div v-if="articles.length == 0" class="alert alert-secondary text-center">no articles</div>
+
     <div class="article" v-for="article in articles" v-bind:key="article._id">
       <h4 class="articles-header">{{article.title}}</h4>
+      <div v-if="article.imgs">
+        <center>
+          <img v-if="showImage" v-bind:src="article.imgs" class="img-fluid rounded" />
+          <hr class="my-2" />
+        </center>
+      </div>
+
       <div class v-html="article.article"></div>
       <div class="d-flex justify-content-between mb-2">
         <div class="d-flex flex-wrap">
@@ -23,7 +31,7 @@
       <hr class="my-1" />
       <div class="d-flex justify-content-between">
         <small>By: {{article.author.name}}</small>
-        <small>at: 02-02-2020</small>
+        <small>at: {{article.created_at}}</small>
       </div>
       <br />
       <br />
@@ -41,6 +49,7 @@ export default {
   data() {
     return {
       loaded: true,
+      showImage: true,
       articles: []
     };
   },
@@ -52,6 +61,7 @@ export default {
       })
         .then(({ data }) => {
           this.articles = data;
+          this.articles.reverse();
         })
         .catch(err => {
           console.log(err);
