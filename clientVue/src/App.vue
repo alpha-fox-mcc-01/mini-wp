@@ -1,7 +1,24 @@
 <template>
     <div>
-        <homePage @switchPage="switchPage" v-if="currentPage ==='landing'" :currentPage="currentPage" :user="user"></homePage>
-        <entryPage @switchPage="switchPage" v-if="currentPage === 'signUp' || currentPage === 'signIn'" :currentPage="currentPage" :user="user"></entryPage>
+        <homePage 
+        @switchPage="switchPage" 
+        v-if="currentPage ==='landing'" 
+        :currentPage="currentPage" 
+        :user="user"></homePage>
+        <entryPage @switchPage="switchPage" 
+        v-if="currentPage === 'signUp' || currentPage === 'signIn'" 
+        :currentPage="currentPage" 
+        :user="user"
+
+        ></entryPage>
+        <dashboard 
+        @signOut="signOut"
+        @getUserArticles="getUserArticles"
+        @getArticles="getArticles"
+        v-if="currentPage==='dashboard'" 
+        :user='user'
+        :searchArticles="searchArticles"
+        :article="article"></dashboard>
     </div>
 </template>
 
@@ -10,6 +27,7 @@ import homeNavbar from './components/HomeNavBar'
 import myFooter from './components/Footer'
 import homePage from './components/HomePage'
 import entryPage from './components/EntryPage'
+import dashboard from './components/Dashboard'
 export default {
     data() {
         return {
@@ -38,10 +56,21 @@ export default {
                 this.user.email = ''
             }
         },
+        signOut() {
+            localStorage.removeItem('access_token')
+            this.currentPage = 'landing'
+        },
+        getUserArticles(data) {
+            this.user.articles = data
+        },
+        getArticles(data) {
+            this.searchArticles = data
+        }
     },
     components: {
         homePage,
-        entryPage
+        entryPage,
+        dashboard
     }
 }
 </script>

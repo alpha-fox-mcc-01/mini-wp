@@ -104,6 +104,31 @@ footer[data-v-879b53] {
     background-repeat: no-repeat;
     background-size: cover;
 }
+#user-posts[data-v-669127] {
+    height:85vh;
+    overflow-y: auto;
+}
+#new-post-container[data-v-7acb3a] {
+    width: 100%;
+}
+#new-post-container h1[data-v-7acb3a]{
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 4rem;
+}
+#new-post-container p[data-v-7acb3a]{
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    margin-bottom: 5rem;
+}
+#search-posts[data-v-552947] {
+    height:66vh;
+    overflow-y: auto;
+    margin-top:2rem;
+}
+#dashboard-nav[data-v-2e705a] {
+    background-color: grey !important;
+}
 /*!
  * Bootstrap v4.4.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors

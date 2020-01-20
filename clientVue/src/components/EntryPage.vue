@@ -1,6 +1,9 @@
 <template>
     <div id='sign-up-container'>
-        <entryBox @changePage="changePage" :user="user" :currentPage="currentPage"></entryBox>
+        <entryBox 
+        @changePage="changePage" 
+        :user="user" 
+        :currentPage="currentPage"></entryBox>
     </div>
 </template>
 
@@ -16,6 +19,21 @@ export default {
             this.$emit(
                 "switchPage",
                 pageName
+            )
+        },
+        signIn(email, password) {
+            this.$emit(
+                "signIn",
+                email,
+                password
+            )
+        },
+        signUp(username, email, password) {
+            this.$emit(
+                "signUp",
+                username,
+                email,
+                password
             )
         }
     }

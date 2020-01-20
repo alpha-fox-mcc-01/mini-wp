@@ -15,7 +15,7 @@
                     <label for="sign-up-password">Password</label>
                     <input type="password" class="form-control" v-model="user.password" id="signup-password">
                 </div>
-                <button type="button" class="btn btn-dark">Start a Blog Web</button>
+                <button type="submit" class="btn btn-dark">Start a Blog Web</button>
             </div>
             <div class='col-md-6'>
                 <div class='container' style='margin-top: 6.5rem; margin-left: 2rem; border-left: solid black; height:14.1rem;'>
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     props: ["currentPage", "user"],
     methods: {
@@ -38,7 +39,23 @@ export default {
                 "changePage",
                 pageName
             )
-        }
+        },
+        signUp() {
+            console.log('masuk')
+            axios.post('http://34.87.49.35/users', {
+                username: this.user.username,
+                email: this.user.email,
+                password: this.user.password
+            })
+                .then(response => {
+                    this.user.username = '',
+                    this.user.currentPage = 'signIn'
+                    this.$emit('changePage', 'dashboard')
+                })
+                .catch(err => {
+                    console.log(err.message)
+                })
+        },
     }
 }
 </script>

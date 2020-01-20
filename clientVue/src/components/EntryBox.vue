@@ -11,8 +11,14 @@
                     <button type="button" class="btn btn-dark" style='height: 2.5rem;' @click="$emit('changePage', 'landing')">Go Back</button>
                 </div>
             </div>
-            <signUp @changePage="changePage" v-if="currentPage === 'signUp'" :user="user"></signUp>
-            <signIn @changePage="changePage" v-if="currentPage === 'signIn'" :user="user"></signIn>
+            <signUp 
+            @changePage="changePage" 
+            v-if="currentPage === 'signUp'" 
+            :user="user"></signUp>
+            <signIn 
+            @changePage="changePage"
+            v-if="currentPage === 'signIn'" 
+            :user="user"></signIn>
         </div>
     </div>
 </template>
@@ -29,8 +35,14 @@ export default {
     },
     props: ["currentPage", "user"],
     methods: {
-            changePage(pageName) {
+        changePage(pageName) {
             this.$emit('changePage', pageName)
+        },
+        signUp(username, email, password) {
+            this.$emit('signUp', username, email, password)
+        },
+        signIn(email, password) {
+            this.$emit('signIn', email, password)
         }
     }
 }
