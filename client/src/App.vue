@@ -67,6 +67,8 @@ export default {
       });
     },
     verifyToken() {
+      console.log("verifying tokens");
+
       axios({
         method: "POST",
         url: "/users/verify",
@@ -75,6 +77,8 @@ export default {
         }
       })
         .then(({ data }) => {
+          console.log("verified");
+
           Swal.fire({
             icon: "success",
             title: "Welcome Back",
