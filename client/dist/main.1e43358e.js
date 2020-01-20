@@ -11968,7 +11968,7 @@ var _default = {
       var username = profile.getName();
       (0, _axios.default)({
         method: 'post',
-        url: "http://localhost:3000/user/googlesignin",
+        url: "http://34.87.116.76/user/googlesignin",
         data: {
           google_token: google_token,
           username: username
@@ -11993,7 +11993,7 @@ var _default = {
 
       (0, _axios.default)({
         method: 'post',
-        url: 'http://localhost:3000/user/login',
+        url: 'http://34.87.116.76/user/login',
         data: {
           email: this.email,
           password: this.password
