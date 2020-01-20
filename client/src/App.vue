@@ -46,7 +46,7 @@ export default {
       isLoggedOn: false,
       loggedOnId: "",
       loggedOnName: "",
-      currentPage: "Dashboard"
+      currentPage: "LandingPage"
     };
   },
   methods: {
@@ -60,20 +60,24 @@ export default {
       this.loggedOnId = "";
       this.loggedOnName = "";
       this.currentPage = "LandingPage";
+
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function() {
+        console.log("User signed out.");
+      });
     },
-    verifyToken(token) {
-      const access_token = token.access_token;
+    verifyToken() {
       axios({
         method: "POST",
         url: "/users/verify",
         data: {
-          access_token
+          access_token: localStorage.getItem("access_token")
         }
       })
         .then(({ data }) => {
           Swal.fire({
             icon: "success",
-            title: "signed-in",
+            title: "Welcome Back",
             showConfirmButton: false,
             timer: 1000,
             showClass: {

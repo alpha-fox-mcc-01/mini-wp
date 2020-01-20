@@ -1,6 +1,19 @@
 const Article = require('../models/Article')
 
 module.exports = class ArticleController {
+
+	static fetchMine(req, res, next) {
+		Article.find({
+			author: req.authenticated_id
+		})
+			.then(result => {
+				res.status(200).json(result)
+			})
+			.catch(err => {
+				res.status(500).json(err)
+			})
+	}
+
 	static getAll(req, res, next) {
 		Article.find({ is_published: true })
 			.populate('author', 'name')
@@ -38,22 +51,35 @@ module.exports = class ArticleController {
 	}
 
 	static createArticle(req, res, next) {
-		let { title, article, author, categories } = req.body
+		let { title, article, categories } = req.body
 		let values = {
 			title, article
 		}
+		values.imgs = req.file.cloudStoragePublicUrl
 		values.author = req.authenticated_id
+		values.categories = []
 
+		let splittedcategories = []
 		if (categories) {
-			let splittedcategories = categories.split(',')
-			splittedcategories = splittedcategories.map(category => category.trim())
-			values.categories = splittedcategories
+			splittedcategories = categories.split(',')
+			splittedcategories.forEach(row => {
+				row = row.trim()
+				if (row.length > 1) {
+					values.categories.push(row)
+				}
+			})
+		}
+		if (req.body.is_published) {
+			values.is_published = true
 		}
 		Article.create(values)
 			.then(result => {
+
 				res.status(201).json(result)
 			})
 			.catch(err => {
+				console.log(err);
+
 				next(err)
 			})
 	}

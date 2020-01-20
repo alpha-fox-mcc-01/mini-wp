@@ -3,7 +3,7 @@
 \* = required parameters
 
 ---
-## Fetch/Get all Articles
+## Fetch/Get all Published Articles
 URL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 
 &nbsp;&nbsp;/articles
 
@@ -25,10 +25,37 @@ Response: array of Obj:
  - article: < String >
  - author: ObjectId
  - created_at: timestamp
- - comments: [ {userId, comment, published_at} ]
-
--
+ - comments: arrayOf Comment
 ---
+
+## Fetch my Articles
+URL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 
+&nbsp;&nbsp;/articles/mine
+
+METHOD &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 
+&nbsp;&nbsp;GET
+
+PARAM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 
+&nbsp;&nbsp;
+[headers]:
+
+ - access_token
+
+### SUCCESS RESPONSE :
+
+Code: 200
+Response: array of Obj:
+ - _id: ObjectId
+ - imgs: [ Strings ]
+ - categories: [ Strings ]
+ - likes: [ ObjectId ]
+ - title: < String >
+ - article: < String >
+ - author: ObjectId
+ - created_at: timestamp
+ - comments: arrayOf Comment
+---
+
 ## Create new Article
 URL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: 
 &nbsp;&nbsp;/articles
@@ -41,7 +68,8 @@ PARAM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
 [data]
   - title* < string >
   - article* < string >
-  - categories [ < string > ]
+  - categories < string >
+  - is_published < boolean >
 
 
 ### SUCCESS RESPONSE :
