@@ -1,0 +1,25 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "Ninoloid MiniWP Client",
+  "main": "index.html",
+  "scripts": {
+    "start": "NODE_ENV=production node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ahmad MSA",
+  "license": "ISC",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.12.0",
+    "axios": "^0.19.1",
+    "bootstrap": "^4.4.1",
+    "bootstrap-vue": "^2.2.2",
+    "vue": "^2.6.11",
+    "vue-hot-reload-api": "^2.3.4"
+  },
+  "devDependencies": {
+    "@vue/component-compiler-utils": "^3.1.1",
+    "cssnano": "^4.1.10",
+    "vue-template-compiler": "^2.6.11"
+  }
+}

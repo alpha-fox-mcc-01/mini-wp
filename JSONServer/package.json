@@ -1,0 +1,14 @@
+{
+  "name": "json-server-for-miniwp",
+  "version": "1.0.0",
+  "description": "JSON-Server for Mini WP",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ahmad MSA",
+  "license": "ISC",
+  "dependencies": {
+    "json-server": "^0.15.1"
+  }
+}

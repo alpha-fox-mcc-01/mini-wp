@@ -1,0 +1,73 @@
+{
+  "articles": [
+    {
+      "_id": 1,
+      "title": "Article 1",
+      "content": "Content of article 1",
+      "created_at": "Today",
+      "published": true
+    },
+    {
+      "title": "Edit Post 2",
+      "content": "Edit Post 2",
+      "created_at": "Tue Jan 14 2020",
+      "published": true,
+      "_id": 2
+    },
+    {
+      "title": "asdasdasdasd",
+      "content": "dsadasdasdasdsa",
+      "created_at": "Tue Jan 14 2020",
+      "published": false,
+      "_id": 3
+    },
+    {
+      "title": "asd",
+      "content": "dsa",
+      "created_at": "Tue Jan 14 2020",
+      "published": false,
+      "_id": 4
+    },
+    {
+      "title": "ini title",
+      "content": "ini contentnya coy",
+      "_id": 5
+    },
+    {
+      "title": "ngetes",
+      "content": "tes yuk",
+      "_id": 6
+    },
+    {
+      "title": "",
+      "content": "",
+      "created_at": "Tue Jan 14 2020",
+      "published": false,
+      "_id": 10
+    },
+    {
+      "title": "ini ga di publish",
+      "content": "ini ga di publish",
+      "created_at": "Tue Jan 14 2020",
+      "published": "",
+      "_id": 11
+    },
+    {
+      "title": "asdasd",
+      "content": "dwadwa",
+      "created_at": "Tue Jan 14 2020",
+      "published": false,
+      "_id": 12
+    }
+  ],
+  "comments": [
+    {
+      "_id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
