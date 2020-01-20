@@ -1,0 +1,95 @@
+/* #landingpage, #signupform, #loginform, #dashboard {
+    display: none;
+} */
+
+body, a {
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.logo {
+    max-width : 50px;
+}
+
+nav {
+    position: sticky;
+    padding-top: 1em;
+  
+}
+
+.flex {
+    margin-left: 3em;
+    margin-right: 1em;
+    /* align-items: center; */
+}
+
+img {
+    max-width: 100%;
+}
+ul {
+    text-align: center;
+    
+}
+
+li, span {
+    cursor: pointer;
+}
+
+a:hover {
+    background-color: grey;
+}
+
+#banner {
+    margin-left: 3em;
+    flex-direction: column;
+    align-items: center;
+    object-fit: cover;
+
+}
+
+
+.container {
+    justify-content: space-between;
+}
+
+#overview {
+    width: 80%;
+    justify-content: flex-start;
+}
+
+.col-1 {
+    text-align: center;
+    flex-basis: 30%;
+    
+}
+.col-2 {
+    text-align: center;
+    flex-basis: 70%;
+}
+
+
+
+.w-20 {
+    margin-block-end : auto;
+}
+
+#dashelement {
+    margin-top: 0px;
+    align-items: stretch;
+}
+
+.relative {
+   justify-content: baseline;
+}
+
+#blogcontent {
+    flex-direction: column;
+}
+
+#loginform, #signupform {
+    justify-content: center;
+}
+
+#createArticle {
+    display: flex;
+    flex-direction: row;
+}

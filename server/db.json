@@ -1,0 +1,11 @@
+{
+    "article": [
+      { "_id": 1, "title": "json-server", "content": "djsadjajsdhjskahdjkahwjdhkjawhdkjasjdjksackjsjkcnjdcbjsandjasndkjasd", "author": "siapa", "userId": "1", "status": "public", "created_at": "2020-01-14"},
+      { "_id": 2, "title": "artikel 2", "content": "djsadjajsdhjskahdjkahwjdhkjawhdkjasjdjksackjsjkcnjdcbjsandjasndkjasd", "author": "siapa ", "userId": "2",  "status": "public", "created_at": "2020-01-15"}, 
+      { "_id": 3, "title": "artikel 3", "content": "djsadjajsdhjskahdjkahwjdhkjawhdkjasjdjksackjsjkcnjdcbjsandjasndkjasd", "author": "siapa", "userId": "2", "status": "public", "created_at": "2020-01-15"}
+    ],
+    "user": [
+      { "_id": 1, "username": "Panda Case", "email": "sajdkja@gmail.com", "password": "hashedpassword"},
+      { "_id": 2, "username": "Glossier", "email": "glossier@gmail.com", "password": "hashedpassword"}
+    ]
+}
