@@ -43,6 +43,9 @@ export default {
         },
         signIn(email, password) {
             this.$emit('signIn', email, password)
+        },
+        getArticles(data) {
+            this.$emit('getArticles', data)
         }
     }
 }

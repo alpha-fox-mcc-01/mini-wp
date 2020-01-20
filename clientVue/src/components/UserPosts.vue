@@ -1,5 +1,5 @@
 <template>
-    <div class='col-md-3' id='user-posts' v-if="user.articles.length > 0">
+    <div class='col-md-3' id='user-posts'>
         <hr>
         <h1 style="font-family: 'Muli', sans-serif;"><center>Your Previous Posts</center></h1>
         <hr>

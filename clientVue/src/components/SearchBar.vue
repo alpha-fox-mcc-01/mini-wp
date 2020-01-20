@@ -1,5 +1,5 @@
 <template>
-    <div class="col-md-3" v-if="searchArticles.length > 0">
+    <div class="col-md-3">
         <hr>
         <h1 style="font-family: 'Muli', sans-serif;"><center>Discover</center></h1>
         <hr>

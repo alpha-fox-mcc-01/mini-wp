@@ -35,6 +35,9 @@ export default {
                 email,
                 password
             )
+        },
+        getArticles(data) {
+            this.$emit('getArticles', data)
         }
     }
 }

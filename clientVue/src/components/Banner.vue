@@ -19,7 +19,7 @@ export default {
     },
     methods: {
         changePage(pageName) {
-            console.log(pageName)
+            console.log(pageName, " dari banner")
             this.$emit('changePage', pageName)
         }
     }

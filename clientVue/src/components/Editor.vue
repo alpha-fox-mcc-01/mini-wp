@@ -1,5 +1,5 @@
 <template>
-    <div id='new-post'>
+    <div class='col-md-6' id='new-post'>
         <div class='container' id='new-post-container'>
             <div class="card" id='new-post-card'>
                 <div class="card-body">
@@ -11,6 +11,7 @@
                             <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" rows="1" v-model="article.title"></textarea>
                             <label for="exampleFormControlTextarea1">Content</label>
                             <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" rows="15" v-model="article.content"></textarea>
+                            <b-form-file v-model="file" class="mt-3" plain></b-form-file>
                         </div>
                         <!-- <div id="editor"></div>
                         <script>
@@ -33,6 +34,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     props: ["user", "article"],
     methods: {
@@ -74,6 +76,20 @@ export default {
     text-align: center;
     font-family: 'Ubuntu', sans-serif;
     margin-bottom: 5rem;
+}
+
+#new-post-card {
+    color: black;
+    background-color: rgba(128, 128, 128, 0.623);
+    padding: 20px;
+    /* background-image: url("../images/blue-flowers.png"); */
+
+
+    width: 100%;
+    
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 </style>

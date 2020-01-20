@@ -121,6 +121,19 @@ footer[data-v-879b53] {
     font-family: 'Ubuntu', sans-serif;
     margin-bottom: 5rem;
 }
+#new-post-card[data-v-7acb3a] {
+    color: black;
+    background-color: rgba(128, 128, 128, 0.623);
+    padding: 20px;
+    /* background-image: url("../images/blue-flowers.png"); */
+
+
+    width: 100%;
+    
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 #search-posts[data-v-552947] {
     height:66vh;
     overflow-y: auto;
@@ -128,6 +141,22 @@ footer[data-v-879b53] {
 }
 #dashboard-nav[data-v-2e705a] {
     background-color: grey !important;
+}
+.jumbotron[data-v-2e705a] {
+    margin-bottom: 0rem !important;
+}
+.jumbotron-fluid[data-v-2e705a] {
+    color: white;
+    background-image: url("/mountainsBG.16113f06.jpg");
+    /* background-color:rgba(0, 255, 255, 0); */
+    /* background-color: rgba(211, 209, 209, 0.678); */
+    /* background-color: rgb(65, 63, 63); */
+    min-height: 40vh;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* margin-bottom: 7rem; */
 }
 /*!
  * Bootstrap v4.4.1 (https://getbootstrap.com/)

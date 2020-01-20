@@ -61,16 +61,21 @@ export default {
             this.currentPage = 'landing'
         },
         getUserArticles(data) {
-            this.user.articles = data
+            this.user.articles = data.data
         },
         getArticles(data) {
-            this.searchArticles = data
+            this.searchArticles = data.data
         }
     },
     components: {
         homePage,
         entryPage,
         dashboard
+    },
+    created: function() {
+        if (localStorage.getItem('access_token')) {
+            this.currentPage = 'dashboard'            
+        }
     }
 }
 </script>

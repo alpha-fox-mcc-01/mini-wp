@@ -45,14 +45,22 @@ export default {
                     localStorage.setItem('access_token', response.data.access_token)
                     this.user.email = '',
                     this.user.password = ''
+                    this.getArticles()
                     this.$emit('changePage', 'dashboard')
-                    this.getUserArticles()
                 })
                 .catch(err => {
-                    this.
                     console.log(err.message)
                 })
         },
+        getArticles() {
+            axios.get('http://34.87.49.35/articles')
+                .then(({data}) => {
+                    this.$emit('getArticles', data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
     }
 }
 </script>

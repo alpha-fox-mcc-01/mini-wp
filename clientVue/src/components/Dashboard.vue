@@ -26,20 +26,21 @@
             </div>
         </div>
         <div class="row" id='dash-1'>
-            <userPosts @getUserArticles="getUserArticles"></userPosts>
-            <editor></editor>
-            <searchBar @getArticles="getArticles"></searchBar>
+            <userPosts :user="user" :searchArticles="searchArticles" @getUserArticles="getUserArticles"></userPosts>
+            <editor :user="user" :article="article"></editor>
+            <searchBar :user="user" :searchArticles="searchArticles" @getArticles="getArticles"></searchBar>
         </div>
     </div>
 </template>
 
 
 <script>
+import axios from 'axios'
 import userPosts from './UserPosts'
 import editor from './Editor'
 import searchBar from './SearchBar'
 export default {
-    props: ["user", "article"],
+    props: ["user", "article", "searchArticles"],
     components: {
         userPosts,
         editor,
@@ -52,6 +53,15 @@ export default {
         getArticles(data) {
             this.$emit('getArticles', data)
         }
+    },
+    created: function() {
+        axios.get('http://34.87.49.35/articles')
+            .then(({data}) => {
+                this.$emit('getArticles', data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 }
 </script>
@@ -61,5 +71,21 @@ export default {
 #dashboard-nav {
     background-color: grey !important;
 }
+.jumbotron {
+    margin-bottom: 0rem !important;
+}
 
+.jumbotron-fluid {
+    color: white;
+    background-image: url("./assets/images/mountainsBG.jpg");
+    /* background-color:rgba(0, 255, 255, 0); */
+    /* background-color: rgba(211, 209, 209, 0.678); */
+    /* background-color: rgb(65, 63, 63); */
+    min-height: 40vh;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* margin-bottom: 7rem; */
+}
 </style>
