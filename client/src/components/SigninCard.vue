@@ -36,7 +36,7 @@
           <div v-if="signupErrors.length >= 1" class="alert alert-danger text-center">
             <b>Error:</b>
             <hr class="my-2" />
-            <p v-for="(err,i) in signinErrors" :key="i">{{err}}</p>
+            <p v-for="(err,i) in signupErrors" :key="i">{{err}}</p>
           </div>
           <button
             v-on:click.prevent="register"
@@ -201,8 +201,8 @@ export default {
                 popup: "animated fadeOutUp faster"
               }
             });
-            this.signupErrors.push(err.data.errmsg);
-            console.log(err.response);
+            console.log(err.response.data.errmsg);
+            this.signupErrors.push(err.response.data.errmsg);
           });
       }
     },
