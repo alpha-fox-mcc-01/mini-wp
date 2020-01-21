@@ -4,7 +4,8 @@ const User = require('../models/user')
 class articleController{
 
     static addArticle(req, res){
-        // console.log(req.file.cloudStoragePublicUrl)
+        console.log(req.file.cloudStoragePublicUrl)
+        // console.log(req.file, '][][][][][][][')
         console.log(req.currentUserid._id)
         let published = true 
         if(req.body.publish === 'false') {
@@ -17,15 +18,16 @@ class articleController{
             author: userid,
             paragraf: req.body.paragraf,
             publish: published,
+            img: req.file.cloudStoragePublicUrl
         }
 
-        console.log(obj)
+        // console.log(obj)
         
         Article.create(
             obj
         )
         .then(data => {
-            // console.log(data);
+            console.log(data, 'ini data udah jadi yey');
             
             res.status(200).json({ data })
         })

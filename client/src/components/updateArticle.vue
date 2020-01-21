@@ -19,16 +19,20 @@
                       </select>
                   </div>
               </div>
+                    <div class="custom-file" >
+          <input type="file" class="custom-file-input" id="customFile"  @change="fileChange"/>
+          <label class="custom-file-label" for="customFile" >{{imgName}}</label>
+        </div>
               
-              <button type="submit" class="btn btn-primary">update</button>
+              <button type="submit" class="btn btn-primary mt-5">update</button>
             </form>
-            {{updatedPost}}
+           
     </div>
 </template>
 
 <script>
 name: 'updateArticle'
-import axios from 'axios'
+import axios from '../api/axiosInstance'
 export default {
     data(){
         return{
@@ -37,15 +41,21 @@ export default {
     },
     props:{
         updatedPost:{},
-        page:''
+        page:'',
+        imgName:''
     },
     methods:{
+         fileChange (event) {
+            console.log(event.target.files[0], '<<>>')
+            this.imgName = event.target.files[0].name
+            this.image = event.target.files[0]
+        },
          updatePost(id) {
             console.log(id)
             console.log('bisa update')
             axios({
                 method: 'put',
-                url: `http://34.87.116.76/article/update/${id}`,
+                url: `/article/update/${id}`,
                 data: {
                     title: this.updatedPost.title,
                     desc: this.updatedPost.desc,

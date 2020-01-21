@@ -1,12 +1,13 @@
 <template>
      <div class="container" v-if="page == 'myarticle'">
-         <button @click.prevent="status = true">published</button>
-         <button @click.prevent="status = false">private</button>
+         <button class="btn btn-info mt-5" @click.prevent="status = true">published</button>
+         <button class="btn btn-info mt-5" @click.prevent="status = false">private</button>
+         <!-- {{publishStatus}} -->
     <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
-        <div class="post-preview" v-for="post in publishStatus" :key="post.id">
+      <div class="col-lg-8 col-md-10 mx-auto ">
+        <div class="post-preview mt-3" v-for="post in publishStatus" :key="post.id">
           <a href="#">
-            <h2 class="post-title">
+            <h2 class="post-title" @click.prevent="read(post._id)">
               {{post.title}}
             </h2>
             <h5 class="post-subtitle">
@@ -14,10 +15,11 @@
             </h5>
           </a>
           <p class="post-meta">Posted by
-            <a href="#">author</a>
-            on September 24, 2019</p>
-            <a type=""  @click.prevent="deletePost(post._id)">Delete</a>
-            <a type="" @click.prevent="updatePost(post._id, post.title, post.desc, post.paragraf, post.publish, post.img)">update</a>
+            <a href="#">{{post.author.name}}</a>
+            {{post.createdAt}}</p>
+            <button type="button" class="btn btn-danger"><a type=""  @click.prevent="deletePost(post._id)">Delete</a></button>
+            <button type="button" class="btn btn-success"><a type="" @click.prevent="updatePost(post._id, post.title, post.desc, post.paragraf, post.publish, post.img)">update</a></button>
+            
             <hr>
         </div>
         </div>
@@ -26,7 +28,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '../api/axiosInstance'
 export default {
     data(){
         return{
@@ -36,15 +38,21 @@ export default {
     },
     props:{
         page: String,
+        fetch: Boolean
     },
     methods:{
+           read(id){
+            // console.log(id, 'dari feed')
+            this.getArticle()
+            this.$emit('read-Page', 'readarticle', id)
+        },
         getArticle(){
             let userid =  localStorage.getItem('access_token')
             console.log(userid)
 
             axios({
                 method:'GET',
-                url:'http://34.87.116.76/article/myarticle',
+                url:'/article/myarticle',
                 headers: { 'access_token': userid }
             })
             .then(({data})=> {
@@ -64,7 +72,7 @@ export default {
             
             axios({
                 method: 'delete',
-                url: `http://localhost:3000/article/delete/${id}`,
+                url: `/article/delete/${id}`,
                 headers: { 'access_token': userid }
                  })
                 .then(({ data }) => {
@@ -93,17 +101,20 @@ export default {
     },
     computed:{
             publishStatus(){
-                // this.getArticle()
-            //     if (this.page == 'home'){
-            //     console.log('================');
-            // }
-                console.log('kerja nih sebelum', this.articles);
+                // let count
+                if(this.fetch == true){
+                this.getArticle()
+                this.$emit('fetch-off')
+
+                }
+                // console.log('kerja nih sebelum', this.articles);
                 const result = this.articles.filter(word => word.publish == this.status);
                 return result
             }
         },
         created: function(){
-                this.getArticle()           
+                this.getArticle()    
+                       
         }
 }
 </script>

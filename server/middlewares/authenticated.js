@@ -20,8 +20,7 @@ module.exports =
                     }
                 })
                 .catch(err =>{
-                res.status(500).json(err)
-                    
+                    res.status(500).json(err)  
                 })
             } else {
                 res.status(400).json({

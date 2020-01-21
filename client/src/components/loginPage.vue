@@ -19,7 +19,7 @@
 </template>
 <script>
 name : 'loginPage'
-import axios from 'axios'
+import axios from '../api/axiosInstance'
 export default {
     data (){
         return {
@@ -43,7 +43,7 @@ export default {
 
              axios({
                 method: 'post',
-                url: `http://34.87.116.76/user/googlesignin`,
+                url: `/user/googlesignin`,
                 data: {
                     google_token, username
                 }
@@ -67,7 +67,7 @@ export default {
         login(){
              axios({
                 method: 'post',
-                url: 'http://34.87.116.76/user/login',
+                url: '/user/login',
                 data: {
                     email: this.email,
                     password: this.password
@@ -76,6 +76,7 @@ export default {
                 .then(({ data }) => {
                     if(data.token){
                         localStorage.setItem('access_token', data.token);
+                        localStorage.setItem('name', data.name);
                         console.log(data);
                         this.email = ''
                         this.password = ''

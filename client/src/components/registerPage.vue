@@ -23,7 +23,7 @@
 
 <script>
 name : 'registerPage'
-import axios from 'axios'
+import axios from '../api/axiosInstance'
 export default {
     data(){
         return {
@@ -39,7 +39,7 @@ export default {
         register(){
             axios({
                 method: 'post',
-                url: 'http://34.87.116.76/user/regis',
+                url: '/user/regis',
                 data: {
                     name: this.name,
                     email: this.email,

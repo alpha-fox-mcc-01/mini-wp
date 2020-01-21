@@ -19,15 +19,7 @@
 
   }
 
-  a {
-    color: #212529;
-    transition: all 0.2s;
-  }
-
-  a:focus,
-  a:hover {
-    color: #0085A1;
-  }
+ 
 
   body {
 font-size: 20px;

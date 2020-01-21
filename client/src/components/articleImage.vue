@@ -18,7 +18,7 @@
 
 <script>
 name: 'articleImage'
-import axios from 'axios'
+import axios from '../api/axiosInstance'
 export default {
     data(){
         return{
@@ -38,10 +38,13 @@ export default {
       this.$emit('pageplus')
       let formData = new FormData();
       formData.append("image", this.image);
+      formData.append("title", this.newArticleTitle);
+      formData.append("article", this.newArticlePost);
+      formData.append("categories", this.newArticleCategories);
       console.log(">> formData >> ", formData);
       // You should have a server side REST API
       axios
-        .post(`http://34.87.116.76/article/upload/${this.currentArticle}`, formData, {
+        .post(`/article/upload/${this.currentArticle}`, formData, {
           headers: {
             "Content-Type": "multipart/form-data"
           }

@@ -5,18 +5,19 @@
         <div class="container" v-if=" page == 'readarticle'">
             <img src="" alt="">
             <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="post-heading">
+        <div class="col-lg-12 col-md-10 mx-auto mt-5">
+          <div class="post-heading text-center mb-5">
             <h1>{{articleNow.title}}</h1>
-            <h3 class="subheading">{{articleNow.desc}}</h3>
+            <h4 class="subheading">{{articleNow.desc}}</h4>
             <span class="meta">Posted by
               <a href="#">{{articleNow.author.name}}</a>
               on {{articleNow.createdAt}}</span>
           </div>
+          <hr>
           <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
-                <img :src="articleNow.img" alt="">
               <!-- <p v-on:readArticle="this.page"></p> -->
+                <img :src="articleNow.img" alt="" class="mb-5">
                 <p><span v-html="paragraf"></span> </p>
               <!-- <p>Placeholder text by
                 <a href="http://spaceipsum.com">Space Ipsum</a>. Photographs by
@@ -29,7 +30,7 @@
 
 <script>
 name: 'readArticle'
-import axios from 'axios'
+import axios from '../api/axiosInstance'
 export default {
     data(){
         return {
@@ -47,7 +48,7 @@ export default {
             
              axios({
                 method: 'get',
-                url: `http://34.87.116.76/article/read/${this.readNow}`
+                url: `/article/read/${this.readNow}`
             })
                 .then(({ data }) => {
                     this.articleNow = data[0]
@@ -62,20 +63,20 @@ export default {
         }
     },
     computed:{
-            check(){
-               if(this.readNow){
-            this.readArticle()        
-        }
+        check(){
+            if(this.readNow){
+                this.readArticle()        
             }
-        },
+        }
+    },
     created: function(){
 
-        }
+    }
 }
 </script>
 
 <style scoped>
 img{
-    max-height: 20rem;
+    max-height: 25rem;
 }
 </style>
