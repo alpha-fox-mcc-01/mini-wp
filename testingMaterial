@@ -1,0 +1,20 @@
+testing method: Test Driven Development
+1. test yg pasti gagal
+2. ngoding, make sure it works
+3. refactor/ eliminate redundancy
+
+"test driven technology is not testing, its the method"
+
+mochajs(framework testing)
+npm i -d mocha
+script test
+"tets" : NODE_ENV=testing mocha
+
+
+chaijs(assertion library )
+compare hasil reponse(expect, should)
+gettr, chainable function
+chai-HTTP=> untuk integration testing route
+
+
+
