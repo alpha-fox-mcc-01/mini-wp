@@ -52,7 +52,7 @@ export default {
         },
         getArticles(data) {
             this.$emit('getArticles', data)
-        }
+        },
     },
     created: function() {
         axios.get('http://34.87.49.35/articles')
