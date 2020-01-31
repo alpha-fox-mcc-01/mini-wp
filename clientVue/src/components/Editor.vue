@@ -11,10 +11,9 @@
                             <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" rows="1" v-model="newArticle.title"></textarea>
                             <label for="exampleFormControlTextarea1">Content</label>
                             <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" rows="15" v-model="newArticle.content"></textarea>
-                            <label>Image
+                            <label>Upload Featured Image here
                                 <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
                             </label>
-                                <button v-on:click="submitFile()">Submit</button>
                         </div>
                         <br>
                         <button type="submit" class="btn btn-dark">Post</button>
@@ -66,15 +65,6 @@ export default {
         },
         handleFileUpload () {
             this.newArticle.file = event.target.files[0];
-        },
-        submitFile () {
-            axios({
-                method: 'POST',
-                url: 'http://34.87.49.35/articles',
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            })
         }
     }
 }
