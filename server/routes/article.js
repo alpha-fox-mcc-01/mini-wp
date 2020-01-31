@@ -11,7 +11,11 @@ router.get('/viewArticle/:id', ArticleController.viewArticle);
 router.get('/showPublishArticle', ArticleController.showPublishArticle);
 
 router.use(authorization);
-router.post('/addArticle', ArticleController.addArticle);
+router.use('/', authentication);
+router.post('/',
+  images.multer.single('image'), 
+  images.sendUploadToGCS, ArticleController.addArticle);
+// router.post('/addArticle', ArticleController.addArticle);
 router.post('/publishArticle/:id', ArticleController.publishArticle);
 router.post('/unpublishArticle/:id', ArticleController.unpublishArticle);
 router.put('/updateArticle/:id', ArticleController.updateArticle);

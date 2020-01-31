@@ -9,7 +9,8 @@ class ArticleController {
       title,
       content,
       published: false,
-      userId: req.currentUserId
+      userId: req.currentUserId,
+      image: req.file.cloudStoragePublicUrl,
     })
       .then(article => {
         const articleTitle = article.title
