@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from '../../api/axiosInstance.js';
 
 export default {
   name: "ArticleCard",
@@ -29,7 +29,7 @@ export default {
     viewArticle(id) {
       axios({
         method: "GET",
-        url: `http://localhost:3000/article/viewArticle/${id}`,
+        url: `article/viewArticle/${id}`,
         headers: {
           token: localStorage.getItem('access_token')
         }
@@ -45,7 +45,7 @@ export default {
     publishArticle(id) {
       axios({
         method: "POST",
-        url: `http://localhost:3000/article/publishArticle/${id}`,
+        url: `article/publishArticle/${id}`,
         headers: {
           token: localStorage.getItem('access_token')
         }
@@ -64,7 +64,7 @@ export default {
     unpublishArticle(id) {
       axios({
         method: "POST",
-        url: `http://localhost:3000/article/unpublishArticle/${id}`,
+        url: `article/unpublishArticle/${id}`,
         headers: {
           token: localStorage.getItem('access_token')
         }
@@ -83,7 +83,7 @@ export default {
     showUserArticle() {
       axios({
         method: "GET",
-        url: 'http://localhost:3000/article/showUserArticle',
+        url: 'article/showUserArticle',
         headers: {
           token: localStorage.getItem('access_token')
         }
@@ -99,12 +99,13 @@ export default {
     showPublishArticle() {
       axios({
         method: "GET",
-        url: 'http://localhost:3000/article/showPublishArticle',
+        url: 'article/showPublishArticle',
         headers: {
           token: localStorage.getItem('access_token')
         }
       })
         .then(result => {
+          console.log(result.data, 'dari children article card')
           this.$emit('changeArticles', result.data);
           this.$emit('changePage', 'dashboardPublished');
         })
@@ -115,7 +116,7 @@ export default {
     deleteArticle(id) {
       axios({
         method: "DELETE",
-        url: `http://localhost:3000/article/deleteArticle/${id}`,
+        url: `article/deleteArticle/${id}`,
         headers: {
           token: localStorage.getItem('access_token')
         }

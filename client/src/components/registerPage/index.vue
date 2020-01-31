@@ -38,7 +38,7 @@
           <p class="mt-3">Already have an account? <span class="text-secondary pointer span-hover" @click="changePage('login')">Sign In here</span></p>
         </div>
         <div class="col-lg-8 align-self-center d-none d-lg-block">
-          <img class="landing-img" src="../../img/register.jpg" alt="multitasking-guy">
+          <img class="landing-img" src="../assets/register.jpg" alt="multitasking-guy">
         </div>
       </div>
     </div>
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from '../../api/axiosInstance.js';
 
 export default {
   name: "RegisterPage",
@@ -72,7 +72,7 @@ export default {
     registerUser() {
       axios({
         method: "POST",
-        url: 'http://localhost:3000/user/register',
+        url: 'user/register',
         data: {
           firstName: this.user.firstName,
           lastName: this.user.lastName,

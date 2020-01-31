@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from '../../api/axiosInstance.js';
 import ArticleCardPublic from './ArticleCardPublic';
 
 export default {
@@ -63,7 +63,7 @@ export default {
       console.log('masuk')
       axios({
         method: "GET",
-        url: 'http://localhost:3000/article/showPublicArticle',
+        url: 'article/showPublicArticle',
         headers: {
           token: localStorage.getItem('access_token')
         }

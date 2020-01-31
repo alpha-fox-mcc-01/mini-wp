@@ -2,12 +2,15 @@ const express = require('express');
 const router = express.Router();
 const ArticleController = require('../controllers/ArticleController');
 const authentication = require('../middlewares/authentication');
+const authorization = require('../middlewares/authorization');
 
 router.use(authentication);
+router.get('/showPublicArticle', ArticleController.showPublicArticle);
 router.get('/showUserArticle', ArticleController.showUserArticle);
 router.get('/viewArticle/:id', ArticleController.viewArticle);
 router.get('/showPublishArticle', ArticleController.showPublishArticle);
-router.get('/showPublicArticle', ArticleController.showPublicArticle);
+
+router.use(authorization);
 router.post('/addArticle', ArticleController.addArticle);
 router.post('/publishArticle/:id', ArticleController.publishArticle);
 router.post('/unpublishArticle/:id', ArticleController.unpublishArticle);

@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from '../../api/axiosInstance.js';
 
 export default {
   name: "LoginPage",
@@ -57,7 +57,7 @@ export default {
     loginUser() {
       axios({
         method: "POST",
-        url: 'http://localhost:3000/user/login',
+        url: 'user/login',
         data: {
           email: this.user.email,
           password: this.user.password

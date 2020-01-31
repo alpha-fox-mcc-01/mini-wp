@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: "ArticleCard",
   props: {
@@ -22,7 +23,7 @@ export default {
     viewArticle(id) {
       axios({
         method: "GET",
-        url: `http://localhost:3000/article/viewArticle/${id}`,
+        url: `article/viewArticle/${id}`,
         headers: {
           token: localStorage.getItem('access_token')
         }

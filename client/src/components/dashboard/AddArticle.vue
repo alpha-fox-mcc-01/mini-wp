@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from '../../api/axiosInstance.js';
 
 export default {
   name: "AddArticle",
@@ -45,7 +45,7 @@ export default {
     addArticle() {
       axios({
         method: "POST",
-        url: 'http://localhost:3000/article/addArticle',
+        url: 'article/addArticle',
         data: {
           title: this.article.title,
           content: this.article.content

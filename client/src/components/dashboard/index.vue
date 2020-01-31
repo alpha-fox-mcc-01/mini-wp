@@ -38,12 +38,12 @@
         </ViewArticle>
 
         <UserPublished
-        :currentPage="currentPage"
-        :notification="notification"
-        :formatedArticles="formatedArticles"
-        @changeArticles="changeArticles"
-        @articleViewer="articleViewer"
-        @changePage="changePage">
+          :currentPage="currentPage"
+          :notification="notification"
+          :formatedArticles="formatedArticles"
+          @changeArticles="changeArticles"
+          @articleViewer="articleViewer"
+          @changePage="changePage">
         </UserPublished>
 
         <UserUnpublished
@@ -95,6 +95,7 @@ export default {
   },
   computed: {
     formatedArticles: function() {
+      const arrayNorak = []
       this.articles.forEach(article => {
         let formatedContent = '';
         for(let i = 0; i < 197; i++) {
@@ -113,6 +114,7 @@ export default {
       this.articleView = article;
     },
     changeArticles(articles) {
+      console.log(articles, "ini dari dahsboard")
       this.articles = articles;
     },
     notificationAdd(notification) {

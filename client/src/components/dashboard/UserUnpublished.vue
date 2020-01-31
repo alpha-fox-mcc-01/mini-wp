@@ -43,6 +43,7 @@ export default {
       this.$emit('articleViewer', article);
     },
     changeArticles(articles) {
+      console.log(articles, 'dari user unpublished')
       this.$emit('changeArticles', articles);
     }
   }

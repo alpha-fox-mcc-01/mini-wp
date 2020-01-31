@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from '../../api/axiosInstance.js';
 
 export default {
   name: "DashboardSidebar",
@@ -26,7 +26,7 @@ export default {
     showUserArticle() {
       axios({
         method: "GET",
-        url: 'http://localhost:3000/article/showUserArticle',
+        url: 'article/showUserArticle',
         headers: {
           token: localStorage.getItem('access_token')
         }
@@ -42,7 +42,7 @@ export default {
     showPublishArticle() {
       axios({
         method: "GET",
-        url: 'http://localhost:3000/article/showPublishArticle',
+        url: 'article/showPublishArticle',
         headers: {
           token: localStorage.getItem('access_token')
         }
@@ -63,7 +63,7 @@ export default {
   .add-btn {
     padding: 0.5rem 1rem;
   }
-  
+
   .dashboard-nav {
     color: rgb(126, 126, 126) !important;
   }
