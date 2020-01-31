@@ -22,6 +22,6 @@ module.exports = (req, res, next) => {
         })
         .catch(err => {
             if (err.code) res.status(400).json({error: 'User is not verified'})
-            res.status(500).json({error: 'Internal Server Error!'})
+            else res.status(500).json({error: 'Internal Server Error!'})
         })
 }

@@ -47,21 +47,15 @@ export default {
         searchBar
     },
     methods: {
-        getUserArticles(data) {
-            this.$emit('getUserArticles', data)
+        getUserArticles() {
+            this.$emit('getUserArticles')
         },
-        getArticles(data) {
-            this.$emit('getArticles', data)
+        getArticles() {
+            this.$emit('getArticles')
         },
     },
-    created: function() {
-        axios.get('http://34.87.49.35/articles')
-            .then(({data}) => {
-                this.$emit('getArticles', data)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+    created() {
+        this.getArticles()
     }
 }
 </script>

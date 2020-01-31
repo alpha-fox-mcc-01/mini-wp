@@ -23,11 +23,13 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 import homeNavbar from './components/HomeNavBar'
 import myFooter from './components/Footer'
 import homePage from './components/HomePage'
 import entryPage from './components/EntryPage'
 import dashboard from './components/Dashboard'
+import axios from 'axios'
 export default {
     data() {
         return {
@@ -48,7 +50,6 @@ export default {
     },
     methods: {
         switchPage(pageName) {
-            console.log(pageName)
             this.currentPage = pageName
             if (pageName === 'landing') {
                 this.user.username = '',
@@ -61,10 +62,34 @@ export default {
             this.currentPage = 'landing'
         },
         getUserArticles(data) {
-            this.user.articles = data.data
+            axios({
+                method: 'GET',
+                url: 'http://34.87.49.35/articles/me',
+                headers: {
+                    access_token: localStorage.getItem('access_token')
+                }
+            })
+                .then(({ data }) => {
+                    this.user.articles = data.data
+                })
+                .catch(err => {
+                    Swal.fire('Error', `Sorry, something went wrong: ${err.message}`, 'error')
+                })
         },
         getArticles(data) {
-            this.searchArticles = data.data
+            axios({
+                method: 'GET',
+                url: 'http://34.87.49.35/articles/me',
+                headers: {
+                    access_token: localStorage.getItem('access_token')
+                }
+            })
+                .then(({ data }) => {
+                    this.searchArticles = data.data
+                })
+                .catch(err => {
+                    Swal.fire('Error', `Sorry, something went wrong: ${err.message}`, 'error')
+                })
         }
     },
     components: {

@@ -51,12 +51,13 @@ module.exports = {
             })
     },
     writeArticle(req, res, next) {
+        console.log(req.file)
         Article.create({
             title: req.body.title,
             content: req.body.content,
             published: false,
             authorId: ObjectID(req.currentUserId),
-            featured_image: req.body.featured_image
+            featured_image: req.file.cloudStoragePublicUrl
         })
             .then(data => {
                 res.status(201).json({data})

@@ -8,22 +8,14 @@
                     <form @submit.prevent="writeArticle">
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">Title</label>
-                            <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" rows="1" v-model="article.title"></textarea>
+                            <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" rows="1" v-model="newArticle.title"></textarea>
                             <label for="exampleFormControlTextarea1">Content</label>
-                            <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" rows="15" v-model="article.content"></textarea>
-                            <b-form-file v-model="file" class="mt-3" plain></b-form-file>
+                            <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" rows="15" v-model="newArticle.content"></textarea>
+                            <label>Image
+                                <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+                            </label>
+                                <button v-on:click="submitFile()">Submit</button>
                         </div>
-                        <!-- <div id="editor"></div>
-                        <script>
-                                ClassicEditor
-                                        .create( document.querySelector( '#editor' ) )
-                                        .then( editor => {
-                                                console.log( editor );
-                                        } )
-                                        .catch( error => {
-                                                console.error( error );
-                                        } );
-                        </script> -->
                         <br>
                         <button type="submit" class="btn btn-dark">Post</button>
                     </form>
@@ -34,29 +26,56 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 import axios from 'axios'
 export default {
     props: ["user", "article"],
+    data () {
+        return {
+            newArticle: {
+                title: '',
+                content: '',
+                file: ''
+            }
+        }
+    },
     methods: {
         writeArticle(title, content) {
-            console.log('masuk')
-            axios.post('http://34.87.49.35/articles', {
-                title: this.article.title,
-                content: this.article.content
-            }, {
+            let formData = new FormData()
+            formData.append('file', this.newArticle.file)
+            formData.append('title', this.newArticle.title)
+            formData.append('content', this.newArticle.content)
+            axios.post('http://34.87.49.35/articles', formData, {
                 headers: {
-                    access_token: localStorage.getItem('access_token')
+                    access_token: localStorage.getItem('access_token'),
+                    'Content-Type': 'multipart/form-data'
                 }
             })
                 .then(({ data }) => {
-                    this.article.title = ''
-                    this.article.content = ''
+                    this.newArticle.title = ''
+                    this.newArticle.content = ''
+                    this.newArticle
+                    Swal.fire('Success', 'Article saved as draft!', 'success')
                     this.$emit('getArticles')
+                    this.$emit('getUserArticles')
+                    console.log(data)
                 })
                 .catch(err => {
                     console.log(err.message)
                 })
         },
+        handleFileUpload () {
+            this.newArticle.file = event.target.files[0];
+        },
+        submitFile () {
+            axios({
+                method: 'POST',
+                url: 'http://34.87.49.35/articles',
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+        }
     }
 }
 </script>
